@@ -1,0 +1,43 @@
+created:
+    - database/factories/CategoriaFactory.php
+    - database/factories/RestauranteFactory.php
+    - database/factories/AvaliacaoFactory.php
+    - database/factories/MesasFactory.php
+    - database/factories/HorarioFactory.php
+    - database/factories/ClienteFactory.php
+    - database/factories/FoneClienteFactory.php
+    - database/factories/ReservaFactory.php
+    - database/factories/MesaReservaFactory.php
+    - database/factories/PratosFactory.php
+    - database/migrations/2022_04_14_203431_create_categorias_table.php
+    - database/migrations/2022_04_14_203432_create_restaurantes_table.php
+    - database/migrations/2022_04_14_203433_create_avaliacaos_table.php
+    - database/migrations/2022_04_14_203434_create_mesas_table.php
+    - database/migrations/2022_04_14_203435_create_horarios_table.php
+    - database/migrations/2022_04_14_203436_create_clientes_table.php
+    - database/migrations/2022_04_14_203437_create_fone_clientes_table.php
+    - database/migrations/2022_04_14_203438_create_reservas_table.php
+    - database/migrations/2022_04_14_203439_create_mesa_reservas_table.php
+    - database/migrations/2022_04_14_203440_create_pratos_table.php
+    - app/Models/Categoria.php
+    - app/Models/Restaurante.php
+    - app/Models/Avaliacao.php
+    - app/Models/Mesas.php
+    - app/Models/Horario.php
+    - app/Models/Cliente.php
+    - app/Models/FoneCliente.php
+    - app/Models/Reserva.php
+    - app/Models/MesaReserva.php
+    - app/Models/Pratos.php
+models:
+    CategoriaRestaurante: { descCategoria: 'string unique' }
+    Restaurante: { nome: string, bairro: string, cidade: string, estado: string, foto: 'string:400 nullable', cardapio: 'string:500 nullable', cep: string, numero: integer, categoria_id: 'id foreign', user_id: 'id foreign' }
+    Avaliacao: { estrelas: integer, descAvaliacao: string, restaurante_id: 'id foreign' }
+    Mesas: { qtdMesas: integer, capMaxima: integer, mesasDisponiveis: integer, restaurante_id: 'id foreign' }
+    Horario: { abreAs: time, fechaAs: time, diasAberto: json, restaurante_id: 'id foreign' }
+    Cliente: { nome: string, endereco: string, estado: string, bairro: string, cidade: string, numero: integer, cpf: 'string unique', cep: string, user_id: 'id foreign' }
+    FoneCliente: { descFone: string, cliente_id: 'id foreign' }
+    Reserva: { data: datetime, qtdPessoas: integer, cliente_id: 'id foreign' }
+    MesaReserva: { reserva_id: 'id foreign', mesa_id: 'id foreign' }
+    Pratos: { nome: string, descPrato: string, valor: float, restaurante_id: 'id foreign' }
+    Categoria: { descCategoria: 'string unique' }
