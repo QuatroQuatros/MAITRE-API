@@ -1,0 +1,1 @@
+Olá, {{$nome}}. Seja bem vindo ao MAÎTRE!

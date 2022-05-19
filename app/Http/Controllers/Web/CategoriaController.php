@@ -10,6 +10,8 @@ use App\Models\Categoria;
 
 use App\Repositories\CategoriaRepository;
 
+use DB;
+
 class CategoriaController extends Controller
 {
 
@@ -20,7 +22,8 @@ class CategoriaController extends Controller
 
     public function index_response(){
         $categorias = $this->categoria->all();
-        return view('dashboards.admin.categoria.create', ['categorias' => $categorias]);
+        $count = DB::table('categorias')->count();
+        return view('dashboards.admin.categoria.create', ['categorias' => $categorias, 'count' => $count]);
     }
 
     public function create(){

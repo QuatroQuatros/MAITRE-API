@@ -10,65 +10,70 @@
             <div class="middle">
                 <div class="left">
                     <h3>Total de categorias</h3>
-                    <h1>5</h1>
+                    <h1>{{$count}}</h1>
                 </div>
             </div>
             <small class="text-muted">atualizado a 24 horas</small>
         </div>
         <!-----------------end sales----------------->
-        <div class="expenses">
-            <span class="material-icons-sharp">bar_chart</span>
-            <div class="middle">
-                <div class="left">
-                    <h3>Mais restaurantes</h3>
-                    <h1>Lanches</h1>
-                </div>
-            </div>
-            <small class="text-muted">atualizado a 24 horas</small>
-        </div>
-        <!-----------------end of expenses----------------->
-        <div class="sales">
-            <span class="material-icons-sharp">stacked_line_chart</span>
-            <div class="middle">
-                <div class="left">
-                    <h3>Nenhum restaurante</h3>
-                    <h1>Saudaveis</h1>
-                </div>
-            </div>
-            <small class="text-muted">atualizado a 24 horas</small>
-        </div>
+
         <!----------------- end income ----------------->
     </div>
     <!---------------- end insights ---------------->
 
     <div class="recent-orders">
-        <h2>Categorias Cadastradas</h2>
-        <table>
+        <h2>Categorias já cadastradas</h2>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+        <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Categoria</th>
-                    <th>QTDE. restaurantes</th>
-                    <th>Opção</th>
+                    <th>QTDE. de Restaurantes</th>
+                    <th>Alterar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($categorias as $c)
+                @foreach($categorias as $c)
                     <tr>
                         <td>{{$c->descCategoria}}</td>
-                        <td></td>
-                        <td>
-                            <form action="/admin/categorias/{{$c->id}}" method="POST" >
-                                @csrf
-                                @method('DELETE')
-                                <a href="#" onclick="event.preventDefault();
-                                this.closest('form').submit();">Excluir</a>
-                            </form>
-                        </td>
+                        <td>{{$c->id}}</td>
+                        <td><a href='' class="danger">Alterar dados</a>
+                        <td><a href="#modal" role="button">Excluir dados</a>
+                    </tr>
                 @endforeach
+                
             </tbody>
         </table>
+        <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+        </script>
     </div>
 </main>
+
+<div class="modal-wrapper" id="modal">
+    <div class="modal-body card">
+        <div class="modal-header">
+            <h2 class="heading">tem certeza ?</h2>
+            <a href="#!" role="button" class="close" aria-label="close this modal">
+                <svg viewBox="0 0 24 24">
+                    <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                </svg>
+            </a>
+        </div>
+        <h3>Esse dado será excluido permanentemente, tem certeza ?</h3>
+
+        <div class="button-center">
+            <a href="" class="button button__link">Não</a>
+            <a href="" class="button button__link">Sim</a>
+        </div>
+    </div>
+    <a href="#!" class="outside-trigger"></a>
+</div>
 
 <!----------- end main ABERTA NO MENU.PHP ------------->
 
@@ -93,24 +98,7 @@
         </div>
     </div>
     <!--end top-->
-    <div class="recent-updates">
-        <h2>Pesquisar por categorias</h2>
-        <div class="updates">
-            <input type="text" id="txtBusca" placeholder="Buscar..." />
-            <div class="update">
-                <div class="profile-photo">
-                    <img src="">
-                </div>
-                <div class="message">
-                    <p><b>Pizzas</b> 5 restaurantes</p>
-                    <small class="text-muted">
-                        <td><a href='../../adm_crud/exclusao-Cliente.php?id=$row[0]' class='warning'>Excluir Produto</a>
-                        </td>
-                    </small>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Formulario -->
     <div id="containerForm">
         <h1>&bull;adicione Categorias&bull;</h1>

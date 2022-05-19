@@ -26,11 +26,6 @@ class Cliente extends Model
         'user_id',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
@@ -39,5 +34,26 @@ class Cliente extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function rules(){
+        return [
+            "nome" => 'required|string',
+            "cpf" => 'required|string|unique:clientes',
+            "endereco" => 'required|string',
+            "numero" => 'required|integer',
+            "bairro" => 'required|string',
+            "cidade" => 'required|string',
+            "estado" => 'required|string',
+            "cep" => 'required|string',
+            "user_id" => 'required|integer'
+        ];
+    }
+
+    public function feedback(){
+        return [
+            'required' => 'O campo :attribute é obrigatório.',
+            'cpf.unique' => 'Este CPF já está cadastrado.',
+        ];
     }
 }

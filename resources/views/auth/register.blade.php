@@ -55,7 +55,7 @@
                         <div class="form-content">
                             <label class="label-input" for="">
                                 <i class="far fa-user icon-modify"></i>
-                                <input name="name" id="nome" type="text" placeholder="Nome do usuario">
+                                <input name="nome" id="nome" type="text" placeholder="Nome do usuario">
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-phone-volume icon-modify"></i>
@@ -148,7 +148,7 @@
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-house-user icon-modify"></i>
-                                <input type="number" id="num" name="num" placeholder="Numero:">
+                                <input type="number" id="num" name="numero" placeholder="Numero:">
                             </label>
                         </div>
                         <button class="btn btn-second">Cadastrar dados</button>
