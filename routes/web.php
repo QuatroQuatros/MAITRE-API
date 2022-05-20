@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\AvaliacaoController;
 use App\Http\Controllers\Web\AdminController;
+use App\Http\Controllers\Web\CategoriaController;
 use App\Http\Controllers\Web\ClienteController;
 use App\Http\Controllers\Web\RestauranteController;
-use App\Http\Controllers\Web\CategoriaController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Middleware\Restaurante;
 use Laravel\Jetstream\Role;
@@ -29,8 +30,6 @@ Route::prefix('/admin')->group(function(){
 
 });
 
-
-
 Route::prefix('/restaurantes')->group(function(){
     Route::get('/admin', [RestauranteController::class, 'dash'])->middleware('auth', 'restaurante');
     Route::get('/create', [RestauranteController::class, 'create'])->middleware('auth', 'restaurante');
@@ -39,13 +38,11 @@ Route::prefix('/restaurantes')->group(function(){
     Route::get('/{id}', [RestauranteController::class, 'show']);
 });
 
+Route::prefix('/clientes')->group(function(){
+    Route::get('/', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
+});
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+
+Route::prefix('/avaliacoes')->group(function(){
+    Route::post('/create', [AvaliacaoController::class, 'store'])->middleware('auth', 'cliente');;
 });

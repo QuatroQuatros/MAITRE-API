@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHorariosTable extends Migration
+class CreateHorarioDiasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,10 @@ class CreateHorariosTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('horarios', function (Blueprint $table) {
+        Schema::create('horario_dias', function (Blueprint $table) {
             $table->id();
-            $table->time('abreAs');
-            $table->time('fechaAs');
-            $table->json('diasAberto');
+            $table->foreignId('diaSemana_id')->constrained();
+            $table->foreignId('horario_id')->constrained();
             $table->foreignId('restaurante_id')->constrained();
             $table->timestamps();
         });
@@ -34,6 +33,6 @@ class CreateHorariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('horarios');
+        Schema::dropIfExists('horario_dias');
     }
 }

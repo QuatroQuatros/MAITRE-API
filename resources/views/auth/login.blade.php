@@ -50,7 +50,7 @@
                                         <label>Mantenha-me conectado.</label>
                                     </li>
                                 </ul>
-                                <a class="password" href="#">Esqueceu a senha ?</a>
+                                <a class="password" href="/forgot-password">Esqueceu a senha ?</a>
                                 <button class="btn btn-second">ACESSAR</button>
                                 <p>Não tem conta? <a class="msg" href="/register"> cadastre-se aqui</a></p>
                             </form>

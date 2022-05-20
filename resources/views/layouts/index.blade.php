@@ -87,7 +87,7 @@
   <footer id="footer">
       <div class="container">
           <div class="logo me-auto">
-              <a href="index.html"><img src="/img/logo/maitre.png" class="img-fluid"></a>
+              <a href="/"><img src="/img/logo/maitre.png" class="img-fluid"></a>
           </div>
           <div class="social-links">
               <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Horario extends Model
+class FotoRestaurante extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,9 @@ class Horario extends Model
      * @var array
      */
     protected $fillable = [
-        'horario',
+        'foto',
+        'descFoto',
+        'restaurante_id',
     ];
 
     /**
@@ -25,5 +27,11 @@ class Horario extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'restaurante_id' => 'integer',
     ];
+
+    public function restaurante()
+    {
+        return $this->belongsTo(Restaurante::class);
+    }
 }

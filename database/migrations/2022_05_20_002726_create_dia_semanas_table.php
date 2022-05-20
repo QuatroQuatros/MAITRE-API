@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAvaliacaosTable extends Migration
+class CreateDiaSemanasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,11 @@ class CreateAvaliacaosTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-
-        Schema::create('avaliacaos', function (Blueprint $table) {
+        Schema::create('dia_semanas', function (Blueprint $table) {
             $table->id();
-            $table->integer('estrelas');
-            $table->string('descAvaliacao');
-            $table->foreignId('restaurante_id')->constrained();
+            $table->string('diaSemana');
             $table->timestamps();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -33,6 +27,6 @@ class CreateAvaliacaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('avaliacaos');
+        Schema::dropIfExists('dia_semanas');
     }
 }

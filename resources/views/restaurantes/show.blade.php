@@ -538,33 +538,36 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="/avaliacoes/create" method="post">
+                            @csrf
+                            <input type="hidden" name="restaurante_id" value="{{$restaurante->id}}"/>
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Avaliação</label>
                                 <div class="estrelas">
-                                    <input type="radio" id="cm_star-empty" name="fb" value="" checked />
+                                    <input type="radio" id="cm_star-empty" name="estrelas" value="" checked />
                                     <label for="cm_star-1"><i class="fa"></i></label>
-                                    <input type="radio" id="cm_star-1" name="fb" value="1" />
+                                    <input type="radio" id="cm_star-1" name="estrelas" value="1" />
                                     <label for="cm_star-2"><i class="fa"></i></label>
-                                    <input type="radio" id="cm_star-2" name="fb" value="2" />
+                                    <input type="radio" id="cm_star-2" name="estrelas" value="2" />
                                     <label for="cm_star-3"><i class="fa"></i></label>
-                                    <input type="radio" id="cm_star-3" name="fb" value="3" />
+                                    <input type="radio" id="cm_star-3" name="estrelas" value="3" />
                                     <label for="cm_star-4"><i class="fa"></i></label>
-                                    <input type="radio" id="cm_star-4" name="fb" value="4" />
+                                    <input type="radio" id="cm_star-4" name="estrelas" value="4" />
                                     <label for="cm_star-5"><i class="fa"></i></label>
-                                    <input type="radio" id="cm_star-5" name="fb" value="5" />
+                                    <input type="radio" id="cm_star-5" name="estrelas" value="5" />
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="message-text" class="col-form-label">Escreva seu comentario</label>
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <textarea class="form-control" name="descAvaliacao" id="message-text"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                <input type="submit" value="Enviar Comentario">
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary">Enviar comentario</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

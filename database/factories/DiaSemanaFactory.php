@@ -4,16 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Horario;
+use App\Models\DiaSemana;
 
-class HorarioFactory extends Factory
+class DiaSemanaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Horario::class;
+    protected $model = DiaSemana::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +23,7 @@ class HorarioFactory extends Factory
     public function definition()
     {
         return [
-            'horario' => $this->faker->time(),
+            'diaSemana' => $this->faker->word,
         ];
     }
 }

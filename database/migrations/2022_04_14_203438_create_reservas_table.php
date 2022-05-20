@@ -19,6 +19,10 @@ class CreateReservasTable extends Migration
             $table->id();
             $table->dateTime('data');
             $table->integer('qtdPessoas');
+            $table->dateTime('horaCheckIn')->nullable();;
+            $table->dateTime('horaCheckOut')->nullable();;
+            $table->dateTime('duracao')->nullable();;
+            $table->foreignId('status_id')->constrained()->default(1);
             $table->foreignId('cliente_id')->constrained();
             $table->timestamps();
         });

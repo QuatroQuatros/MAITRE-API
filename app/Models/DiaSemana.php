@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Horario extends Model
+class DiaSemana extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Horario extends Model
      * @var array
      */
     protected $fillable = [
-        'horario',
+        'diaSemana',
     ];
 
     /**

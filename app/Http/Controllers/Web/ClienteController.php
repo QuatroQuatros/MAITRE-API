@@ -31,4 +31,8 @@ class ClienteController extends Controller
         $cliente->user_id = $id;
         $cliente->save();
     }
+
+    public function profile(){
+        return view('clientes.profile');
+    }
 }

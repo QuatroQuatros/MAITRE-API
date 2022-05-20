@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientesTable extends Migration
+class CreateFotoRestaurantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,18 +15,11 @@ class CreateClientesTable extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('foto_restaurantes', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
             $table->string('foto', 400)->nullable();
-            $table->string('endereco');
-            $table->string('estado');
-            $table->string('bairro');
-            $table->string('cidade');
-            $table->integer('numero');
-            $table->string('cpf')->unique();
-            $table->string('cep');
-            $table->foreignId('user_id')->constrained();
+            $table->string('descFoto');
+            $table->foreignId('restaurante_id')->constrained();
             $table->timestamps();
         });
 
@@ -40,6 +33,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('foto_restaurantes');
     }
 }

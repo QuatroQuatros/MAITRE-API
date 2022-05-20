@@ -2038,19 +2038,24 @@ table tr:last-child td{
 
 .recent-orders .warning{
 
-  color: rgba(255, 177, 59, 0.432);
+  color: rgba(255, 177, 59, 0.432) !important;
 }
 
 .recent-orders .danger{
 
-  color: rgba(255, 59, 59, 0.432);
+  color: rgba(255, 59, 59, 0.432) !important;
+}
+
+.recent-orders .successfull{
+
+  color: rgba(65, 255, 59, 0.432) !important;
 }
 
 .button-option {
-border: 0;
-transition: 0.4s;
-border-radius: 50px;
-background: transparent;
+border: 0 !important;
+transition: 0.4s !important;
+border-radius: 50px !important;
+background: transparent !important;
 }
 
 .error{

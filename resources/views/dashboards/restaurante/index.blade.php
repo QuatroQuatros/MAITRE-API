@@ -60,8 +60,8 @@
   <h1>Analise de Dados</h1>
 
   <div class="insi">
-  <div id="curve_chart" style="width: 500px; height: 450px"></div>
-      <div id="columnchart_material" style="width: 500px; height: 450px;"></div>
+  <div id="curve_chart" style="height: 450px"></div>
+      <div id="columnchart_material" style="height: 450px;"></div>
   </div>
   <!---------------- end insights ---------------->
   <div class="recent-orders">
