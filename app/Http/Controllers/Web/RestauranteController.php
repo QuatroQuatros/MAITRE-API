@@ -31,7 +31,8 @@ class RestauranteController extends Controller
     }
 
     public function show($id){
-        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id)]);
+        $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
+        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes]);
     }
 
     public function store(Request $request){

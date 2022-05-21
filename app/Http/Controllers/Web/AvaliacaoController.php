@@ -20,7 +20,7 @@ class AvaliacaoController extends Controller
     public function store(Request $request){
         $request->merge(['user_id' =>  Auth::user()->id]);
         $this->avaliacaoRepository->store($request);
-        //return Redirect::back();
+        return Redirect::back();
     }
 
 }
