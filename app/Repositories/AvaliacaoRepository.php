@@ -19,7 +19,8 @@ class AvaliacaoRepository{
         return $this->avaliacao->create([
             "estrelas" => $request->estrelas,
             "descAvaliacao" => $request->descAvaliacao,
-            "restaurante_id" => $request->restaurante_id
+            "restaurante_id" => $request->restaurante_id,
+            "user_id" => $request->user_id,
         ]);
     }
 

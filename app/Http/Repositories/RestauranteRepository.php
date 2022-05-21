@@ -22,7 +22,13 @@ class RestauranteRepository{
 
     }
     public function show($id){
-        return $this->restaurante->findOrFail($id);
+        //$this->restaurante = $this->restaurante->findOrFail($id);
+        return $this->restaurante->join('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->get();
+
+
+        //return $this->restaurante->findOrFail($id);
 
     }
 

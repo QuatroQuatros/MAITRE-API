@@ -20,17 +20,14 @@ class CreateAvaliacoesTable extends Migration
             $table->integer('estrelas');
             $table->string('descAvaliacao');
             $table->foreignId('restaurante_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
 
         Schema::enableForeignKeyConstraints();
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+   
     public function down()
     {
         Schema::dropIfExists('avaliacoes');

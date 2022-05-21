@@ -14,16 +14,14 @@ class Avaliacao extends Model
         'estrelas',
         'descAvaliacao',
         'restaurante_id',
+        'user_id'
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+
     protected $casts = [
         'id' => 'integer',
         'restaurante_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
     public function restaurante()
@@ -31,11 +29,18 @@ class Avaliacao extends Model
         return $this->belongsTo(Restaurante::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function rules(){
         return [
             "estrelas" => "required|integer",
             "descAvaliacao" => 'required|string',
-            "restaurante_id" => "required|integer"
+            "restaurante_id" => "required|integer",
+           // "user_id" => "required|integer",
+
         ];
     }
 
