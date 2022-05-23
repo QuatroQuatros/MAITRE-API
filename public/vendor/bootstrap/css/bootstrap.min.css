@@ -581,8 +581,34 @@ progress {
 }
 
 .img-logo {
-    max-width: 50%;
-    height: 50%;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    padding: 2px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.img-ftRest {
+    width: 400px;
+    height: 250px;
+    padding: 2px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+@media (max-width:425px) {
+    .img-ftRest {
+        width: 250px;
+        height: 250px;
+        padding: 2px;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+    }
+}
+
+.img-prato {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     padding: 2px;
     margin-bottom: 20px;
@@ -5332,7 +5358,7 @@ textarea.form-control-lg {
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: #0d6efd;
+    
     transition: width .6s ease
 }
 

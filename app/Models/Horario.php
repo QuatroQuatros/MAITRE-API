@@ -8,22 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 class Horario extends Model
 {
     use HasFactory;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
+        'dia_semana_id',
         'horario',
+        'restaurante_id',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
+        'dia_semana_id' => 'integer',
+        'restaurante_id' => 'integer',
     ];
+
+    public function dia_semana()
+    {
+        return $this->belongsTo(DiaSemana::class);
+    }
+    
+    public function restaurante()
+    {
+        return $this->belongsTo(Restaurante::class);
+    }
+
+    public function rules(){
+        return [
+            "dia_semana_id" => 'required|integer',
+            "horario" => 'required|string',
+            "restaurante_id" => 'required|integer',
+           
+        ];
+    }
+
+    public function feedback(){
+        return [
+            'required' => 'O campo :attribute é obrigatório',
+        ];
+    }
 }

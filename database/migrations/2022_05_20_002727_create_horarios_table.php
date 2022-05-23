@@ -6,25 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateHorariosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
             $table->time('horario');
+            $table->foreignId('dia_semana_id')->constrained();
+            $table->foreignId('restaurante_id')->constrained();
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('horarios');

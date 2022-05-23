@@ -22,19 +22,26 @@ class RestauranteRepository{
 
     }
     public function show($id){
-        return $this->restaurante->findOrFail($id);
+         return $this->restaurante->join('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->get();
+        //return $this->restaurante->findOrFail($id);
 
     }
 
     public function store(Request $request){
         $request->validate($this->restaurante->rules(), $this->restaurante->feedback());
 
+        
         $imagem = $request->file('foto');
         $name = $imagem->getClientOriginalName(); 
+        $path = $imagem->storeAs('imagens', $name, 'public');
+        
+        
 
         //$path = Storage::disk('s3')->put('imagens', $imagem, 'public');
 
-        $path = $imagem->storeAs('imagens', $name, 'public');
+       
 
         //Storage::disk('s3')->setVisibility($path, 'public');
 

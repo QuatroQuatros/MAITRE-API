@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>MAÎTRE || SERVINDO A VOCÊ</title>
 
@@ -26,24 +27,27 @@
     <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Template Main CSS File -->
     <link href="/css/login2.css" rel="stylesheet">
-    <link href="/css/forms.css" rel="stylesheet">
+
+    <link href="/css/formsRestaurante.css" rel="stylesheet">
 
 </head>
 
-<body>
 
+<body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center header-transparent">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <div class="logo me-auto">
-                <a href="../index.php"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
+                <a href="/"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
             </div>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
@@ -93,7 +97,7 @@
       
         <!-- Vendor JS Files -->
         <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
         <script src="/vendor/glightbox/js/glightbox.min.js"></script>
         <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
         <script src="/vendor/swiper/swiper-bundle.min.js"></script>
@@ -104,6 +108,7 @@
         <script src="/js/cep.js"></script>
         <script src="/js/forms.js"></script>
         <script src="/js/login.js"></script>
+        <script src="/js/preview.js"></script>
         <script src="/js/formsRestaurante.js"></script>
         <script src="/js/selectInterativo.js"></script>
       

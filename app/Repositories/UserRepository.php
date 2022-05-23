@@ -51,14 +51,17 @@ class UserRepository{
                 
             }
             if($user->level == 2){
-                $r = new RestauranteRepository(new Restaurante);
-                $r->store($request);
                 \DB::commit();
+                //return redirect('/restaurantes/create');
+                /*$r = new RestauranteRepository(new Restaurante);
+                $r->store($request);
+                
+                
                 Mail::send('mail.welcome', ['nome' => $request->nome], function($m) use($request){
                     $m->from('atlanticmaitre@gmail.com', 'MAÎTRE');
                     $m->subject('Bem vindo ao MAÎTRE!');
                     $m->to($request->email);
-                });
+                });*/
 
             }
         }catch(\Exception $e){

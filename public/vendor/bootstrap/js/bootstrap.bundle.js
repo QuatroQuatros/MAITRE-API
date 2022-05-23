@@ -33,6 +33,11 @@
    */
 
 
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+
   const getUID = prefix => {
     do {
       prefix += Math.floor(Math.random() * MAX_UID);

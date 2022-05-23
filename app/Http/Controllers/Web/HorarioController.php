@@ -1,22 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Web;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use App\Models\Horario;
-use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
+
     public function __construct(Horario $horario){
         $this->horario = $horario;
     }
-
-    public function  index(){
-        return Horario::all();
-    }
-
-
-    public function store(Request $request){  
+    public function store(Request $request){
         $request->validate($this->horario->rules(), $this->horario->feedback());
 
         return response($this->horario->create([
@@ -24,9 +21,6 @@ class HorarioController extends Controller
             "horario" => $request->horario,
             "restaurante_id" => $request->restaurante_id,
         ]));
-    }
-
-    public function show($id){
 
     }
 }

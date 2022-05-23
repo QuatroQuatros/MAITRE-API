@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\Redirect;
 
 use App\Models\Restaurante;
 use App\Repositories\RestauranteRepository;
@@ -27,7 +28,7 @@ class RestauranteController extends Controller
     }
 
     public function create(){
-        return view('dashboards.restaurante.create');
+        return view('auth.restaurante-register');
     }
 
     public function show($id){
@@ -36,7 +37,14 @@ class RestauranteController extends Controller
     }
 
     public function store(Request $request){
-        $this->restauranteRepository->store($request);
+        $request->merge(['user_id' => auth()->user()->id]);
+        return response($this->restauranteRepository->store($request));
+        //return back()->withInput(['level' => 2]);
+    }
+
+    public function update(Request $request){
+        $this->restauranteRepository->update($request);
+
     }
 
     public function buscar(){
