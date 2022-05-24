@@ -407,6 +407,10 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                             </select>
                             <div class="validate"></div>
                         </div>
+                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                            <input type="date" class="form-control" name="data" id="dataInput" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
+                            <div class="validate"></div>
+                        </div>
                     </div>
                     <div class="text-center"><button type="submit">Agendar</button></div>
                 </form>
@@ -520,6 +524,28 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
         </div>
 
        
-
     </main>
+
+    <script>
+        //Script para definir a data minima e maxima do calendario de reservas.
+
+
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let mmNext = today.getMonth() + 2; // Months start at 0!
+        let dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        if (mmNext < 10) mmNext = '0' + mmNext;
+
+        var date = yyyy + '-' + mm + '-' + dd;
+        var dateNext = yyyy + '-' + mmNext + '-01';
+
+        document.getElementById('dataInput').setAttribute("min", date);
+        document.getElementById('dataInput').setAttribute("max", dateNext);
+
+
+    </script>
 @endsection

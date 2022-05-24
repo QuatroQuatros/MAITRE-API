@@ -12,6 +12,7 @@ class Reserva extends Model
     protected $fillable = [
         'diaSemana',
         'horario',
+        'data',
         'qtdPessoas',
         'cliente_id',
         'status_reserva_id',

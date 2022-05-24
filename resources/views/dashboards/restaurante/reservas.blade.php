@@ -17,7 +17,13 @@
             <div class="col col-1" data-label="Nome do cliente">{{$r->nome}}</div>
             <div class="col col-2" data-label="Email Cliente">{{$r->email}}</div>
             <div class="col col-3" data-label="Telefone">$341</div>
-            <div class="col col-4" data-label="Status"><span class="warning">Pendente</span></div>
+            @if($r->status_reserva_id == 1)
+              <div class="col col-4" data-label="Status"><span class="warning" id="status">Pendente</span></div>
+            @elseif($r->status_reserva_id == 2)
+              <div class="col col-4" data-label="Status"><span class="success" id="status">Aprovado</span></div>
+            @else
+            <div class="col col-4" data-label="Status"><span class="danger" id="status">Cancelado</span></div>
+            @endif  
           </li>
         </a>
         @endforeach
@@ -75,7 +81,7 @@
         <h3>Telefone : <span class="text-muted"> (11) 946233-4046 </span></h3>
       </div>
       <div class="central">
-        <h3>Dia reserva : <span class="text-muted" id="dia"> 13/09/2004 </span></h3>
+        <h3>Dia reserva : <span class="text-muted" id="data"> 13/09/2004 </span></h3>
       </div>
       <div class="central">
         <h3>Dia semana : <span class="text-muted" id="diaSemana"> Segunda </span></h3>
@@ -128,7 +134,10 @@
         <h3>Quantidade de pessoas : <span class="text-muted"> 5 </span></h3>
       </div>
   
-      <form action="" method="post" id="contact_form">
+      <form action="/reservas/aprovar/{{$reservas[0]->id}}" method="post" id="contact_form">
+        @csrf 
+        @method('PATCH')
+        <input type="hidden" name="status_reserva_id" value="2">
         <div class="name">
           <label for="name">
             <h3>Duração da reserva</h3>
@@ -143,13 +152,8 @@
           </select>
         </p>
         <div class="button-center">
-            <form class="d-flex" method="POST" action="/reservas/rejeitar/{{$reservas[0]->id}}">
-                @csrf
-                @method('PUT')
-                <a class="button button__link" role="button" onclick="event.preventDefault();
-                this.closest('form').submit();"><i class="bi bi-door-open-fill"></i> Rejeitar reserva</a>
-            </form>    
-          <!--<a href="#" class="button button__link" onclick="rejeitarReserva()">Rejeitar reserva</a>-->
+            
+          <a href="#" class="button button__link" onclick="rejeitarReserva()">Rejeitar reserva</a>
           <button class="button button__link" onclick="launch_toast()">Confirmar reserva</button>
         </div>
       </form>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\RestauranteController;
+use App\Http\Controllers\Api\ReservasController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\HorarioController;
 use App\Http\Controllers\Api\AvaliacaoController;
@@ -31,6 +32,8 @@ Route::apiResource('/categorias', CategoriaController::class);
 Route::apiResource('/restaurantes', RestauranteController::class);
 Route::apiResource('/horarios', HorarioController::class);
 Route::apiResource('/avaliacoes', AvaliacaoController::class);
+
+Route::apiResource('/reservas/rejeitar', ReservasController::class);
 
 
 

@@ -62,8 +62,11 @@ Route::prefix('/clientes')->group(function(){
 Route::prefix('/reservas')->group(function(){
     Route::get('/{id}', [ReservasController::class, 'find']);
     Route::post('/create', [ReservasController::class, 'store'])->middleware('auth', 'cliente');
-    Route::put('/rejeitar', [ReservasController::class, 'rejeitar'])->middleware('auth', 'restaurante');
+    Route::patch('/rejeitar/{id}', [ReservasController::class, 'rejeitar']);
+    Route::patch('/aprovar/{id}', [ReservasController::class, 'aprovar']);
 });
+
+
 
 Route::prefix('/avaliacoes')->group(function(){
     Route::post('/create', [AvaliacaoController::class, 'store'])->middleware('auth', 'cliente');;

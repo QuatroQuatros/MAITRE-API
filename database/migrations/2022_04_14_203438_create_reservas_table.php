@@ -18,6 +18,7 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->time('horario');
+            $table->date('data');
             $table->string('diaSemana');
             $table->integer('qtdPessoas');
             $table->dateTime('horaCheckIn')->nullable();;

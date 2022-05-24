@@ -53,7 +53,7 @@ class RestauranteController extends Controller
     }
 
     public function reservas(){
-        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.horario', 'clientes.nome', 'users.email')
+        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'clientes.nome', 'users.email')
         ->join('clientes', 'reservas.cliente_id', 'clientes.id')
         ->join('users', 'clientes.user_id', 'users.id')
         ->whereNull('duracao')->get();
