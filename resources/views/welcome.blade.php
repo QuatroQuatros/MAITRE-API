@@ -98,7 +98,7 @@
           @foreach ($restaurantes as $r)
           <div class="col-lg-4 col-md-6">
             <div class="member">
-                <div class="pic"><img class="restaurante-img" src="/storage/{{$r->foto}}" class="img-fluid" alt=""></div>
+                <div class="pic"><img class="restaurante-img" src="{{$r->foto}}" class="img-fluid" alt=""></div>
                 <div class="member-info">
                     <h4>{{$r->nome}}</h4>
                     <div class="stars">
