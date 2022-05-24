@@ -68,7 +68,7 @@
           @elseif(auth()->user()->level == 3)
           <a href="/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
           @else
-           <a href="/clientes" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a>
+           <a href="/clientes/{{auth()->user()->id}}"  class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a>
           @endif
           <form action="/logout" method="POST">
               @csrf

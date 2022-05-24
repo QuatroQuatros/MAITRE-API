@@ -20,6 +20,7 @@ class ReservasController extends Controller
             'diaSemana' => $request->dia,
             'qtdPessoas' => $request->qtd,
             'cliente_id' => $c->id,
+            'restaurante_id' => $request->restId,
             'status_reserva_id' => 1,
         ]);
 

@@ -379,6 +379,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
                 <form action="/reservas/create" method="post" role="form" class="php-email-form">
                     @csrf
+                    <input type="hidden" value="{{$restaurante->id}}" name="restId">
                     <div class="rowLine">
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                             <input type="number" class="form-control" name="qtd" id="qtd" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">

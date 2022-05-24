@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Restaurante;
+use App\Models\Reserva;
 use App\Models\Cliente;
 
 class ClienteController extends Controller
@@ -32,7 +33,8 @@ class ClienteController extends Controller
         $cliente->save();
     }
 
-    public function profile(){
-        return view('clientes.profile');
+    public function profile($id){
+        $reservas = Reserva::where('reservas.cliente_id', $id)->get();
+        return view('clientes.profile', ['reservas' => $reservas]);
     }
 }

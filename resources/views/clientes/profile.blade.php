@@ -301,27 +301,40 @@
                     <table>
                 <thead>
                     <tr>
-                        <th>Data/horario Da Reserva</th>
+                        <th>Data da Reserva</th>
+                        <th>Horario Da Reserva</th>
                         <th>Restaurante da Reserva</th>
                         <th>Quantidade de Pessoas</th>
                         <th>status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($reservas as $r)
+                    <tr>
+                        <td data-title="Data">{{$r->data}}</td>
+                        <td data-title="Horario">{{$r->data}}</td>
+                        <td data-title="restaurante">{{$r->data}}<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                        <td data-title="pessoas">{{$r->data}}<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                        <td data-title="status" class="successfull">{{$r->data}}</td>
+                    </tr>
+                    @endforeach
                     <tr>
                         <td data-title="Data">Colocar do banco</td>
-                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="successfull">Reservado</td>
-                    </tr>
-                    <tr>
-                    <td data-title="data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
                         <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
                         <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
                         <td data-title="status" class="warning">Pendente</td>
                     </tr>
                     <tr>
-                    <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
+                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                        <td data-title="status" class="warning">Pendente</td>
+                    </tr>
+                    <tr>
+                        <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
                         <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
                         <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
                         <td data-title="status" class="danger">Cancelado</td>
@@ -385,6 +398,7 @@
                                     </select>
                                     <div class="validate"></div>
                                 </div>
+                                
                                 <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                                     <select placeholder="Horario da reserva" class="form-120" id="HorarioReserva" name="horarioReserva">
                                         <option selected value="0">Horario da reserva</option>

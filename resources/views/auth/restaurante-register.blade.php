@@ -55,7 +55,7 @@
                                         <select name="categoria_id">
                                             <option value="0">Selecione a categoria de seu restaurante</option>
                                             @foreach($categorias as $c)
-                                                <option value="{{$c->id}}">{{$c->categoria}}</option>
+                                                <option value="{{$c->id}}">{{$c->descCategoria}}</option>
                                             @endforeach
 
                                         </select>

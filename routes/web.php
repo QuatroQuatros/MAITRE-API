@@ -56,7 +56,7 @@ Route::prefix('/restaurantes')->group(function(){
 });
 
 Route::prefix('/clientes')->group(function(){
-    Route::get('/', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
+    Route::get('/{id}', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
 });
 
 Route::prefix('/reservas')->group(function(){
