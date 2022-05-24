@@ -56,7 +56,7 @@ class RestauranteRepository{
             "cidade" => $request->cidade,
             "estado" =>  $request->estado,
             "foto" => Storage::disk('s3')->url($path),
-            "foto" => $path,
+            //"foto" => $path,
             "cep" =>  $request->cep,
             "categoria_id" => $request->categoria_id,
             "user_id" => $request->user_id
