@@ -388,13 +388,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                             <select placeholder="dia da reserva" class="form-control" id="Horario da reserva" name="dia">
                                 <option selected value="0">Dia da reserva</option>
-                                <option select value="2">SEGUNDA-FEIRA</option>
-                                <option select value="3">TERÇA-FEIRA</option>
-                                <option select value="4">QUARTA-FEIRA</option>
-                                <option select value="5">QUINTA-FEIRA</option>
-                                <option select value="6">SEXTA-FEIRA</option>
-                                <option select value="7">SABADO</option>
-                                <option select value="1">DOMINGO</option>
+                                @foreach($horarios as $h)
+                                    <option value="{{$h->diaId}}">{{$h->diaSemana}}</option>
+                                @endforeach
                             </select>
                             <div class="validate"></div>
                         </div>

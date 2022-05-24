@@ -54,7 +54,10 @@
                                     <div class="input-div">
                                         <select name="categoria_id">
                                             <option value="0">Selecione a categoria de seu restaurante</option>
-                                            <option value="1">Batata</option>
+                                            @foreach($categorias as $c)
+                                                <option value="{{$c->id}}">{{$c->categoria}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>

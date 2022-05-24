@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\RestauranteController;
 use App\Http\Controllers\Api\ReservasController;
 use App\Http\Controllers\Api\ClienteController;
 use App\Http\Controllers\Api\HorarioController;
+
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AvaliacaoController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ Route::apiResource('/categorias', CategoriaController::class);
 Route::apiResource('/restaurantes', RestauranteController::class);
 Route::apiResource('/horarios', HorarioController::class);
 Route::apiResource('/avaliacoes', AvaliacaoController::class);
+Route::apiResource('/user', UserController::class);
 
 Route::apiResource('/reservas/rejeitar', ReservasController::class);
 
@@ -52,10 +55,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 
 
-
-Route::get('/user', function(){
-    return response()->json(["usuarios" => User::all()]);
-})->middleware('auth:sanctum');
 
 
 

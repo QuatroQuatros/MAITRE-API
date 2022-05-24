@@ -24,7 +24,7 @@ class LoginResponse implements LoginResponseContract
         }elseif (is_null($user->first_login_at) && $level!= 2 ) {
             $user->first_login_at = Carbon::now();
             $user->last_login_at  = Carbon::now();
-            $user->update();
+            $user->save();
        }
 
         if($level == 1){

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Redirect;
 
+use App\Models\Categoria;
 use App\Models\Restaurante;
 use App\Models\Reserva;
 use App\Models\Horario;
@@ -31,12 +32,13 @@ class RestauranteController extends Controller
     }
 
     public function create(){
-        return view('auth.restaurante-register');
+        $categorias = Categoria::all();
+        return view('auth.restaurante-register', ['categorias' => $categorias]);
     }
 
     public function show($id){
         //$horarios = Horario::where('restaurante_id', $id)->get();
-        $horarios = Horario::select('horario')->distinct()->where('restaurante_id', $id)->get();
+        $horarios = Horario::select('horarios.id','horarios.horario', 'dia_semanas.diaSemana', 'dia_semanas.id as diaId')->distinct()->join('dia_semanas', 'dia_semanas.id', 'horarios.dia_semana_id')->where('restaurante_id', $id)->get();
         $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
         return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'horarios' => $horarios]);
     }
