@@ -43,7 +43,7 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <div class="logo me-auto">
-                <a href="../index.php"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
+                <a href="/"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
             </div>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
