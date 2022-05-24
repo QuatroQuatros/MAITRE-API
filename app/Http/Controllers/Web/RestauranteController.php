@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Redirect;
 
 use App\Models\Restaurante;
+use App\Models\Reserva;
+use App\Models\Horario;
 use App\Repositories\RestauranteRepository;
+
 
 class RestauranteController extends Controller
 {
@@ -32,8 +35,10 @@ class RestauranteController extends Controller
     }
 
     public function show($id){
+        //$horarios = Horario::where('restaurante_id', $id)->get();
+        $horarios = Horario::select('horario')->distinct()->where('restaurante_id', $id)->get();
         $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
-        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes]);
+        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'horarios' => $horarios]);
     }
 
     public function store(Request $request){
@@ -45,6 +50,14 @@ class RestauranteController extends Controller
     public function update(Request $request){
         $this->restauranteRepository->update($request);
 
+    }
+
+    public function reservas(){
+        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.horario', 'clientes.nome', 'users.email')
+        ->join('clientes', 'reservas.cliente_id', 'clientes.id')
+        ->join('users', 'clientes.user_id', 'users.id')
+        ->whereNull('duracao')->get();
+        return view('dashboards.restaurante.reservas', ['reservas' => $reservas]);
     }
 
     public function buscar(){

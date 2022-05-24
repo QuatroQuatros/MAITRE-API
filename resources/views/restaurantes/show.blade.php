@@ -377,39 +377,33 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         momento.</p>
                 </div>
 
-                <form action="" method="post" role="form" class="php-email-form">
+                <form action="/reservas/create" method="post" role="form" class="php-email-form">
+                    @csrf
                     <div class="rowLine">
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="number" class="form-control" name="email" id="email" placeholder="QTDE. Pessoas" data-rule="email" data-msg="Digitar quantidade de pessoas">
+                            <input type="number" class="form-control" name="qtd" id="qtd" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
                             <div class="validate"></div>
                         </div>
+        
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Nome do usuario" data-rule="minlen:4" data-msg="Escreva seu nome">
-                            <div class="validate"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="dia da reserva" class="form-control" id="Horario da reserva" name="horarioReserva">
+                            <select placeholder="dia da reserva" class="form-control" id="Horario da reserva" name="dia">
                                 <option selected value="0">Dia da reserva</option>
-                                <option select value="1">SEGUNDA-FEIRA</option>
-                                <option select value="2">TERÇA-FEIRA</option>
-                                <option select value="3">QUARTA-FEIRA</option>
-                                <option select value="4">QUINTA-FEIRA</option>
-                                <option select value="5">SEXTA-FEIRA</option>
-                                <option select value="6">SABADO</option>
-                                <option select value="7">DOMINGO</option>
+                                <option select value="2">SEGUNDA-FEIRA</option>
+                                <option select value="3">TERÇA-FEIRA</option>
+                                <option select value="4">QUARTA-FEIRA</option>
+                                <option select value="5">QUINTA-FEIRA</option>
+                                <option select value="6">SEXTA-FEIRA</option>
+                                <option select value="7">SABADO</option>
+                                <option select value="1">DOMINGO</option>
                             </select>
                             <div class="validate"></div>
                         </div>
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="Horario da reserva" class="form-control" id="Horario da reserva" name="horarioReserva">
+                            <select placeholder="Horario da reserva" class="form-control" id="Horario da reserva" name="horario">
                                 <option selected value="0">Horario da reserva</option>
-                                <option select value="13"></option>
-                                <option select value="14"></option>
-                                <option select value="15"></option>
-                                <option select value="16"></option>
-                                <option select value="17"></option>
-                                <option select value="18"></option>
-                                <option select value="19"></option>
+                                @foreach($horarios as $h)
+                                    <option value="{{$h->horario}}">{{$h->horario}}</option>
+                                @endforeach
                             </select>
                             <div class="validate"></div>
                         </div>

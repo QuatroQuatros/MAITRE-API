@@ -24,7 +24,8 @@
                             <li>Localização</li>
                             <li>Foto restaurante</li>
                             <li>Dias</li>
-                            <li>Horarios</li>
+                            <li>Horários</li>
+                            <li>Mesas</li>
                         </ul>
                     </div>
                     <div class="right-side">
@@ -58,7 +59,7 @@
                                     </div>
                                 </div>
                                 <div class="buttons">
-                                    <button class="next_button">Proxima etapa</button>
+                                    <button class="next_button">Próxima etapa</button>
                                 </div>
                             </div>
                             <div class="main">
@@ -97,12 +98,12 @@
                                 <div class="input-text">
                                     <div class="input-div">
                                         <input type="text" name="numero" required require>
-                                        <span>Numero do restaurante:</span>
+                                        <span>Número do restaurante:</span>
                                     </div>
                                 </div>
                                 <div class="buttons button_space">
                                     <button class="back_button">Voltar</button>
-                                    <span class="next_button">Proxima Etapa</span>
+                                    <span class="next_button">Próxima Etapa</span>
                                 </div>
                             </div>
                             <!--img-->
@@ -123,7 +124,7 @@
                                 </div>
                                 <div class="buttons button_space">
                                     <button class="back_button">Voltar</button>
-                                    <button class="next_button">Proxima Etapa</button>
+                                    <button class="next_button">Próxima Etapa</button>
                                     
                                 </div>
                             </div>
@@ -174,105 +175,133 @@
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='2' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">segunda-feira</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='2' role="switch" id="seg">
+                                        <label class="form-check-label" for="seg">segunda-feira</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='3' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">terça-feira</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='3' role="switch" id="ter">
+                                        <label class="form-check-label" for="ter">terça-feira</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='4' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">quarta-feira</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='4' role="switch" id="qua">
+                                        <label class="form-check-label" for="qua">quarta-feira</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='5' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">quinta-feira</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='5' role="switch" id="qui">
+                                        <label class="form-check-label" for="qui">quinta-feira</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='6' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">sexta-feira</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='6' role="switch" id="sex">
+                                        <label class="form-check-label" for="sex">sexta-feira</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='7' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">sabado</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='7' role="switch" id="sab">
+                                        <label class="form-check-label" for="sab">sabado</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="dia[]" value='1' role="switch" id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">domingo</label>
+                                        <input class="form-check-input" type="checkbox" name="dia[]" value='1' role="switch" id="dom">
+                                        <label class="form-check-label" for="dom">domingo</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="buttons button_space">
                                 <button class="back_button">voltar</button>
-                                <button class="next_button">Proximo passo</button>
+                                <button class="next_button">Próxima Etapa</button>
                             </div>
                         </form>
                     </div>
 
                     <div class="main">
                         <div class="text">
-                            <h2>Horarios</h2>
-                            <p>Digite os horarios que seu restaurante estará aberto</p>
+                            <h2>Horários</h2>
+                            <p>Digite os horários que seu restaurante estará aberto</p>
                         </div>
                         <!--form para seleção de horario (CASO QUISER QUE A PAGINA RECARREGUE TIRA O ID-->
-                        <form id="formHorario" method="post">
-                            @csrf
+                        <form id="formHorario">
                             <div class="input-text">
                                 <!-- Custom select structure -->
                                 <select id="dias">
                                     <option selected>Selecione um dia </option>
+                                    
                                 </select>
                                 <!-- Custom select structure -->
                             </div>
                             <div class="input-text">
-                                <label>Horario de Abertura</label>
+                                <label>Horário de Abertura</label>
                                 <div class="input-div">
-                                    <input type="time" name="inicio" id="inicio" min="01:00" max="23:59" required>
+                                    <input type="time" name="inicio" id="inicio" min="01:00" max="23:59" >
                                 </div>
                             </div>
                             <div class="input-text">
-                                <label>Horario de fechamento</label>
+                                <label>Horário de fechamento</label>
                                 <div class="input-div">
-                                    <input type="time" name="fim" id="fim" min="01:00" max="23:59" required>
+                                    <input type="time" name="fim" id="fim" min="01:00" max="23:59" >
                                 </div>
                             </div>
                             <div class="input-text">
                                 <label>Intervalo de reserva</label>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="popover" title="Intervalo de reserva ?" data-bs-content="Intervalo, serve para termos uma base de quanto tempo é necessario para uma reserva ficar em espera">(?)</button>
                                 <div class="input-div">
-                                    <input type="time" name="intervalo" id="intervalo" min="01:00" max="04:00" placeholder="01:00" required>
+                                    <input type="time" name="intervalo" id="intervalo" min="01:00" max="04:00" placeholder="01:00">
                                 </div>
                             </div>
                             <div class="buttons">
                                 <button class="back_button" id="horarioVoltar">voltar</button>
-                                <button id="finalizar" class="disabled">Finalizar</button>
-                                <!--<button class="next_button">Cadastrar</button>-->
-                                <button onclick="teste()">Cadastrar</button>
+                                <!--<span id="finalizar" class="disabled">Proxima Etapa</span>-->
+                                <!--<button class="disabled" id="finalizar">Proximo</button>-->
+                                <button onclick="cadastrarHorario()">Cadastrar</button>
+                                <button class="next_button">Proxíma Etapa</button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="main">
+                        <div class="text">
+                            <h2>Mesas</h2>
+                            <p>Cadastre a quantidade de mesas que serão disponibilizadas para reservas</p>
+                        </div>
+                        <!--form para mesas-->
+                        <form id="formMesa">
+                            <div class="input-text">
+                                <div class="input-div">
+                                    <input type="number" name="qtd" id="qtdMesas">
+                                    <span>Qtde. mesas</span>
+                                </div>
+                                <div class="input-div">
+                                    <input type="number" name="cap" id="capMesa">
+                                    <span>Capacidade pessoas</span>
+                                </div>
+                            </div>
+                            <div class="buttons button_space">
+                                <button class="back_button" id="horarioVoltar">voltar</button>
+                                <button onclick="cadastrarMesa()">Cadastrar</button>
+                                <button class="next_button">Finalizar</button>
+                                <!--<button id="finalizar" class="disabled">Finalizar</button>-->
                             </div>
                         </form>
                     </div>
@@ -284,9 +313,9 @@
 
                         <div class="text congrats">
                             <h2>Obrigado!</h2>
-                            <p>Obrigado senhor <span class="shown_name"></span> Seu restaurante foi cadastrado com sucesso</p>
+                            <p>Obrigado<span class="shown_name"></span> Seu restaurante foi cadastrado com sucesso</p>
                             <div class="buttons button_space">
-                                <a href="/login"><button class="next_button">Proximo passo</button></a>
+                                <a href="/restaurantes/admin"><button class="next_button">Finalizar</button></a>
                             </div>
                         </div>
                     </div>

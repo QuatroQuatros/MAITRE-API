@@ -17,12 +17,13 @@ class CreateReservasTable extends Migration
 
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('data');
+            $table->time('horario');
+            $table->string('diaSemana');
             $table->integer('qtdPessoas');
             $table->dateTime('horaCheckIn')->nullable();;
             $table->dateTime('horaCheckOut')->nullable();;
             $table->dateTime('duracao')->nullable();;
-            $table->foreignId('status_id')->constrained()->default(1);
+            $table->foreignId('status_reserva_id')->constrained()->default(1);
             $table->foreignId('cliente_id')->constrained();
             $table->timestamps();
         });

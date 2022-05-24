@@ -9,11 +9,7 @@ class Mesas extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'mesas';
     protected $fillable = [
         'qtdMesas',
         'capMaxima',
@@ -21,11 +17,6 @@ class Mesas extends Model
         'restaurante_id',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
         'restaurante_id' => 'integer',

@@ -177,13 +177,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="box-item">
-                                <h4><a href="#">Nosso &amp; App</a></h4>
+                                <h4><a href="#">Nosso App</a></h4>
                                 <p>Nosso app é focado para que você escolhe a melhor opção de acordo com sua vontade e claro que não tenha que ficar em uma fila para poder comer</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="box-item">
-                                <h4><a href="#">Nosso &amp; site</a></h4>
+                                <h4><a href="#">Nosso site</a></h4>
                                 <p>Nosso site é feito para você dono de um restaurante que deseja atrair clientes e melhorar a administração de seu restaurante, sendo atualizado de cada reserva e avaliação que é feita sobre seu estabelecimento</p>
                             </div>
                         </div>

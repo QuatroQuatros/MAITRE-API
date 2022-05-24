@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/adm.css">
     <link rel="stylesheet" href="/css/cadasRes.css">
     <link rel="stylesheet" href="/css/lightbox.css">
+    <link rel="stylesheet" href="/css/notificacao.css">
 
     <!--Data table-->
     
@@ -67,9 +68,9 @@
                  <h3>Cardapio</h3>
              </a>
 
-             <a href="#" class="active">
+             <a href="/restaurantes/reservas" class="active">
                  <span class="material-icons-sharp">mail_outline</span>
-                 <h3>Messages</h3>
+                 <h3>Reservas</h3>
                  <span class="message-count">26</span>
              </a>
 
@@ -92,6 +93,7 @@
      <script src="/js/style.js"></script>
     <script src="/js/cep.js"></script>
     <script src="/js/lightbox.min.js"></script>
+    <script src="/js/modal.js"></script>
 
 
     </body>

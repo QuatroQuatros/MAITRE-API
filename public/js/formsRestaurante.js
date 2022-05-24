@@ -4,10 +4,6 @@ var step_list = document.querySelectorAll(".progress-bar li");
 var num = document.querySelector(".step-number");
 let formnumber=0;
 
-/*const {axios} = require('axios');*/
-//let formnumber = document.getElementById('formLevel').value;
-//formnumber = parseInt(formnumber);
-
 next_click.forEach(function(next_click_form){
     next_click_form.addEventListener('click',function(){
         if(!validateform()){
@@ -51,14 +47,7 @@ function updateform(){
     main_form[formnumber].classList.add('active');
 } 
  
-function progress_forward(){
-    // step_list.forEach(list => {
-        
-    //     list.classList.remove('active');
-         
-    // }); 
-    
-     
+function progress_forward(){    
     num.innerHTML = formnumber+1;
     step_list[formnumber].classList.add('active');
 }  
@@ -100,7 +89,9 @@ var request;
 var checkedValue = [];
 var diaCadastrado = [];
 var restId;
-var d;
+var dias = [];
+
+
 $(document).on('submit', '#form1', function(e) {
     e.preventDefault();
     console.log('teste')
@@ -153,11 +144,7 @@ $(document).on('submit', '#formDia', function(e) {
     for (var i=0; i < diaCadastrado.length; i++) {
       dia = diaCadastrado[i];
       if (checkedValue.indexOf(dia) >= 0) {
-        console.log(dia + ' está no array');
-        checkedValue = checkedValue.splice(checkedValue.indexOf(dia), 1);
-        console.log(checkedValue.length)
-      } else {
-        console.log(dia + ' não está no array');
+        checkedValue.splice(checkedValue.indexOf(dia), 1);
       }
     }
     console.log(checkedValue)
@@ -169,9 +156,7 @@ $(document).on('submit', '#formDia', function(e) {
         });
 
         request.done(function (data, textStatus, xhr){
-            console.log(data);
-            d = data;
-            console.log(data.length);
+            dias = data;
 
             if(xhr.status == 200){
                 $("#dias").empty();
@@ -193,14 +178,20 @@ $(document).on('submit', '#formDia', function(e) {
 
 $(document).on('submit', '#formHorario', function(e) {
     e.preventDefault();
+    console.log(dias)
+    $("#diaMesa").empty();
+    for(var i = 0; i < dias.length; i++){
+        $("#diaMesa").append(`<option value=${dias[i].id}>${dias[i].diaSemana}</option>`); 
+    }  
+});
 
+$(document).on('submit', '#formMesa', function(e) {
+    e.preventDefault();
 });
 
 
 function hour_to_seconds(hour){
-    console.log(hour)
-    var a = String(hour).split(':')
-    console.log(a);
+    var a = String(hour).split(':');
     var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60;
     return seconds
 }
@@ -235,25 +226,12 @@ function call(body){
     });
 
     request.done(function (response, textStatus, jqXHR){
-        console.log(response);
-        console.log(checkedValue.length)
         if(!diaCadastrado.includes(body.dia_semana_id)){
             diaCadastrado.push(body.dia_semana_id);
         }
-
-        for (var i=0; i < diaCadastrado.length; i++) {
-          dia = diaCadastrado[i];
-          if (checkedValue.indexOf(dia) >= 0) {
-            console.log(dia + ' está no array');
-            checkedValue = checkedValue.splice(checkedValue.indexOf(dia), 1);
-            console.log(checkedValue.length)
-          } else {
-            console.log(dia + ' não está no array');
-          }
-        }
         
         $(`#dias option[value="${body.dia_semana_id}"]`).remove();
-
+        checkedValue.splice(checkedValue.indexOf(body.dia_semana_id), 1);
         if(checkedValue.length == 0){
             $( "#finalizar" ).removeClass( "disabled" ).addClass( "next_button" );
         }
@@ -267,7 +245,7 @@ function call(body){
     });   
 }
 
-function teste(){
+function cadastrarHorario(){
 
 
     var dia = document.getElementById('dias').value;
@@ -285,46 +263,56 @@ function teste(){
 
         call(body);
 
-
-
-
-
-        /*axios.post('/horarios/create', {
-            dia_semana_id: dia,
-            horario: horario,
-            restaurante_id: restId
-          })
-          .then(function (response) {
-            console.log(response);
-            $(`#dias option[value="${dias}"]`).remove();
-          })
-          .catch(function (error) {
-            console.log(error);
-          });*/
-
         
     }
 
 }
 
-$(document).on('click', '#horarioVoltar', function(e) {
+function cadastrarMesa(){
+    var qtd = document.getElementById('qtdMesas').value;
+    var cap = document.getElementById('capMesa').value;
+
+    body = {
+        "qtd": qtd,
+        "capacidade": cap,
+        "restaurante_id": restId
+    };
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    request = $.ajax({
+        url: "/mesas/create",
+        type: "POST",
+        data: JSON.stringify(body),
+        dataType: 'json',
+        processData: false,
+        contentType: "application/json; charset=utf-8",
+    });
+
+    request.done(function (response, textStatus, jqXHR){
+        console.log(response)
+        $('#qtdMesas').val('');
+        $('#capMesa').val('');
+
+    });
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });   
+
+}
+
+$(document).on('submit', '#finalizar', function(e) {
     e.preventDefault();
-    console.log('oi', diaCadastrado);
-    console.log('batata', checkedValue)
-
-
-
-
-
-    /*for(var i =0; i < checkedValue.length; i++){
-        for(var j =0; j < diaCadastrado.length; j++){
-            if(checkedValue.includes[diaCadastrado[j]]){
-                console.log('batata')
-            }
-        }
-    }*/
 
 });
+
 
 
 
