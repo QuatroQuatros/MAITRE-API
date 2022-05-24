@@ -43,7 +43,7 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
             <div class="logo me-auto">
-                <a href="/"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
+                <a href="/"><img src="/img/logo/maitre.png" class="img-fluid"></a>
             </div>
 
             <nav id="navbar" class="navbar order-last order-lg-0">
@@ -65,7 +65,7 @@
         <footer id="footer">
             <div class="container">
                 <div class="logo me-auto">
-                    <a href="index.html"><img src="/img/logo/logoMaitre2.png" class="img-fluid"></a>
+                    <a href="/"><img src="/img/logo/maitre.png" class="img-fluid"></a>
                 </div>
                 <div class="social-links">
                     <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
