@@ -34,10 +34,10 @@ class Restaurante extends Model
         'user_id' => 'integer',
     ];
 
-    public function categoria_restaurante()
-    {
-        return $this->belongsTo(CategoriaRestaurante::class);
-    }
+    // public function categoria_restaurante()
+    // {
+    //     return $this->belongsTo(CategoriaRestaurante::class);
+    // }
 
     // public function user()
     // {
