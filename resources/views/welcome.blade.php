@@ -74,6 +74,63 @@
 
 <main id="main">
 
+<!-- ======= restaurantes Premium Section ======= -->
+  <section id="restaurantePremium" class="events">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Restaurantes <span>Em Destaque</span></h2>
+        </div>
+
+        <div class="events-slider swiper">
+            <div class="swiper-wrapper">
+
+
+                @foreach($restaurantes as $r)
+                    @if($r->level == 2)
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="{{$r->foto}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>{{$r->nome}}</h3>
+                                    
+                                    <p class="fst-italic">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore
+                                        magna aliqua.
+                                    </p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
+                                            commodo
+                                            consequat.</li>
+                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
+                                            voluptate velit.</li>
+                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
+                                            commodo
+                                            consequat.</li>
+                                    </ul>
+                                    <p>
+                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                                        in
+                                        reprehenderit in voluptate
+                                        velit esse cillum dolore eu fugiat nulla pariatur
+                                    </p>
+                                    <a href="/restaurantes/{{$r->id}}"><button type="submit"
+                                            class="button-coment">Visitar restaurante</button></a>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+                    @endif
+                @endforeach
+
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section><!-- End restaurante premiu Section -->
+
   <!--======= restaurantes Section ======= -->
   <section id="restaurantes" class="chefs">
       <div class="container">
@@ -96,153 +153,31 @@
             </div>
           @endif
           @foreach ($restaurantes as $r)
-          <div class="col-lg-4 col-md-6">
-            <div class="member">
-                <div class="pic"><img class="restaurante-img" src="{{$r->foto}}" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                    <h4>{{$r->nome}}</h4>
-                    <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                            class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                            class="bi bi-star-fill"></i>
-                    </div>
-                    <div class="center-button">
-                        <a href="/restaurantes/{{$r->id}}"><button type="submit"
-                                class="button-coment">Visitar restaurante</button></a>
+            @if($r->level == 1)
+                <div class="col-lg-4 col-md-6">
+                    <div class="member">
+                        <div class="pic"><img class="restaurante-img" src="{{$r->foto}}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>{{$r->nome}}</h4>
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                    class="bi bi-star-fill"></i>
+                            </div>
+                            <div class="center-button">
+                                <a href="/restaurantes/{{$r->id}}"><button type="submit"
+                                        class="button-coment">Visitar restaurante</button></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-          </div>
+            @endif
           @endforeach
       </div>
   </section><!-- End restaurante Section -->
 
 
-  <!-- ======= full restaurantes Section ======= -->
-  <section id="restaurantePremium" class="events">
-      <div class="container">
 
-          <div class="section-title">
-              <h2>Restaurantes <span>Em Destaque</span></h2>
-          </div>
-
-          <div class="events-slider swiper">
-              <div class="swiper-wrapper">
-
-                  <div class="swiper-slide">
-                      <div class="row event-item">
-                          <div class="col-lg-6">
-                              <img src="/img/event-birthday.jpg" class="img-fluid" alt="">
-                          </div>
-                          <div class="col-lg-6 pt-4 pt-lg-0 content">
-                              <h3>Birthday Parties</h3>
-                              <div class="price">
-                                  <p><span>$189</span></p>
-                              </div>
-                              <p class="fst-italic">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore
-                                  magna aliqua.
-                              </p>
-                              <ul>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                                  <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
-                                      voluptate velit.</li>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                              </ul>
-                              <p>
-                                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                  in
-                                  reprehenderit in voluptate
-                                  velit esse cillum dolore eu fugiat nulla pariatur
-                              </p>
-                              <a href="./restaurante/restaurante.php"><button type="submit"
-                                      class="button-coment">Visitar restaurante</button></a>
-                          </div>
-                      </div>
-                  </div><!-- End testimonial item -->
-
-                  <div class="swiper-slide">
-                      <div class="row event-item">
-                          <div class="col-lg-6">
-                              <img src="/img/event-private.jpg" class="img-fluid" alt="">
-                          </div>
-                          <div class="col-lg-6 pt-4 pt-lg-0 content">
-                              <h3>Private Parties</h3>
-                              <div class="price">
-                                  <p><span>$290</span></p>
-                              </div>
-                              <p class="fst-italic">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore
-                                  magna aliqua.
-                              </p>
-                              <ul>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                                  <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
-                                      voluptate velit.</li>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                              </ul>
-                              <p>
-                                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                  in
-                                  reprehenderit in voluptate
-                                  velit esse cillum dolore eu fugiat nulla pariatur
-                              </p>
-                              <a href="./restaurante/restaurante.php"><button type="submit"
-                                      class="button-coment">Visitar restaurante</button></a>
-                          </div>
-                      </div>
-                  </div><!-- End testimonial item -->
-                  <div class="swiper-slide">
-                      <div class="row event-item">
-                          <div class="col-lg-6">
-                              <img src="/img/event-custom.jpg" class="img-fluid" alt="">
-                          </div>
-                          <div class="col-lg-6 pt-4 pt-lg-0 content">
-                              <h3>Custom Parties</h3>
-                              <div class="price">
-                                  <p><span>$99</span></p>
-                              </div>
-                              <p class="fst-italic">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                  incididunt ut labore et dolore
-                                  magna aliqua.
-                              </p>
-                              <ul>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                                  <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
-                                      voluptate velit.</li>
-                                  <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                      commodo
-                                      consequat.</li>
-                              </ul>
-                              <p>
-                                  Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                  in
-                                  reprehenderit in voluptate
-                                  velit esse cillum dolore eu fugiat nulla pariatur
-                              </p>
-                              <a href="./restaurante/restaurante.php"><button type="submit"
-                                      class="button-coment">Visitar restaurante</button></a>
-                          </div>
-                      </div>
-                  </div><!-- End testimonial item -->
-              </div>
-              <div class="swiper-pagination"></div>
-          </div>
-      </div>
-  </section><!-- End restaurante premiu Section -->
 
 </main><!-- End #main -->
 @endsection

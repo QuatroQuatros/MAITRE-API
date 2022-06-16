@@ -55,7 +55,7 @@
                                         <select name="categoria_id">
                                             <option value="0">Selecione a categoria de seu restaurante</option>
                                             @foreach($categorias as $c)
-                                                <option value="{{$c->id}}">{{$c->descCategoria}}</option>
+                                                <option value="{{$c->id}}">{{$c->categoria}}</option>
                                             @endforeach
 
                                         </select>
@@ -176,6 +176,14 @@
                         <!--form para seleção de dias-->
                         <form id="formDia">
                             <div class="input-text">
+                                <div class="input-div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="todos" value='2' role="switch" id="seg">
+                                        <label class="form-check-label" for="seg">Todos os dias</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-text">          
                                 <div class="input-div">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="dia[]" value='2' role="switch" id="seg">

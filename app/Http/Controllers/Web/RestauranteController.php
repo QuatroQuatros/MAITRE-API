@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Redirect;
 
 use App\Models\Categoria;
+use App\Models\CategoriaRestaurante;
 use App\Models\Restaurante;
 use App\Models\Reserva;
 use App\Models\Horario;
+use App\Models\Prato;
+use App\Models\PratoEspecial;
 use App\Repositories\RestauranteRepository;
 
 
@@ -32,7 +35,7 @@ class RestauranteController extends Controller
     }
 
     public function create(){
-        $categorias = Categoria::all();
+        $categorias = CategoriaRestaurante::all();
         return view('auth.restaurante-register', ['categorias' => $categorias]);
     }
 
@@ -40,7 +43,12 @@ class RestauranteController extends Controller
         //$horarios = Horario::where('restaurante_id', $id)->get();
         $horarios = Horario::select('horarios.id','horarios.horario', 'dia_semanas.diaSemana', 'dia_semanas.id as diaId')->distinct()->join('dia_semanas', 'dia_semanas.id', 'horarios.dia_semana_id')->where('restaurante_id', $id)->get();
         $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
-        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'horarios' => $horarios]);
+        $categorias = Prato::select('categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->distinct()->get();
+        $pratos = Prato::select('pratos.categoria_id', 'pratos.nome', 'pratos.valor', 'pratos.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos.categoria_id', 'categorias.id')->where('restaurante_id', $id)->distinct()->get();
+        $especiais = PratoEspecial::select('pratos_especiais.categoria_id', 'dia_semanas.diaSemana', 'pratos_especiais.nome',  'pratos_especiais.valor', 'pratos_especiais.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos_especiais.categoria_id', 'categorias.id')->join('dia_semanas', 'dia_semanas.id', 'pratos_especiais.dia_semana_id')
+        ->orderBy('pratos_especiais.dia_semana_id')
+        ->where('restaurante_id', $id)->get();
+        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'horarios' => $horarios, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias]);
     }
 
     public function store(Request $request){

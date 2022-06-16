@@ -25,4 +25,8 @@ class UserController extends Controller
     public function show($id){
         return $this->userRepository->show($id);
     }
+
+    public function teste(){
+        return $this->user->select('profile_photo_url')->get();
+    }
 }

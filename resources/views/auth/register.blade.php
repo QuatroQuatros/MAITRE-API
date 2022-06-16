@@ -60,7 +60,7 @@
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-phone-volume icon-modify"></i>
-                                <input type="text" name="tel" id="tel" placeholder="Telefone(contato)">
+                                <input type="text" name="fone" id="tel" placeholder="Telefone(contato)">
                             </label>
                         </div>
                         <div class="form-content">
@@ -221,8 +221,8 @@
                             <div class="select_mate" data-mate-select="active">
                                 <select name="selectData" onchange="" onclick="return false;" id="">
                                     <option selected>Selecione o pacote que irá utilizar </option>
-                                    <option value="basico">Pacote básico </option>
-                                    <option value="basico">Pacote Premium </option>
+                                    <option value="1">Pacote básico </option>
+                                    <option value="2">Pacote Premium </option>
                                 </select>
                                 <p class="selecionado_opcion" onclick="open_select(this)"></p><span onclick="open_select(this)" class="icon_select_mate"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />

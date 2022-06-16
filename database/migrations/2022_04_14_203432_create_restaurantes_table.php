@@ -22,11 +22,12 @@ class CreateRestaurantesTable extends Migration
             $table->string('cidade');
             $table->string('estado');
             $table->string('foto', 400)->nullable();
-            $table->string('cardapio', 500)->nullable();
             $table->string('cep');
             $table->integer('numero');
-            $table->foreignId('categoria_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->integer('level')->default(1);
+            $table->foreignId('categoria_restaurante_id')->constrained();
+            $table->foreignId('user_id')->onDelete('cascade')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

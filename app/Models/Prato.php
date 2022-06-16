@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pratos extends Model
+class Prato extends Model
 {
     use HasFactory;
 
@@ -18,6 +18,7 @@ class Pratos extends Model
         'nome',
         'descPrato',
         'valor',
+        'categoria_id',
         'restaurante_id',
     ];
 
@@ -29,6 +30,7 @@ class Pratos extends Model
     protected $casts = [
         'id' => 'integer',
         'valor' => 'float',
+        'categoria_id' => 'integer',
         'restaurante_id' => 'integer',
     ];
 

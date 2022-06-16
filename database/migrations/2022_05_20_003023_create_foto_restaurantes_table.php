@@ -19,7 +19,8 @@ class CreateFotoRestaurantesTable extends Migration
             $table->id();
             $table->string('foto', 400)->nullable();
             $table->string('descFoto');
-            $table->foreignId('restaurante_id')->constrained();
+            $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

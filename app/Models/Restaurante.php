@@ -2,42 +2,47 @@
 
 namespace App\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Restaurante extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes, CascadeSoftDeletes;
 
+    //protected $cascadeDeletes = ['user'];
+    protected $dates = ['deleted_at']; 
+    
     protected $fillable = [
         'nome',
         'bairro',
         'cidade',
         'estado',
         'foto',
-        'cardapio',
         'cep',
         'numero',
-        'categoria_id',
+        'level',
+        'categoria_restaurante_id',
         'user_id',
     ];
 
    
     protected $casts = [
         'id' => 'integer',
-        'categoria_id' => 'integer',
+        'categoria_restaurante_id' => 'integer',
         'user_id' => 'integer',
     ];
 
-    public function categoria()
+    public function categoria_restaurante()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(CategoriaRestaurante::class);
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->withTrashed()->belongsTo(User::class);
+    // }
 
     public function rules(){
         return [
@@ -47,9 +52,10 @@ class Restaurante extends Model
             "bairro" => 'required|string',
             "cidade" => 'required|string',
             "estado" => 'required|string',
-            "foto" => 'nullable|file|mimes:png,jpg,jpeg',
+            "foto" => 'required|file|mimes:png,jpg,jpeg',
             "cep" => 'required|string',
-            "categoria_id" => 'required|integer',
+            "level" => 'required|integer',
+            "categoria_restaurante_id" => 'required|integer',
             "user_id" => 'required|integer',
         ];
     }

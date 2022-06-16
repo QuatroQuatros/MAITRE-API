@@ -93,6 +93,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         </div><!-- End testimonial item -->
 
                     </div>
+                    
                     <div class="swiper-pagination"></div>
                 </div>
 
@@ -158,70 +159,52 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <div class="row">
                             <div class="col-lg-3">
                                 <ul class="nav nav-tabs flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">prato 1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-2">prato 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-3">prato 3</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-4">prato 4</a>
-                                    </li>
+                                    @foreach($especiais as $e)
+                                        @if($loop->index == 0)
+                                            <li class="nav-item">
+                                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-{{ $loop->index }}">{{$e->diaSemana}}</a>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#tab-{{ $loop->index }}">{{$e->diaSemana}}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                   
                                 </ul>
                             </div>
                             <div class="col-lg-9 mt-4 mt-lg-0">
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" id="tab-1">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
+                                    @foreach($especiais as $e)
+                                        @if($loop->index == 0)
+                                            <div class="tab-pane active show" id="tab-{{ $loop->index }}">
+                                                <div class="row">
+                                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                                        <h3>{{$e->nome}}</h3>
+                                                        <p class="fst-italic">{{$e->descPrato}}</p>
+                                                        <p>R${{$e->valor}}</p>
+                                                    </div>
+                                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                                        <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                        @else
+                                            <div class="tab-pane" id="tab-{{ $loop->index }}">
+                                                <div class="row">
+                                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                                        <h3>{{$e->nome}}</h3>
+                                                        <p class="fst-italic">{{$e->descPrato}}</p>
+                                                        <p>R${{$e->valor}}</p>
+                                                    </div>
+                                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                                        <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-2">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-3">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-3.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-4">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-4.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endif
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                         </div>
@@ -253,7 +236,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
             <div class="container">
 
                 <div class="section-title">
-                    <h2>Cardapio <span>completo</span></h2>
+                    <h2>Cardápio <span>completo</span></h2>
                 </div>
 
 
@@ -261,109 +244,28 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="menu-flters">
                             <li data-filter="*" class="filter-active">Tudo</li>
-                            <li data-filter=".filter-starters">Tira-gosto</li>
-                            <li data-filter=".filter-salads">Salada</li>
-                            <li data-filter=".filter-specialty">Especiarias</li>
+
+                            @foreach($categorias as $c)
+                                <li data-filter=".filter-{{$c->descCategoria}}">{{$c->descCategoria}}</li>
+                            @endforeach
                         </ul>
                     </div>
                     <input type="search" placeholder="Pequise por pratos" />
                 </div>
 
                 <div class="row menu-container">
+                    @foreach($pratos as $p)
+                        <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
+                            <div class="menu-content">
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
+                            </div>
+                            <div class="menu-ingredients">
+                                {{$p->descPrato}}
+                            </div>
+                        </div>
+                    @endforeach
 
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Bread
-                                barrel</a><span>$6.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Bread
-                                barrel</a><span>$6.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Crab
-                                Cake</a><span>$7.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            A delicate crab cake served on a toasted roll with lettuce and
-                            tartar
-                            sauce
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Caesar
-                                Selections</a><span>$8.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tuscan
-                                Grilled</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Grilled chicken with provolone, artichoke hearts, and roasted red
-                            pesto
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mozzarella
-                                Stick</a><span>$4.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Greek
-                                Salad</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Fresh spinach, crisp romaine, tomatoes, and Greek olives
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Spinach
-                                Salad</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Fresh spinach with mushrooms, hard boiled egg, and warm bacon
-                            vinaigrette
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Lobster
-                                Roll</a><span>$12.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-                        </div>
-                    </div>
+                    
                 </div>
 
         </section><!-- End Menu Section -->
@@ -464,10 +366,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                     </p>
                                 </div>
                             </div>
-                        @endforeach
-
-                    
+                        @endforeach                    
                     </div>
+                    
                     <div class="swiper-pagination"></div>
                     <div class="center-button">
                         <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>

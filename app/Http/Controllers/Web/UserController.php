@@ -23,8 +23,10 @@ class UserController extends Controller
         }catch(\Exception $e){
             throw $e;
         }
-        
+    }
 
-
+    public function destroy($id){
+        $this->user = $this->user->findOrFail($id);
+        $this->user->delete();
     }
 }

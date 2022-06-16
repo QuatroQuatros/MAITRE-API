@@ -51,6 +51,7 @@ class UserRepository{
                 $r = new ClienteRepository(new Cliente);
                 $r->store($request);
                 \DB::commit();
+                /*
                 try{
                     Mail::send('mail.welcome', ['nome' => $request->nome], function($m) use($request){
                         $m->from('atlanticmaitre@gmail.com', 'MAÎTRE');
@@ -60,6 +61,7 @@ class UserRepository{
                 }catch(\Exception $ignored){
                     
                 }
+                */
         
                 
                 

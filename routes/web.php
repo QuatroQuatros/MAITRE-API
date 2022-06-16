@@ -57,6 +57,8 @@ Route::prefix('/restaurantes')->group(function(){
 
 Route::prefix('/clientes')->group(function(){
     Route::get('/{id}', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
+    Route::match(array('PUT', 'PATCH'), "/{id}", [ClienteController::class, 'update'])->middleware('auth', 'cliente');
+    Route::delete('/{id}', [ClienteController::class, 'destroy'])->middleware('auth', 'cliente');
 });
 
 Route::prefix('/reservas')->group(function(){

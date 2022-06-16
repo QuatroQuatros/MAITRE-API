@@ -15,7 +15,8 @@ class CreateHorariosTable extends Migration
             $table->id();
             $table->time('horario');
             $table->foreignId('dia_semana_id')->constrained();
-            $table->foreignId('restaurante_id')->constrained();
+            $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

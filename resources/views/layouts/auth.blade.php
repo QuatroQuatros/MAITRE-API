@@ -8,7 +8,7 @@
     <title>MAÎTRE || SERVINDO A VOCÊ</title>
 
     <!-- Favicons -->
-    <link href="" rel="icon">
+    <link href="/img/favicons/maitre.png" rel="icon">
     <link href="" rel="apple-touch-icon">
 
      <!--font aewsome-->

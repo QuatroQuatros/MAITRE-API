@@ -36,6 +36,21 @@ class RestauranteController extends Controller
         return response($this->restauranteRepository->update($request, $id), 202);
     }
 
+    public function destroy($id){
+        return response($this->restauranteRepository->destroy($id), 204);
+    }
+
+    public function restore($id){
+        return response($this->restauranteRepository->restore($id));
+    }
+
+    public function premium($id){
+        return response($this->restauranteRepository->premium($id));
+    }
+
+    public function cancelPremium($id){
+        return response($this->restauranteRepository->cancelPremium($id));
+    }
 
 
 

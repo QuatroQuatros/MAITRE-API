@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMesasTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateMesasTable extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
 
-        Schema::create('mesas', function (Blueprint $table) {
+        Schema::disableForeignKeyConstraints();
+        Schema::create('fone_restaurantes', function (Blueprint $table) {
             $table->id();
-            $table->integer('qtdMesas');
-            $table->integer('capMaxima');
-            $table->integer('mesasDisponiveis');
+            $table->string('descFone');
             $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
             $table->softDeletes();
             $table->timestamps();
@@ -35,6 +33,6 @@ class CreateMesasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mesas');
+        Schema::dropIfExists('fone_restaurantes');
     }
-}
+};
