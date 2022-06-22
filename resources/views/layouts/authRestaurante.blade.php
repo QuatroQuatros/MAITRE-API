@@ -37,6 +37,7 @@
     <link href="/css/login2.css" rel="stylesheet">
 
     <link href="/css/formsRestaurante.css" rel="stylesheet">
+    <link href="/css/modal_select.css" rel="stylesheet">
 
 </head>
 

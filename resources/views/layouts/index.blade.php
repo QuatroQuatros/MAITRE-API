@@ -27,6 +27,7 @@
 
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/modais.css" rel="stylesheet">
+    <link href="/css/filtroPesquisa.css" rel="stylesheet">
 
 </head>
 
@@ -125,6 +126,10 @@
   <script src="/js/main.js"></script>
   <script src="/js/cep.js"></script>
 
+
+  <script src="/js/filtros.js"></script>
+
+  
   <script>
     $.ajaxSetup({
         headers: {

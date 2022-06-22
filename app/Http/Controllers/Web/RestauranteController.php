@@ -25,7 +25,7 @@ class RestauranteController extends Controller
     }
 
     public function index(){
-        return view('restaurantes.list', ['restaurantes' => Restaurante::all()]);
+        return view('restaurantes.list', ['restaurantes' => Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get(), 'categorias' => CategoriaRestaurante::all()]);
     }
 
 
@@ -70,23 +70,47 @@ class RestauranteController extends Controller
         return view('dashboards.restaurante.reservas', ['reservas' => $reservas]);
     }
 
-    public function buscar(){
+    public function buscar(Request $request){
 
         $busca = request('search');
+        $filtros = $request->query();
         
         if($busca){
             if( $this->restaurante->where('nome', 'like', '%'.$busca.'%')->exists()){
                 $restaurante = $this->restaurante->where('nome', 'like', '%'.$busca.'%')->get();
                 return response()->json($restaurante, 200);
 
+            }else if($this->restaurante->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
+            ->where('categoria_restaurantes.categoria','like', '%'.$busca.'%')->exists()){
+                $restaurante = $this->restaurante->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
+                ->where('categoria_restaurantes.categoria','like', '%'.$busca.'%')->get();
+                return response()->json($restaurante, 200);
             }else{
                 return response()->noContent();
                 
             }
             
+        }else if($filtros['categoria']){
+            return Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id') ->
+            whereIn('categoria_restaurantes.categoria', $filtros['categoria'])->get();
+
+            //return view('restaurantes.list', ['restaurantes' => $restaurantes, 'categorias' => CategoriaRestaurante::all()]);
         }else{
             return response()->json(['mensagem' => "produto não encontrado"], 204);
         }
         
+    }
+
+    public function teste(Request $request){
+        $busca = $request->query();
+        // if($busca['search']){
+        //     return Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id') ->
+        //     whereIn('categoria_restaurantes.categoria', $busca['search'])->get();
+        // }
+
+
+
+
+        return $busca;
     }
 }
