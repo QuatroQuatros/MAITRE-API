@@ -27,6 +27,7 @@ class CreateClientesTable extends Migration
             $table->string('cpf')->unique();
             $table->string('cep');
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

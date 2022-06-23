@@ -93,6 +93,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         </div><!-- End testimonial item -->
 
                     </div>
+                    
                     <div class="swiper-pagination"></div>
                 </div>
 
@@ -158,70 +159,52 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <div class="row">
                             <div class="col-lg-3">
                                 <ul class="nav nav-tabs flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">prato 1</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-2">prato 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-3">prato 3</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#tab-4">prato 4</a>
-                                    </li>
+                                    @foreach($especiais as $e)
+                                        @if($loop->index == 0)
+                                            <li class="nav-item">
+                                                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-{{ $loop->index }}">{{$e->diaSemana}}</a>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#tab-{{ $loop->index }}">{{$e->diaSemana}}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                   
                                 </ul>
                             </div>
                             <div class="col-lg-9 mt-4 mt-lg-0">
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" id="tab-1">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
+                                    @foreach($especiais as $e)
+                                        @if($loop->index == 0)
+                                            <div class="tab-pane active show" id="tab-{{ $loop->index }}">
+                                                <div class="row">
+                                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                                        <h3>{{$e->nome}}</h3>
+                                                        <p class="fst-italic">{{$e->descPrato}}</p>
+                                                        <p>R${{$e->valor}}</p>
+                                                    </div>
+                                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                                        <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                        @else
+                                            <div class="tab-pane" id="tab-{{ $loop->index }}">
+                                                <div class="row">
+                                                    <div class="col-lg-8 details order-2 order-lg-1">
+                                                        <h3>{{$e->nome}}</h3>
+                                                        <p class="fst-italic">{{$e->descPrato}}</p>
+                                                        <p>R${{$e->valor}}</p>
+                                                    </div>
+                                                    <div class="col-lg-4 text-center order-1 order-lg-2">
+                                                        <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-2">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-3">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-3.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tab-4">
-                                        <div class="row">
-                                            <div class="col-lg-8 details order-2 order-lg-1">
-                                                <h3>Nome do prato</h3>
-                                                <p class="fst-italic">...</p>
-                                                <p>...</p>
-                                            </div>
-                                            <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                <img src="../assets/img/specials-4.jpg" alt="" class="img-fluid">
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @endif
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                         </div>
@@ -253,7 +236,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
             <div class="container">
 
                 <div class="section-title">
-                    <h2>Cardapio <span>completo</span></h2>
+                    <h2>Cardápio <span>completo</span></h2>
                 </div>
 
 
@@ -261,109 +244,28 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="menu-flters">
                             <li data-filter="*" class="filter-active">Tudo</li>
-                            <li data-filter=".filter-starters">Tira-gosto</li>
-                            <li data-filter=".filter-salads">Salada</li>
-                            <li data-filter=".filter-specialty">Especiarias</li>
+
+                            @foreach($categorias as $c)
+                                <li data-filter=".filter-{{$c->descCategoria}}">{{$c->descCategoria}}</li>
+                            @endforeach
                         </ul>
                     </div>
                     <input type="search" placeholder="Pequise por pratos" />
                 </div>
 
                 <div class="row menu-container">
+                    @foreach($pratos as $p)
+                        <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
+                            <div class="menu-content">
+                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
+                            </div>
+                            <div class="menu-ingredients">
+                                {{$p->descPrato}}
+                            </div>
+                        </div>
+                    @endforeach
 
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Bread
-                                barrel</a><span>$6.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Bread
-                                barrel</a><span>$6.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Crab
-                                Cake</a><span>$7.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            A delicate crab cake served on a toasted roll with lettuce and
-                            tartar
-                            sauce
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Caesar
-                                Selections</a><span>$8.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Tuscan
-                                Grilled</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Grilled chicken with provolone, artichoke hearts, and roasted red
-                            pesto
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-starters">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mozzarella
-                                Stick</a><span>$4.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Lorem, deren, trataro, filede, nerada
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Greek
-                                Salad</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Fresh spinach, crisp romaine, tomatoes, and Greek olives
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-salads">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Spinach
-                                Salad</a><span>$9.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Fresh spinach with mushrooms, hard boiled egg, and warm bacon
-                            vinaigrette
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 menu-item filter-specialty">
-                        <div class="menu-content">
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Lobster
-                                Roll</a><span>$12.95</span>
-                        </div>
-                        <div class="menu-ingredients">
-                            Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-                        </div>
-                    </div>
+                    
                 </div>
 
         </section><!-- End Menu Section -->
@@ -377,42 +279,32 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         momento.</p>
                 </div>
 
-                <form action="/reservas/create" method="post" role="form" class="php-email-form">
+                <form action="/reservas/create" method="post" role="form" class="php-email-form" id="formReserva">
                     @csrf
+                    <input type="hidden" value="{{$restaurante->id}}" name="restId">
+                    <input type="hidden" name="dia"/>
                     <div class="rowLine">
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                             <input type="number" class="form-control" name="qtd" id="qtd" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
                             <div class="validate"></div>
-                        </div>
-        
+                        </div>   
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="dia da reserva" class="form-control" id="Horario da reserva" name="dia">
-                                <option selected value="0">Dia da reserva</option>
-                                <option select value="2">SEGUNDA-FEIRA</option>
-                                <option select value="3">TERÇA-FEIRA</option>
-                                <option select value="4">QUARTA-FEIRA</option>
-                                <option select value="5">QUINTA-FEIRA</option>
-                                <option select value="6">SEXTA-FEIRA</option>
-                                <option select value="7">SABADO</option>
-                                <option select value="1">DOMINGO</option>
-                            </select>
+                            <input type="date" class="form-control" name="data" id="dataInput" onchange="getDia()">
                             <div class="validate"></div>
                         </div>
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="Horario da reserva" class="form-control" id="Horario da reserva" name="horario">
-                                <option selected value="0">Horario da reserva</option>
-                                @foreach($horarios as $h)
+                            <select placeholder="Horario da reserva" class="form-control" id="horarios" name="horario">
+                                <option selected value="0">Horário da reserva</option>
+                                {{-- @foreach($horarios as $h)
                                     <option value="{{$h->horario}}">{{$h->horario}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             <div class="validate"></div>
                         </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="date" class="form-control" name="data" id="dataInput" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
-                            <div class="validate"></div>
-                        </div>
+                      
                     </div>
-                    <div class="text-center"><button type="submit">Agendar</button></div>
+                    <div class="text-center"><button type="submit" onclick="batata(event)">Agendar</button></div>
+                    {{-- <button onclick="batata(event)">Teste</button> --}}
                 </form>
             </div>
         </section><!-- reserva Section -->
@@ -467,10 +359,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                     </p>
                                 </div>
                             </div>
-                        @endforeach
-
-                    
+                        @endforeach                    
                     </div>
+                    
                     <div class="swiper-pagination"></div>
                     <div class="center-button">
                         <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>
@@ -492,6 +383,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <form action="/avaliacoes/create" method="post">
                             @csrf
                             <input type="hidden" name="restaurante_id" value="{{$restaurante->id}}"/>
+                            
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Avaliação</label>
                                 <div class="estrelas">
@@ -535,17 +427,75 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
         let mm = today.getMonth() + 1; // Months start at 0!
         let mmNext = today.getMonth() + 2; // Months start at 0!
         let dd = today.getDate();
+        
 
         if (dd < 10) dd = '0' + dd;
         if (mm < 10) mm = '0' + mm;
         if (mmNext < 10) mmNext = '0' + mmNext;
 
         var date = yyyy + '-' + mm + '-' + dd;
+        //var dateNext = yyyy + '-' + mmNext;
         var dateNext = yyyy + '-' + mmNext + '-01';
 
         document.getElementById('dataInput').setAttribute("min", date);
         document.getElementById('dataInput').setAttribute("max", dateNext);
 
+
+        function getDia(){
+            var data = document.getElementById('dataInput').value
+            var select = document.getElementById('horarios');
+
+            $('#horarios').empty();
+
+            var DiaSemana = [
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '1',
+
+            ];
+
+            var d = new Date(data);
+            var dia = DiaSemana[d.getDay()];
+            var url = 'http://127.0.0.1:8000/api/horarios/' + dia
+            console.log(url)
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                console.log(data)
+                let horarios = data.horarios;
+                let size = Object.keys(horarios).length
+                if(size >0){
+                    return horarios.map(function(horario) {
+                    var opt = document.createElement('option');
+                    opt.value = horario.horario;
+                    opt.innerHTML = horario.horario;
+                    select.append(opt)
+                    })
+                }else{
+                    var opt = document.createElement('option');
+                    opt.innerHTML = 'Não há horários disponíveis para este dia.';
+                    select.append(opt)
+                }
+                
+            })
+
+
+            document.querySelector('input[name="dia"]').value = DiaSemana[d.getDay()];
+        }
+
+
+        function batata(e){
+            e.preventDefault();
+     
+           
+            document.getElementById("formReserva").submit();
+            
+        }
+        
 
     </script>
 @endsection

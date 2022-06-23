@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+use Carbon\Carbon;
+
 class AuthController extends Controller
 {
 
@@ -17,14 +19,32 @@ class AuthController extends Controller
         ]);
 
 
-
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
+
+            if (is_null($user->first_login_at) && $user->level == 2) {
+                $user->first_login_at = Carbon::now();
+                $user->last_login_at  = Carbon::now();
+                $user->update();
+            }elseif (is_null($user->first_login_at) && $user->level!= 2 ) {
+                $user->first_login_at = Carbon::now();
+                $user->last_login_at  = Carbon::now();
+                $user->save();
+           }else{
+                $user->last_login_at  = Carbon::now();
+                $user->update();
+           }
+
+
+
+
             $token = $user->createToken('JWT')->plainTextToken;
             $response =[
                 "user" => $user,
                 "token" => $token
             ];
+
+
 
             return response()->json($response, 200);
     
@@ -43,7 +63,8 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'level' => $request->level,
         ]);
 
         $response =[

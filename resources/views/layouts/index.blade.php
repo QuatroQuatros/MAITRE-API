@@ -26,6 +26,8 @@
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/modais.css" rel="stylesheet">
+    <link href="/css/filtroPesquisa.css" rel="stylesheet">
 
 </head>
 
@@ -68,7 +70,7 @@
           @elseif(auth()->user()->level == 3)
           <a href="/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
           @else
-           <a href="/clientes" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a>
+           <a href="/clientes/{{auth()->user()->id}}"  class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a>
           @endif
           <form action="/logout" method="POST">
               @csrf
@@ -122,7 +124,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
+  <script src="/js/cep.js"></script>
 
+
+  <script src="/js/filtros.js"></script>
+
+  
   <script>
     $.ajaxSetup({
         headers: {

@@ -20,6 +20,7 @@ class CreatePratosTable extends Migration
             $table->string('nome');
             $table->string('descPrato');
             $table->float('valor');
+            $table->foreignId('categoria_id')->constrained();
             $table->foreignId('restaurante_id')->constrained();
             $table->timestamps();
         });

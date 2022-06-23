@@ -16,8 +16,24 @@ class AvaliacaoController extends Controller
         
     }
 
+    public function index(){
+        return response()->json(['avaliacoes' => $this->avaliacaoRepository->index()], 200);
+    }
+
     public function store(Request $request){
         return response($this->avaliacaoRepository->store($request), 201);
 
+    }
+
+    public function show($id){
+        return response($this->avaliacaoRepository->show($id));
+    }
+
+    public function update(Request $request, $id){
+        return response($this->avaliacaoRepository->update($request, $id));
+    }
+
+    public function destroy($id){
+        return response($this->avaliacaoRepository->destroy($id));
     }
 }

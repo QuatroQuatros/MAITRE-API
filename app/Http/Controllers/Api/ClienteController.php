@@ -4,73 +4,43 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Cliente;
+use App\Repositories\ClienteRepository;
+
 
 class ClienteController extends Controller
 {
+
+    public function __construct(Cliente $cliente){
+        $this->cliente = $cliente;
+        $this->ClienteRepository = new ClienteRepository($this->cliente);
+    }
+
     public function index(){
         return Cliente::all();
     }
 
     public function show($id){
-        $cliente = Cliente::findOrFail($id);
-        return response($cliente, 200);
+        //$cliente = Cliente::findOrFail($id);
+        return User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first();
+        //return response($cliente, 200);
     }
 
     public function store(Request $request){
-        $request->validate([
-            "nome" => 'required|string',
-            "cpf" => 'required|string|unique:clientes',
-            "endereco" => 'required|string',
-            "numero" => 'required|integer',
-            "bairro" => 'required|string',
-            "cidade" => 'required|string',
-            "estado" => 'required|string',
-            "cep" => 'required|string',
-            "user_id" => 'required|integer'
-        ]);
+        return $this->ClienteRepository->store($request);
 
-        $cliente = Cliente::create([
-            "nome" => $request->nome,
-            "cpf" => $request->cpf,
-            "endereco" => $request->endereco,
-            "numero" => $request->numero,
-            "bairro" => $request->bairro,
-            "cidade" => $request->cidade,
-            "estado" =>  $request->estado,
-            "cep" =>  $request->cep,
-            "user_id" => $request->user_id
-        ]);
-
-        return response($cliente, 201);
+    
 
 
     }
 
     public function update(Request $request, $id){
-        $cliente = Cliente::findOrFail($id);
+        return $this->ClienteRepository->update($request, $id);
+    }
 
-        $request->validate([
-            "nome" => 'required|string',
-            "endereco" => 'required|string',
-            "numero" => 'required|integer',
-            "bairro" => 'required|string',
-            "cidade" => 'required|string',
-            "estado" => 'required|string',
-            "cep" => 'required|string',
-        ]);
-
-
-        $cliente->update([
-            "nome" => $request->nome,
-            "endereco" => $request->endereco,
-            "numero" => $request->numero,
-            "bairro" => $request->bairro,
-            "cidade" => $request->cidade,
-            "estado" =>  $request->estado,
-            "cep" =>  $request->cep,
-        ]);
-
-        return response($cliente, 202);
+    
+    public function updateFone(Request $request, $id){
+        return $this->ClienteRepository->updateFone($request, $id);
     }
 }

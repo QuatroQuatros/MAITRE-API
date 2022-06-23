@@ -27,6 +27,6 @@ class HorarioController extends Controller
     }
 
     public function show($id){
-
+        return response()->json(['horarios' => $this->horario->where('dia_semana_id', $id)->get()]);
     }
 }

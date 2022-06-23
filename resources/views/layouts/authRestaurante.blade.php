@@ -9,7 +9,7 @@
     <title>MAÎTRE || SERVINDO A VOCÊ</title>
 
     <!-- Favicons -->
-    <link href="" rel="icon">
+    <link href="/img/favicons/maitre.png" rel="icon">
     <link href="" rel="apple-touch-icon">
 
      <!--font aewsome-->
@@ -37,6 +37,7 @@
     <link href="/css/login2.css" rel="stylesheet">
 
     <link href="/css/formsRestaurante.css" rel="stylesheet">
+    <link href="/css/modal_select.css" rel="stylesheet">
 
 </head>
 

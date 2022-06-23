@@ -19,6 +19,14 @@ class UserRepository{
         $this->user = $user;
     }
 
+    public function index(){
+        return $this->user->all();
+    }
+
+    public function show($id){
+        return $this->user->findOrFail($id);
+    }
+
     public function store(Request $request){
         $request->validate($this->user->rules(), $this->user->feedback());
 
@@ -43,11 +51,19 @@ class UserRepository{
                 $r = new ClienteRepository(new Cliente);
                 $r->store($request);
                 \DB::commit();
-                Mail::send('mail.welcome', ['nome' => $request->nome], function($m) use($request){
-                    $m->from('atlanticmaitre@gmail.com', 'MAÎTRE');
-                    $m->subject('Bem vindo ao MAÎTRE!');
-                    $m->to($request->email);
-                });
+                /*
+                try{
+                    Mail::send('mail.welcome', ['nome' => $request->nome], function($m) use($request){
+                        $m->from('atlanticmaitre@gmail.com', 'MAÎTRE');
+                        $m->subject('Bem vindo ao MAÎTRE!');
+                        $m->to($request->email);
+                    });
+                }catch(\Exception $ignored){
+                    
+                }
+                */
+        
+                
                 
             }
             if($user->level == 2){

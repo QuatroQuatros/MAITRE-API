@@ -1,1 +1,1 @@
-Olá, {{$nome}}. Seja bem vindo ao MAÎTRE!
+Olá, {{$user->name}}. Seja bem vindo ao MAÎTRE!

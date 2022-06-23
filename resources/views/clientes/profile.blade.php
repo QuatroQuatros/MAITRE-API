@@ -14,7 +14,12 @@
                         <div class="row">
                             <div class="col-md-6 form-group ">
                                 <div class="text-center">
-                                    <img src="/img/chefs/chefs-1.jpg" class="img-logo" alt="">
+                                    @if($cliente->foto != null)
+                                        <img src="{{$cliente->foto}}" class="img-logo" alt="">
+                                    @else
+                                        <img src="{{$cliente->profile_photo_url}}" class="img-logo" alt="">
+
+                                    @endif
                                     <form class="form-upload">
                                         <label class="input-personalizado">
                                             <span data-bs-toggle="modal" data-bs-target="#modalFoto" class="botao-selecionar">Trocar imagem de perfil</span>
@@ -28,21 +33,21 @@
                                     <div class="rowLine">
                                         <div class=" info">
                                             <i class="bi bi-person-circle"></i>
-                                            <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalNome">Nome de usuario</h4>
-                                            <p>A108 Adam Street<br>New York, NY 535022</p>
+                                            <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalNome">Nome</h4>
+                                            <p>{{$cliente->nome}}</p>
                                         </div>
 
                                         <div class=" info">
                                             <i class="bi bi-telephone"></i>
                                             <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalTel">Seu telefone</h4>
-                                            <p>A108 Adam Street<br>New York, NY 535022</p>
+                                            <p>4002-8922</p>
                                         </div>
-
                                         <div class=" info mt-4 mt-lg-0">
-                                            <i class="bi bi-list"></i>
-                                            <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalCpf">CPF</h4>
-                                            <p>segunda-domingo:<br>11:00 AM - 23:00 PM</p>
+                                            <i class="fas fa-user-slash icon-modify"></i>
+                                            <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalExcluirConta">Excluir conta</h4>
+                                            <p data-bs-toggle="modal" data-bs-target="#modalExcluirConta" class="altSenha">apagar conta</p>
                                         </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -52,24 +57,50 @@
                                         <div class=" info">
                                             <i class="bi bi-globe"></i>
                                             <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalEndereco">Endereço </h4>
-                                            <p>Rua Luís Álvares de Espinha, 169</p>
+                                            <p>{{$cliente->endereco}}, {{$cliente->numero}}</p>
                                         </div>
                                         <div class=" info mt-4 mt-lg-0">
                                             <i class="bi bi-box-arrow-right"></i>
                                             <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalEmail">E-mail cadastrado</h4>
-                                            <p>info@example.com</p>
+                                            <p>{{$cliente->email}}</p>
                                         </div>
                                         <div class=" info mt-4 mt-lg-0">
                                             <i class="fas fa-lock icon-modify"></i>
                                             <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalSenha">Senha cadastrada</h4>
-                                            <p data-bs-toggle="modal" data-bs-target="#modalSenha"class="altSenha">Alterar senha</p>
+                                            <p data-bs-toggle="modal" data-bs-target="#modalSenha" class="altSenha">Alterar senha</p>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
             </section>
+
+
+            <!--foto alteração-->
+            <div class="modal fade" id="modalExcluirConta" tabindex="-1" aria-labelledby="modalExcluirContaLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalExcluirContaLabel">Excluir conta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/clientes/{{$cliente->user_id}}" method="POST" class="form">
+                                @csrf
+                                @method('DELETE')
+                               Essa conta será excluida, perdendo todos os comentarios, reservas e quaisquer conteudo que tenha mexido, tem certeza ?
+                               <br>
+                                <button type="submit" class="btn btn-primaryBoot" data-bs-dismiss="modal">Sim</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--modal Alteração-->
 
@@ -85,7 +116,7 @@
                             <div class="rowCenter">
                                 <div class="text-center">
                                     <div id="img-container">
-                                        <img src="/img/chefs/chefs-1.jpg" class="img-logo" id="preview" alt="">
+                                        <img src="../assets/img/chefs/chefs-1.jpg" class="img-logo" id="preview" alt="">
                                     </div>
                                     <form class="form-uploadNot" action="" method="post" role="form">
                                         <label class="input-personalizado">
@@ -117,12 +148,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="rowCenter">
-                                <form action="" method="post" role="form" class="form">
+                            <form action="/clientes/{{$cliente->user_id}}" method="POST" role="form" class="form">
+                                    @csrf
+                                    @method('PATCH')
                                     <label class="label-input" for="">
                                         <i class="far fa-user icon-modify"></i>
-                                        <input type="text" placeholder="Novo nome do usuario">
+                                        <input type="text" name="nome" placeholder="Novo nome do usuario">
                                     </label>
-                                    <a href=""><button class="btn btn-primaryBoot">Salvar dados</button></a>
+                                    <button class="btn btn-primaryBoot">Salvar dados</button>
                                 </form>
                             </div>
                         </div>
@@ -160,31 +193,6 @@
                 </div>
             </div>
 
-            <!-- cpf do usuario-->
-            <div class="modal fade" id="modalCpf" tabindex="-1" aria-labelledby="modalCpfLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalCpdLabel">Alteração de CPF</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="rowCenter">
-                                <form action="" method="post" role="form" class="form">
-                                    <label class="label-input" for="">
-                                        <i class="fa-solid fa-clipboard-list icon-modify"></i>
-                                        <input type="text" placeholder="Cpf do usuario">
-                                    </label>
-                                    <a href=""><button class="btn btn-second">Salvar dados</button></a>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- email  do usuario-->
             <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="modalEmailLabel" aria-hidden="true">
@@ -196,7 +204,9 @@
                         </div>
                         <div class="modal-body">
                             <div class="rowCenter">
-                                <form action="" method="post" role="form" class="form">
+                            <form action="/clientes/{{$cliente->user_id}}" method="POST" role="form" class="form">
+                                    @csrf
+                                    @method('PATCH')
                                     <label class="label-input" for="">
                                         <i class="fa-solid fa-at icon-modify"></i>
                                         <input type="email" placeholder="Digite seu Email atual">
@@ -268,18 +278,20 @@
                         </div>
                         <div class="modal-body">
                             <div class="rowCenter">
-                                <form action="" method="post" role="form" class="form">
+                            <form action="/clientes/{{$cliente->user_id}}" method="POST" role="form" class="form">
+                                    @csrf
+                                    @method('PATCH')
                                     <label class="label-input" for="">
                                         <i class="fa-solid fa-house-flag icon-modify"></i>
                                         <input type="text" name="cep" id="cep" placeholder="CEP :">
                                     </label>
                                     <label class="label-input" for="">
                                         <i class="fa-solid fa-road icon-modify"></i>
-                                        <input type="text" name="rua" id="rua" placeholder="Rua :">
+                                        <input type="text" name="endereco" id="rua" placeholder="Rua :">
                                     </label>
                                     <label class="label-input" for="">
                                         <i class="fa-solid fa-house-user icon-modify"></i>
-                                        <input type="number" placeholder="Numero residencial :">
+                                        <input type="number" name="numero" placeholder="Numero residencial :">
                                     </label>
                                     <a href=""><button class="btn btn-second">Salvar dados</button></a>
                                 </form>
@@ -301,27 +313,40 @@
                     <table>
                 <thead>
                     <tr>
-                        <th>Data/horario Da Reserva</th>
+                        <th>Data da Reserva</th>
+                        <th>Horario Da Reserva</th>
                         <th>Restaurante da Reserva</th>
                         <th>Quantidade de Pessoas</th>
                         <th>status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($reservas as $r)
+                    <tr>
+                        <td data-title="Data">{{$r->data}}</td>
+                        <td data-title="Horario">{{$r->data}}</td>
+                        <td data-title="restaurante">{{$r->data}}<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                        <td data-title="pessoas">{{$r->data}}<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                        <td data-title="status" class="successfull">{{$r->data}}</td>
+                    </tr>
+                    @endforeach
                     <tr>
                         <td data-title="Data">Colocar do banco</td>
-                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="successfull">Reservado</td>
-                    </tr>
-                    <tr>
-                    <td data-title="data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
                         <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
                         <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
                         <td data-title="status" class="warning">Pendente</td>
                     </tr>
                     <tr>
-                    <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
+                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                        <td data-title="status" class="warning">Pendente</td>
+                    </tr>
+                    <tr>
+                        <td data-title="Data">Colocar do banco</td>
+                        <td data-title="Horario">Colocar do banco</td>
                         <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
                         <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
                         <td data-title="status" class="danger">Cancelado</td>
@@ -343,11 +368,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            A reserva do dia (**/**/****) será excluida permanentemente tem certeza ?
+                            <form action="" class="">
+                                A reserva do dia (**/**/****) será excluida permanentemente tem certeza ?
+                                <button type="button" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a href="">Sim</a></button>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                            <button type="button" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a href="">Sim</a></button>
                         </div>
                     </div>
                 </div>
@@ -363,46 +390,49 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="rowCenter">
-                                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="number" class="form-120" name="qtdePessoa" id="qtdePessoa" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
-                                    <div class="validate"></div>
+                            <form action="" class="">
+                                <div class="rowCenter">
+                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                                        <input type="number" class="form-120" name="qtdePessoa" id="qtdePessoa" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
+                                        <div class="validate"></div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                                        <input type="text" class="form-120" name="nomeRest" id="nomeRest" placeholder="Nome do restaurante" data-msg="Escreva seu nome">
+                                        <div class="validate"></div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                                        <select placeholder="dia da reserva" class="form-120" id="Horario da reserva" name="horarioReserva">
+                                            <option selected value="0">Dia da reserva</option>
+                                            <option select value="1">SEGUNDA-FEIRA</option>
+                                            <option select value="2">TERÇA-FEIRA</option>
+                                            <option select value="3">QUARTA-FEIRA</option>
+                                            <option select value="4">QUINTA-FEIRA</option>
+                                            <option select value="5">SEXTA-FEIRA</option>
+                                            <option select value="6">SABADO</option>
+                                            <option select value="7">DOMINGO</option>
+                                        </select>
+                                        <div class="validate"></div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                                        <select placeholder="Horario da reserva" class="form-120" id="HorarioReserva" name="horarioReserva">
+                                            <option selected value="0">Horario da reserva</option>
+                                            <option select value="13"></option>
+                                            <option select value="14"></option>
+                                            <option select value="15"></option>
+                                            <option select value="16"></option>
+                                            <option select value="17"></option>
+                                            <option select value="18"></option>
+                                            <option select value="19"></option>
+                                        </select>
+                                        <div class="validate"></div>
+                                    </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="text" class="form-120" name="nomeRest" id="nomeRest" placeholder="Nome do restaurante" data-msg="Escreva seu nome">
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                    <select placeholder="dia da reserva" class="form-120" id="Horario da reserva" name="horarioReserva">
-                                        <option selected value="0">Dia da reserva</option>
-                                        <option select value="1">SEGUNDA-FEIRA</option>
-                                        <option select value="2">TERÇA-FEIRA</option>
-                                        <option select value="3">QUARTA-FEIRA</option>
-                                        <option select value="4">QUINTA-FEIRA</option>
-                                        <option select value="5">SEXTA-FEIRA</option>
-                                        <option select value="6">SABADO</option>
-                                        <option select value="7">DOMINGO</option>
-                                    </select>
-                                    <div class="validate"></div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                    <select placeholder="Horario da reserva" class="form-120" id="HorarioReserva" name="horarioReserva">
-                                        <option selected value="0">Horario da reserva</option>
-                                        <option select value="13"></option>
-                                        <option select value="14"></option>
-                                        <option select value="15"></option>
-                                        <option select value="16"></option>
-                                        <option select value="17"></option>
-                                        <option select value="18"></option>
-                                        <option select value="19"></option>
-                                    </select>
-                                    <div class="validate"></div>
-                                </div>
-                            </div>
+                                <br>
+                                <button type="button" class="btn btn-primaryBoot">Alterar reserva</button>
+                            </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primaryBoot"><a href="">Alterar reserva</a></button>
                         </div>
                     </div>
                 </div>

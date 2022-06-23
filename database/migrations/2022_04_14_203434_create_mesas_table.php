@@ -20,7 +20,8 @@ class CreateMesasTable extends Migration
             $table->integer('qtdMesas');
             $table->integer('capMaxima');
             $table->integer('mesasDisponiveis');
-            $table->foreignId('restaurante_id')->constrained();
+            $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 

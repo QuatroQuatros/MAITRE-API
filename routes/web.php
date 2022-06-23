@@ -23,6 +23,8 @@ Route::get('/app', function(){
   
 Route::get('/buscar', [RestauranteController::class, 'buscar']);
 
+Route::get('/teste', [RestauranteController::class, 'teste']);
+
 Route::post('/create/user', [UserController::class, 'store']);
 
 
@@ -44,19 +46,24 @@ Route::prefix('/mesas')->group(function(){
 });
 
 Route::prefix('/restaurantes')->group(function(){
+
     Route::get('/admin', [RestauranteController::class, 'dash'])->middleware('auth', 'restaurante');
     Route::get('/reservas', [RestauranteController::class, 'reservas'])->middleware('auth', 'restaurante');
     Route::get('/create', [RestauranteController::class, 'create'])->middleware('auth', 'restaurante');
     Route::post('/create', [RestauranteController::class, 'store'])->middleware('auth', 'restaurante');
     Route::put('/edit/{id}', [RestauranteController::class, 'update'])->middleware('auth', 'restaurante');
-    
-
+   
+   
     Route::get('/', [RestauranteController::class, 'index']);
     Route::get('/{id}', [RestauranteController::class, 'show']);
+
+    
 });
 
 Route::prefix('/clientes')->group(function(){
-    Route::get('/', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
+    Route::get('/{id}', [ClienteController::class, 'profile'])->middleware('auth', 'cliente');
+    Route::match(array('PUT', 'PATCH'), "/{id}", [ClienteController::class, 'update'])->middleware('auth', 'cliente');
+    Route::delete('/{id}', [ClienteController::class, 'destroy'])->middleware('auth', 'cliente');
 });
 
 Route::prefix('/reservas')->group(function(){

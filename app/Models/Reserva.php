@@ -14,6 +14,7 @@ class Reserva extends Model
         'horario',
         'data',
         'qtdPessoas',
+        'restaurante_id',
         'cliente_id',
         'status_reserva_id',
     ];
@@ -22,12 +23,18 @@ class Reserva extends Model
     protected $casts = [
         'id' => 'integer',
         'cliente_id' => 'integer',
+        'restaurante_id' => 'integer',
         'status_reserva_id' => 'integer'
     ];
 
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);
+    }
+
+    public function restaurante()
+    {
+        return $this->belongsTo(Restaurante::class);
     }
 
     public function status()

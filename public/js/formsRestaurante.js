@@ -26,6 +26,22 @@ back_click.forEach(function(back_click_form){
     });
 });
 
+
+
+
+$(document).ready(function() {
+
+	$('#link').on('change', function() {
+		var url = $(this).val();
+		if (url == '#adicionar') {
+			window.open(url, '_top');
+		}
+		return false;
+	});
+});
+
+
+
 var username=document.querySelector("#user_name");
 var shownname=document.querySelector(".shown_name");
  
@@ -110,7 +126,7 @@ $(document).on('submit', '#form1', function(e) {
     request = $.ajax({
         url: "/restaurantes/create",
         type: "POST",
-        //data: serializedData
+        //data: serializedData,
         data: new FormData( this ),
         processData: false,
         contentType: false

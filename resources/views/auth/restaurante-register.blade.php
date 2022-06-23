@@ -33,6 +33,7 @@
                         <form method="POST" id="form1" enctype="multipart/form-data">
                             @csrf
                             <div class="main active">
+                                <input type="hidden" name="level" value="1">
                                 <div class="text">
                                     <h2>Informações obrigatorias</h2>
                                     <p>Insira essas informações para se fazer seu negócio decolar</p>
@@ -52,9 +53,13 @@
                                 </div>
                                 <div class="input-text">
                                     <div class="input-div">
-                                        <select name="categoria_id">
+                                        <select name="categoria_restaurante_id"  id="link">
                                             <option value="0">Selecione a categoria de seu restaurante</option>
-                                            <option value="1">Batata</option>
+                                            <option value="#adicionar">Cadastrar categoria</option>
+                                            @foreach($categorias as $c)
+                                                <option value="{{$c->id}}">{{$c->categoria}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>
@@ -173,6 +178,14 @@
                         <!--form para seleção de dias-->
                         <form id="formDia">
                             <div class="input-text">
+                                <div class="input-div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="todos" value='2' role="switch" id="seg">
+                                        <label class="form-check-label" for="seg">Todos os dias</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-text">          
                                 <div class="input-div">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" name="dia[]" value='2' role="switch" id="seg">
@@ -323,4 +336,30 @@
             </div>
         </div>
     </div>
+     <!-- Modal -->
+     <div class="modal-wrapper" id="adicionar">
+            <div class="modal-body card">
+                <div class="modal-header">
+                    <h2 class="heading">Cadastrar categoria</h2>
+                    <a href="#!" role="button" class="close" aria-label="close this modal">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                        </svg>
+                    </a>
+                </div>
+                <form action="" method="post" role="form" class="form">
+                    <p>*Por favor verificar se essa categoria já não foi cadastrada</p>
+                    <div class="input-text">
+                        <div class="input-div">
+                            <input type="text" name="nomeCat" id="nomeCat" required require>
+                            <span>Nova categoria</span>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="button">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+            <a href="#!" class="outside-trigger"></a>
+        </div>
 @endsection

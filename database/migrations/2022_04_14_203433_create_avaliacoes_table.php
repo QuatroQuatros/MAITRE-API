@@ -19,8 +19,9 @@ class CreateAvaliacoesTable extends Migration
             $table->id();
             $table->integer('estrelas');
             $table->string('descAvaliacao');
-            $table->foreignId('restaurante_id')->constrained();
+            $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
 
