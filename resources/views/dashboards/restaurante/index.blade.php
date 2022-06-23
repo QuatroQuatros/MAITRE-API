@@ -8,13 +8,29 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['', 'reserva'],
-          ['seg',  2],
-          ['ter',  3],
-          ['qua',  1],
-          ['qui',  5],
-          ['sex',  8],
-          ['sab',  15],
-          ['dom',  10],
+        //   ['seg',  2],
+        //   ['ter',  3],
+        //   ['qua',  1],
+        //   ['qui',  5],
+        //   ['sex',  8],
+        //   ['sab',  15],
+        //   ['dom',  10],
+
+        @php
+        $diaSemana = array(
+            '1' => "Dom",
+            '2' => "Seg",
+            '3' => "Ter",
+            '4' => "Qua",
+            '5' => "Qui",
+            '6' => "Sex",
+            '7' => "Sab",
+        );
+        foreach($reservas as $r){
+           $dia = $diaSemana[$r->diaSemana];
+            echo("['".$dia."', ".$r->total."],");
+        }
+        @endphp
         ]);
 
         var options = {

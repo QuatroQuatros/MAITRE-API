@@ -4,6 +4,7 @@ namespace App\Http\Responses;
  
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Models\User; 
+use App\Models\Restaurante;
 
 use Carbon\Carbon;
 
@@ -25,6 +26,8 @@ class LoginResponse implements LoginResponseContract
             $user->first_login_at = Carbon::now();
             $user->last_login_at  = Carbon::now();
             $user->save();
+       }elseif(!Restaurante::where('user_id', $id)->exists()){
+            return redirect('/restaurantes/create');
        }
 
         if($level == 1){

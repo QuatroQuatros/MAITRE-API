@@ -24,11 +24,11 @@ class RestauranteRepository{
 
     }
     public function show($id){
-        $this->restaurante = $this->restaurante->findOrFail($id);
+        //$this->restaurante = $this->restaurante->findOrFail($id);
         
         return $this->restaurante->leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
         ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
-        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->first();
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->where('restaurantes.id', $id)->first();
         //return $this->restaurante->findOrFail($id);
 
     }
@@ -37,15 +37,17 @@ class RestauranteRepository{
         $request->validate($this->restaurante->rules(), $this->restaurante->feedback());    
         $imagem = $request->file('foto');
         $name = $imagem->getClientOriginalName(); 
-        //$path = $imagem->storeAs('imagens', $name, 'public');
+        $path = $imagem->storeAs('imagens', $name, 'public');
 
         //dd($imagem);
         //$path = $imagem->storeAs('imagens', $imagem, 's3');
 
 
         //$path = $request->file('foto')->store('./imagens/', 's3');
-        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        Storage::disk('s3')->setVisibility($path, 'public');
+
+
+        // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        // Storage::disk('s3')->setVisibility($path, 'public');
        
         
         return $this->restaurante->create([
@@ -55,8 +57,8 @@ class RestauranteRepository{
             "bairro" => $request->bairro,
             "cidade" => $request->cidade,
             "estado" =>  $request->estado,
-            "foto" => Storage::disk('s3')->url($path),
-            //"foto" => $path,
+            // "foto" => Storage::disk('s3')->url($path),
+            "foto" => $path,
             "cep" =>  $request->cep,
             "level" => $request->level,
             "categoria_restaurante_id" => $request->categoria_restaurante_id,
@@ -106,7 +108,22 @@ class RestauranteRepository{
 
     }
 
-    public function premium($id){
+    public function standard(){
+        return $this->restaurante->leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', 'restaurantes.level', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto', 'restaurantes.level')->where('restaurantes.level', 1)->get();
+    }
+
+    public function premium(){
+        return $this->restaurante->leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', 'restaurantes.level', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto', 'restaurantes.level')->where('restaurantes.level', 2)->get();
+
+    }
+
+
+
+    public function getPremium($id){
         $this->restaurante = $this->restaurante->findOrFail($id);
 
         if($this->restaurante->level == 1){

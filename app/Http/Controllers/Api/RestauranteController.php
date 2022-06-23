@@ -18,7 +18,7 @@ class RestauranteController extends Controller
     }
 
     public function index(){
-        return response()->json(["restaurantes" => $this->restauranteRepository->index()], 200);
+        return response()->json(["restaurantes" => $this->restauranteRepository->standard()], 200);
         //return response()->json(["restaurantes" => Restaurante::all()]);
     }
 
@@ -44,8 +44,12 @@ class RestauranteController extends Controller
         return response($this->restauranteRepository->restore($id));
     }
 
-    public function premium($id){
-        return response($this->restauranteRepository->premium($id));
+    public function premium(){
+        return response()->json(["restaurantes" => $this->restauranteRepository->premium()], 200);
+    }
+
+    public function getPremium($id){
+        return response($this->restauranteRepository->getPremium($id));
     }
 
     public function cancelPremium($id){

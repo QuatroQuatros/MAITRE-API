@@ -46,16 +46,16 @@ Route::prefix('/mesas')->group(function(){
 });
 
 Route::prefix('/restaurantes')->group(function(){
-    Route::get('/', [RestauranteController::class, 'index']);
-    Route::get('/{id}', [RestauranteController::class, 'show']);
-
 
     Route::get('/admin', [RestauranteController::class, 'dash'])->middleware('auth', 'restaurante');
     Route::get('/reservas', [RestauranteController::class, 'reservas'])->middleware('auth', 'restaurante');
     Route::get('/create', [RestauranteController::class, 'create'])->middleware('auth', 'restaurante');
     Route::post('/create', [RestauranteController::class, 'store'])->middleware('auth', 'restaurante');
     Route::put('/edit/{id}', [RestauranteController::class, 'update'])->middleware('auth', 'restaurante');
-    
+   
+   
+    Route::get('/', [RestauranteController::class, 'index']);
+    Route::get('/{id}', [RestauranteController::class, 'show']);
 
     
 });

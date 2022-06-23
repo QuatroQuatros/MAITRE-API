@@ -279,39 +279,32 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         momento.</p>
                 </div>
 
-                <form action="/reservas/create" method="post" role="form" class="php-email-form">
+                <form action="/reservas/create" method="post" role="form" class="php-email-form" id="formReserva">
                     @csrf
                     <input type="hidden" value="{{$restaurante->id}}" name="restId">
+                    <input type="hidden" name="dia"/>
                     <div class="rowLine">
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                             <input type="number" class="form-control" name="qtd" id="qtd" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
                             <div class="validate"></div>
-                        </div>
-        
+                        </div>   
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="dia da reserva" class="form-control" id="Horario da reserva" name="dia">
-                                <option selected value="0">Dia da reserva</option>
-                                @foreach($horarios as $h)
-                                    <option value="{{$h->diaId}}">{{$h->diaSemana}}</option>
-                                @endforeach
-                            </select>
+                            <input type="date" class="form-control" name="data" id="dataInput" onchange="getDia()">
                             <div class="validate"></div>
                         </div>
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <select placeholder="Horario da reserva" class="form-control" id="Horario da reserva" name="horario">
-                                <option selected value="0">Horario da reserva</option>
-                                @foreach($horarios as $h)
+                            <select placeholder="Horario da reserva" class="form-control" id="horarios" name="horario">
+                                <option selected value="0">Horário da reserva</option>
+                                {{-- @foreach($horarios as $h)
                                     <option value="{{$h->horario}}">{{$h->horario}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                             <div class="validate"></div>
                         </div>
-                        <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                            <input type="date" class="form-control" name="data" id="dataInput" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
-                            <div class="validate"></div>
-                        </div>
+                      
                     </div>
-                    <div class="text-center"><button type="submit">Agendar</button></div>
+                    <div class="text-center"><button type="submit" onclick="batata(event)">Agendar</button></div>
+                    {{-- <button onclick="batata(event)">Teste</button> --}}
                 </form>
             </div>
         </section><!-- reserva Section -->
@@ -390,6 +383,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                         <form action="/avaliacoes/create" method="post">
                             @csrf
                             <input type="hidden" name="restaurante_id" value="{{$restaurante->id}}"/>
+                            
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Avaliação</label>
                                 <div class="estrelas">
@@ -433,17 +427,75 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
         let mm = today.getMonth() + 1; // Months start at 0!
         let mmNext = today.getMonth() + 2; // Months start at 0!
         let dd = today.getDate();
+        
 
         if (dd < 10) dd = '0' + dd;
         if (mm < 10) mm = '0' + mm;
         if (mmNext < 10) mmNext = '0' + mmNext;
 
         var date = yyyy + '-' + mm + '-' + dd;
+        //var dateNext = yyyy + '-' + mmNext;
         var dateNext = yyyy + '-' + mmNext + '-01';
 
         document.getElementById('dataInput').setAttribute("min", date);
         document.getElementById('dataInput').setAttribute("max", dateNext);
 
+
+        function getDia(){
+            var data = document.getElementById('dataInput').value
+            var select = document.getElementById('horarios');
+
+            $('#horarios').empty();
+
+            var DiaSemana = [
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '1',
+
+            ];
+
+            var d = new Date(data);
+            var dia = DiaSemana[d.getDay()];
+            var url = 'http://127.0.0.1:8000/api/horarios/' + dia
+            console.log(url)
+            fetch(url)
+            .then((resp) => resp.json())
+            .then(function(data) {
+                console.log(data)
+                let horarios = data.horarios;
+                let size = Object.keys(horarios).length
+                if(size >0){
+                    return horarios.map(function(horario) {
+                    var opt = document.createElement('option');
+                    opt.value = horario.horario;
+                    opt.innerHTML = horario.horario;
+                    select.append(opt)
+                    })
+                }else{
+                    var opt = document.createElement('option');
+                    opt.innerHTML = 'Não há horários disponíveis para este dia.';
+                    select.append(opt)
+                }
+                
+            })
+
+
+            document.querySelector('input[name="dia"]').value = DiaSemana[d.getDay()];
+        }
+
+
+        function batata(e){
+            e.preventDefault();
+     
+           
+            document.getElementById("formReserva").submit();
+            
+        }
+        
 
     </script>
 @endsection

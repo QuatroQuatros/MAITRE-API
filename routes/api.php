@@ -39,7 +39,9 @@ Route::get('/user/photo', [UserController::class, 'teste']);
 
 Route::apiResource('/reservas/rejeitar', ReservasController::class);
 
-Route::patch('/restaurantes/premium/{id}', [RestauranteController::class, 'premium']);
+
+Route::get('/premium', [RestauranteController::class, 'premium']);
+Route::patch('/restaurantes/premium/{id}', [RestauranteController::class, 'getPremium']);
 Route::patch('/restaurantes/premium/cancelar/{id}', [RestauranteController::class, 'cancelPremium']);
 Route::get('/restaurantes/restore/{id}', [RestauranteController::class, 'restore']);
 
