@@ -52,6 +52,7 @@ class RestauranteRepository{
         
         return $this->restaurante->create([
             "nome" => $request->nome,
+            "descricao" => $request->descricao,
             "endereco" => $request->endereco,
             "numero" => $request->numero,
             "bairro" => $request->bairro,
@@ -81,19 +82,19 @@ class RestauranteRepository{
         //     ]);
         // }
         
-       
-        $this->restaurante->update([
-            "nome" => $request->nome,
-            "endereco" => $request->endereco,
-            "numero" => $request->numero,
-            "bairro" => $request->bairro,
-            "cidade" => $request->cidade,
-            "estado" =>  $request->estado,
-            "cep" =>  $request->cep,
-            "categoria_id" => $request->categoria_id,
-        ]);
+        return $this->restaurante->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+        // $this->restaurante->update([
+        //     "nome" => $request->nome,
+        //     "endereco" => $request->endereco,
+        //     "numero" => $request->numero,
+        //     "bairro" => $request->bairro,
+        //     "cidade" => $request->cidade,
+        //     "estado" =>  $request->estado,
+        //     "cep" =>  $request->cep,
+        //     "categoria_id" => $request->categoria_id,
+        // ]);
 
-        return $this->restaurante;
+        //return $this->restaurante;
 
 
     }

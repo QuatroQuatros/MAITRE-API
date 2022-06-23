@@ -27,14 +27,23 @@ class RestauranteController extends Controller
     }
 
     public function index(){
+        
         return view('restaurantes.list', ['restaurantes' => Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get(), 'categorias' => CategoriaRestaurante::all()]);
+    }
+
+    public function home(){
+        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'clientes.nome', 'users.email')
+        ->join('clientes', 'reservas.cliente_id', 'clientes.id')
+        ->join('users', 'clientes.user_id', 'users.id')
+        ->whereNull('duracao')->get();
+        return view('dashboards.restaurante.index', ['reservas' => $reservas]);
     }
 
 
     public function dash(){
         //SELECT diaSemana, count(*) as 'qtd' FROM `reservas` GROUP BY(diaSemana)
         $reservas = Reserva::select('diaSemana', DB::raw('COUNT(id) as total'))->groupBy('diaSemana')->get();
-        return view('dashboards.restaurante.index', ['name' => auth()->user()->name, 'reservas' => $reservas]);
+        return view('dashboards.restaurante.graficos', ['reservas' => $reservas]);
     }
 
     public function create(){
@@ -59,8 +68,14 @@ class RestauranteController extends Controller
         //return back()->withInput(['level' => 2]);
     }
 
-    public function update(Request $request){
-        $this->restauranteRepository->update($request);
+    public function edit($id){
+
+        return view('dashboards.restaurante.edit', ['restaurante' => Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->where('user_id', $id)->first()]);
+    }
+
+    public function update(Request $request, $id){
+        $this->restauranteRepository->update($request, $id);
+        return view('dashboards.restaurante.edit', ['restaurante' => Restaurante::where('user_id', $id)->first()]);
 
     }
 

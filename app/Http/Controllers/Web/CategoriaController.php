@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Categoria;
 
+use App\Models\Prato;
+
 use App\Repositories\CategoriaRepository;
 
 use DB;
@@ -32,8 +34,9 @@ class CategoriaController extends Controller
 
     public function store(Request $request){
         $this->categoriaRepository->store($request);
+        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::all(),'categorias' => Categoria::all()]);
 
-        return $this->index_response();
+        //return $this->index_response();
     }
     public function destroy($id){
         $this->categoriaRepository->destroy($id);

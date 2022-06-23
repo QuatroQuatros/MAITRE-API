@@ -9,6 +9,10 @@ use App\Models\Mesas;
 
 class MesaController extends Controller
 {
+
+    public function create(){
+        return view('dashboards.restaurante.mesas', ['mesas' => Mesas::all()]);
+    }
     public function store(Request $request){
         return Mesas::create([
             'qtdMesas' => $request->qtd,

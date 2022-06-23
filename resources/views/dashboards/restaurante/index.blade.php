@@ -1,137 +1,90 @@
 @extends('layouts.restaurante-adm')
 @section('content')
-
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['', 'reserva'],
-        //   ['seg',  2],
-        //   ['ter',  3],
-        //   ['qua',  1],
-        //   ['qui',  5],
-        //   ['sex',  8],
-        //   ['sab',  15],
-        //   ['dom',  10],
-
-        @php
-        $diaSemana = array(
-            '1' => "Dom",
-            '2' => "Seg",
-            '3' => "Ter",
-            '4' => "Qua",
-            '5' => "Qui",
-            '6' => "Sex",
-            '7' => "Sab",
-        );
-        foreach($reservas as $r){
-           $dia = $diaSemana[$r->diaSemana];
-            echo("['".$dia."', ".$r->total."],");
-        }
-        @endphp
-        ]);
-
-        var options = {
-          title: 'Reservas(Por semana)',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>
-
-<!--grafico de barra-->
-<script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Avaliação(estrelas)','usuarios'],
-          ['1', 2],
-          ['2', 5],
-          ['3', 3],
-          ['4', 7],
-          ['5', 10]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Avaliação geral dos clientes',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
-</script>
-
 <main>
-    <h1>Analise de Dados</h1>
+    <h1>Reservas do dia</h1>
 
-    <div class="insi">
-    <div id="curve_chart" style="height: 450px"></div>
-        <div id="columnchart_material" style="height: 450px;"></div>
+    <div class="insights">
+        <div class="sales">
+            <div class="middle">
+                <div class="left">
+                    <h3>Total de reservas(hoje)</h3>
+                    <h1>$25,024</h1>
+                </div>
+            </div>
+            <small class="text-muted">Last 24 hours</small>
+        </div>
+        <!-----------------end sales----------------->
+        <div class="expenses">
+            <div class="middle">
+                <div class="left">
+                    <h3>Status do restaurante</h3>
+                    <h1>vazio</h1>
+                </div>
+            </div>
+            <small class="text-muted">Last 24 hours</small>
+        </div>
+        <!-----------------end of expenses----------------->
     </div>
-  
+    <!---------------- end insights ---------------->
+    <div class="containerNoti">
+        <h1>Ultimas reservas feitas</h1>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Nome do cliente</div>
+                <div class="col col-2">Email do Cliente</div>
+                <div class="col col-3">telefone</div>
+                <div class="col col-4">Status</div>
+            </li>
+            @foreach($reservas as $r)
+                <a href="#modal" onclick="carregaModal()">
+                    <li class="table-row">
+                        <input type="hidden" value="{{$r->id}}" id="id">
+                        <div class="col col-1" data-label="Nome do cliente">{{$r->nome}}</div>
+                        <div class="col col-2" data-label="Email Cliente">{{$r->email}}</div>
+                        <div class="col col-3" data-label="Telefone">$341</div>
+                        @if($r->status_reserva_id == 1)
+                            <div class="col col-4" data-label="Status"><span class="warning" id="status">Pendente</span></div>
+                        @elseif($r->status_reserva_id == 2)
+                            <div class="col col-4" data-label="Status"><span class="success" id="status">Aprovado</span></div>
+                        @else
+                            <div class="col col-4" data-label="Status"><span class="danger" id="status">Cancelado</span></div>
+                        @endif  
+                    </li>
+                </a>
+            @endforeach
+
+           
+        </ul>
+    </div>
+
+
     <div class="recent-orders">
-        <h2>Nossos Clientes</h2>
+        <h2 class="text-muted">Reservas passadas</h2>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
         <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Horario</th>
-                    <th>Pessoas</th>
-                    <th>Numero telefone</th>
+                    <th>Nome do cliente</th>
+                    <th>Email do cliente</th>
+                    <th>Telefone</th>
+                    <th>Dia Reserva</th>
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                    <td>Winycios alves</td>
-                    <td>17:00 13/09/2022</td>
-                    <td>2</td>
-                    <td class="warning">11 94016-6751</td>
-                </tr>
                 <tr>
-                    <td>Lucinaldo santos</td>
-                    <td>12:00 13/09/2022</td>
-                    <td>1</td>
-                    <td class="warning">11 91234-5678</td>
-                </tr>
-                <tr>
-                    <td>Madalena pereira</td>
-                    <td>21:00 13/09/2022</td>
-                    <td>6</td>
-                    <td class="warning">11 98765-4321</td>
-                </tr>
-                <tr>
-                    <td>Luana teixeira</td>
-                    <td>22:00 13/09/2022</td>
-                    <td>2</td>
-                    <td class="warning">11 94016-7894</td>
-                </tr>
-                <tr>
-                    <td>vinicius gomes</td>
-                    <td>19:00 13/09/2022</td>
-                    <td>8</td>
-                    <td class="warning">11 99876-5432</td>
+                    <td data-label="Nome">Winycios</td>
+                    <td data-label="Email">111.111.111-86</td>
+                    <td data-label="Telefone">11 911111-1111</td>
+                    <td data-label="Dia da Reserva">13/09/2004</td>
                 </tr>
             </tbody>
         </table>
         <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
+            $(document).ready(function() {
+                $('#example').DataTable();
+            });
         </script>
     </div>
 </main>
@@ -150,8 +103,8 @@
         </div>
         <div class="profile">
             <div class="info">
-                <p>hey, <b></b></p>
-                <small class="text-muted">Dono do restaurante</small>
+                <p>hey, <b>{{Auth::user()->name}}</b></p>
+                <small class="text-muted">Admin</small>
             </div>
             <div class="profile-photo">
                 <img src="/img/logos/atlanticSemFundo.png">
@@ -160,7 +113,7 @@
     </div>
     <!--end top-->
     <div class="recent-updates">
-        <h2>Ultimas avaliações</h2>
+        <h2 class="text-muted">Ultimas avaliações</h2>
         <div class="updates">
             <div class="update">
                 <div class="profile-photo">
@@ -211,23 +164,227 @@
             </div>
         </div>
     </div>
-    <!------------------- end recent updates --------------------->
     <div class="sales-analytics">
-        <h2>Cardapio via pdf</h2>
-        <div class="item online">
-            <div class="icon">
-                <span class="material-icons-sharp">download</span>
+        <h2 class="text-muted">Opção de conta</h2>
+        <a href="#inativar">
+            <div class="item online">
+                <div class="icon">
+                    <span class="material-icons-sharp">disabled_by_default</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3>Inativar restaurante</h3>
+                    </div>
+                </div>
             </div>
-            <div class="icon">
-                <a href="" data-lightbox="portfolio" class="material-icons-sharp">fullscreen</a>
-                <!-- como coloquei a img via banco no lightbox <php
-                     while ($row = $stmt->fetch(PDO::FETCH_BOTH)) { ?>
-                <a href="<php echo $row[5]>" data-lightbox="portfolio" class="material-icons-sharp">fullscreen</a>
-                <php }?>-->
+        </a>
+        <a href="#exclusao">
+            <div class="item offline">
+                <div class="icon">
+                    <span class="material-icons-sharp">delete_forever</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3>Excluir restaurante</h3>
+                    </div>
+                </div>
             </div>
+        </a>
+        <a href="../diverso/premium.php">
+            <div class="item customers">
+                <div class="icon">
+                    <span class="material-icons-sharp">upgrade</span>
+                </div>
+                <div class="right">
+                    <div class="info">
+                        <h3><div class="text-muted">Plano atual:</div> <div class="plano">básico</div></h3>
+                        <smal class="text-muted">Aumentar plano</smal>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<!--FECHAMENTO DA DIV CONTAINER, ABERTA EM MENU.PHP-->
+</div>
+
+<!-- Modal Dados-->
+<div class="modal-wrapper" id="modal">
+    <div class="modal-body card">
+        <div class="modal-header">
+            <h2 class="heading">Dados da reserva</h2>
+            <a href="#!" role="button" class="close" aria-label="close this modal">
+                <svg viewBox="0 0 24 24">
+                    <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="central">
+            <h3>Nome completo: <span class="text-muted" id="nome"> Winycios alves nascimento </span></h3>
+        </div>
+        <div class="central">
+            <h3>Email : <span class="text-muted" id="email"> 527.690.598-31 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Telefone : <span class="text-muted" id="telefone"> (11) 946233-4046 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Data reserva : <span class="text-muted" id="data"> 13/09/2004 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Horario da Reserva : <span class="text-muted" id="horario"> 13:30 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Quantidade de pessoas : <span class="text-muted" id="qtd"> 5 </span></h3>
+        </div>
+
+
+
+        <div class="button-center">
+            <a href="" class="button button__link">Voltar</a>
+            <a href="#popup" class="button button__link">Avançar</a>
         </div>
     </div>
-    <!--FECHAMENTO DA DIV CONTAINER, ABERTA EM MENU.PHP-->
+    <a href="#!" class="outside-trigger"></a>
+</div>
+
+
+<!-- Modal Input-->
+<div class="popup" id="popup">
+    <div class="popup-inner">
+        <div class="popup__photo">
+            <table class="rwd-table">
+                <tr>
+                    <th>Mesas</th>
+                    <th>Cadeira por mesa</th>
+                </tr>
+                <tr>
+                    <td data-th="Mesas">
+                        <ul id="result"></ul>
+                    </td>
+                    <td data-th="Qtde">
+                        <ul>Retirar</ul>
+                    </td>
+                </tr>
+                <tfoot class="rwd-table">
+                    <tr>
+                        <th>Total de cadeiras que seram usadas :</th>
+                    </tr>
+                    <tr>
+                        <td data-th="Total de assentos">
+                            <ul>Dados</ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <h4>Mesas adicionadas</h4>
+
+        </div>
+        <div class="popup__text">
+            <div class="central">
+                <h3>Nome completo: <span class="text-muted" id="nome"> Winycios alves nascimento </span></h3>
+            </div>
+            <div class="central">
+                <h3>Email : <span class="text-muted" id="email"> 527.690.598-31 </span></h3>
+            </div>
+            <div class="central">
+                <h3>Telefone : <span class="text-muted" id="telefone"> (11) 946233-4046 </span></h3>
+            </div>
+            <div class="central">
+                <h3>Data reserva : <span class="text-muted" id="data"> 13/09/2004 </span></h3>
+            </div>
+            <div class="central">
+                <h3>Horario da Reserva : <span class="text-muted" id="horario"> 13:30 </span></h3>
+            </div>
+            <div class="central">
+                <h3>Quantidade de pessoas : <span class="text-muted" id="qtd"> 5 </span></h3>
+            </div>
+    
+            <form action="" method="post" id="contact_form">
+                <div class="name">
+                    <label for="name">
+                        <h3>Duração da reserva</h3>
+                    </label>
+                    <input type="time" name="txDuReserva" id="txDuReserva" required>
+                </div>
+                <p class='subject'>
+                    <label class='label' for='select'></label>
+                    <select placeholder="Dia da semana" id="selectMesa" name="txMesas">
+                        <option selected value="0">Mesas disponiveis no momento:</option>
+                        <option value="1">Mesa 1 = 5</option>
+                    </select>
+                <div style="display:inline-flex; gap: 10px;">
+                    <span class="button button__link" id="btn" onclick="addMesa()">Cadastrar</span>
+                    <span class="button button__link" id="btnClear" onclick="limpar()">Limpar</span>
+                </div>
+                </p>
+                <div class="button-center">
+                    <a href="#!" class="button button__link">Rejeitar reserva</a>
+                    <button class="button button__link" onclick="launch_toast()">Confirmar reserva</button>
+                </div>
+            </form>
+            <div id="toast">
+                <div id="desc">Reserva feita com sucesso</div>
+            </div>
+        </div>
+        <a class="popup__close" href="#">X</a>
+    </div>
+</div>
+
+
+
+<!-- modal inativo -->
+<div class="modal-container" id="inativar" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <strong>tem certeza ?</strong>
+                <form>
+                    <fieldset>
+                        <span class="create-account"></span>
+                        <p>Esse restaurante será inativado por tempo identerminado ou até que o dono desse estabelecimento entre em contato com os administradores da maître. tem certeza disso ?</p>
+                        <span class="create-account"></span>
+                        <div class="form-row button-login long">
+                            <a href="/login"><button class="btn btn-login">Não</button></a>
+                            <a href="#!"><button class="btn btn-login">Inativar<i class="fas fa-arrow-right"></i></button></a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        </p>
+        <a href="#m!" class="link-2"></a>
+    </div>
+</div>
+<!-- /modal inativo -->
+
+<!-- Modal Exclusao-->
+<div class="modal-container" id="exclusao" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <strong>tem certeza ?</strong>
+                <form>
+                    <fieldset>
+                        <span class="create-account"></span>
+                        <p>Esse restaurante será excluido permanentemente, tem certeza ?</p>
+                        <span class="create-account"></span>
+                        <div class="form-row button-login long">
+                            <a href="/login"><button class="btn btn-login">Não</button></a>
+                            <a href="#!"><button class="btn btn-login">Excluir<i class="fas fa-arrow-right"></i></button></a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        </p>
+        <a href="#m1-c" class="link-2"></a>
+    </div>
 </div>
 
 

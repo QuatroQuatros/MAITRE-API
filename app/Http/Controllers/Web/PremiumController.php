@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\PratoEspecial;
-
-class PratoEspecialController extends Controller
+class PremiumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class PratoEspecialController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboards.restaurante.premium');
     }
 
     /**
@@ -26,7 +24,7 @@ class PratoEspecialController extends Controller
      */
     public function create()
     {
-        return view('dashboards.restaurante.especiais', ['pratos' => PratoEspecial::all()]);
+        //
     }
 
     /**

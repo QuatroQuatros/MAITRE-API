@@ -32,6 +32,8 @@ class RestauranteController extends Controller
 
     }
 
+   
+
     public function update(Request $request, $id){
         return response($this->restauranteRepository->update($request, $id), 202);
     }

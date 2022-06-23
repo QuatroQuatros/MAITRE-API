@@ -257,7 +257,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                     @foreach($pratos as $p)
                         <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
                             <div class="menu-content">
-                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
+                                <a  data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
                             </div>
                             <div class="menu-ingredients">
                                 {{$p->descPrato}}

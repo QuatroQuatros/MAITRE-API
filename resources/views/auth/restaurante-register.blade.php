@@ -63,6 +63,11 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="input-text">
+                                    <div class="input-div">
+                                        <textarea  placeholder="Descrição do restaraurante" name="descricao" rows="4" cols="50" style="padding:10px"></textarea>
+                                    </div>
+                                </div>
                                 <div class="buttons">
                                     <button class="next_button">Próxima etapa</button>
                                 </div>
@@ -347,11 +352,12 @@
                         </svg>
                     </a>
                 </div>
-                <form action="" method="post" role="form" class="form">
+                <form action="/categoria-restaurante/create" method="post" role="form" class="form">
+                    @csrf
                     <p>*Por favor verificar se essa categoria já não foi cadastrada</p>
                     <div class="input-text">
                         <div class="input-div">
-                            <input type="text" name="nomeCat" id="nomeCat" required require>
+                            <input type="text" name="categoria" id="nomeCat" required require>
                             <span>Nova categoria</span>
                         </div>
                     </div>

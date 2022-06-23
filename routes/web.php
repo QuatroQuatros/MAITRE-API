@@ -4,9 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\AvaliacaoController;
 use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\CategoriaController;
+use App\Http\Controllers\Web\CategoriaRestauranteController;
 use App\Http\Controllers\Web\ClienteController;
 use App\Http\Controllers\Web\DiaSemanaController;
 use App\Http\Controllers\Web\HorarioController;
+use App\Http\Controllers\Web\PratoController;
+use App\Http\Controllers\Web\PratoEspecialController;
+use App\Http\Controllers\Web\PremiumController;
 use App\Http\Controllers\Web\RestauranteController;
 use App\Http\Controllers\Web\ReservasController;
 use App\Http\Controllers\Web\MesaController;
@@ -38,22 +42,41 @@ Route::prefix('/admin')->group(function(){
 
 Route::prefix('/horarios')->group(function(){
     Route::get('/diaSemana', [DiaSemanaController::class, 'index'])->middleware('auth', 'restaurante');
-    Route::post('/create', [HorarioController::class, 'store'])->middleware('auth', 'restaurante');
+    Route::get('/create', [HorarioController::class, 'create'])->middleware('auth', 'restaurante');
+    Route::post('/create', [HorarioController::class, 'store']);
 });
 
 Route::prefix('/mesas')->group(function(){
+    Route::get('/create', [MesaController::class, 'create'])->middleware('auth', 'restaurante');
     Route::post('/create', [MesaController::class, 'store'])->middleware('auth', 'restaurante');
 });
 
+Route::prefix('/pratos')->group(function(){
+    Route::get('/cardapio', [PratoController::class, 'create'])->middleware('auth', 'restaurante');
+    Route::post('/create', [PratoController::class, 'store'])->middleware('auth', 'restaurante');
+});
+
+Route::prefix('/pratos/especiais')->group(function(){
+    Route::get('/cardapio', [PratoEspecialController::class, 'create'])->middleware('auth', 'restaurante');
+    Route::post('/create', [PratoEspecialController::class, 'store'])->middleware('auth', 'restaurante');
+});
+
+
+
+
 Route::prefix('/restaurantes')->group(function(){
 
-    Route::get('/admin', [RestauranteController::class, 'dash'])->middleware('auth', 'restaurante');
+    Route::get('/admin', [RestauranteController::class, 'home'])->middleware('auth', 'restaurante');
     Route::get('/reservas', [RestauranteController::class, 'reservas'])->middleware('auth', 'restaurante');
     Route::get('/create', [RestauranteController::class, 'create'])->middleware('auth', 'restaurante');
     Route::post('/create', [RestauranteController::class, 'store'])->middleware('auth', 'restaurante');
+    Route::get('/edit/{id}', [RestauranteController::class, 'edit'])->middleware('auth', 'restaurante');
     Route::put('/edit/{id}', [RestauranteController::class, 'update'])->middleware('auth', 'restaurante');
    
-   
+    Route::get('/graficos', [RestauranteController::class, 'dash'])->middleware('auth', 'restaurante');
+
+    Route::get('/premium', [PremiumController::class, 'index'])->middleware('auth', 'restaurante');
+
     Route::get('/', [RestauranteController::class, 'index']);
     Route::get('/{id}', [RestauranteController::class, 'show']);
 
@@ -76,6 +99,16 @@ Route::prefix('/reservas')->group(function(){
 
 
 Route::prefix('/avaliacoes')->group(function(){
-    Route::post('/create', [AvaliacaoController::class, 'store'])->middleware('auth', 'cliente');;
+    Route::post('/create', [AvaliacaoController::class, 'store'])->middleware('auth', 'cliente');
 });
+
+Route::prefix('/categoria-restaurante')->group(function(){
+    Route::post('/create', [CategoriaRestauranteController::class, 'store']);
+});
+
+Route::prefix('/categoria-prato')->group(function(){
+    Route::post('/create', [CategoriaController::class, 'store']);
+});
+
+
 
