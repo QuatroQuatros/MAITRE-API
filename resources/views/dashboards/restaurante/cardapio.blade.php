@@ -23,7 +23,7 @@
             <tbody>
                 @foreach($pratos as $p)
                     <tr>
-                        <td data-label="Prato"><a href="/img/img1.jpg" data-lightbox="portfolio"><img class="prato" src="/img/img1.jpg"></a></td>
+                        <td data-label="Prato"><a href="{{$p->foto}}" data-lightbox="portfolio"><img class="prato" src="{{$p->foto}}"></a></td>
                         <td data-label="Nome">{{$p->nome}}</td>
                         <td data-label="Categoria">{{$p->categoria_id}}</td>
                         <td data-label="Descrição">{{$p->descPrato}}</td>
@@ -53,7 +53,7 @@
             <div class="register">
                 <span class="material-icons-sharp">restaurant_menu</span>
                 <strong>Cadastre um prato</strong>
-                <form action="/pratos/create" method="Post">
+                <form action="/pratos/create" method="Post" enctype="multipart/form-data">
                     @csrf
                     <fieldset>
                         <input type="hidden" name="restaurante_id"/>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="form-row">
                                     <label class="form-label" for="input">Foto do prato</label>
-                                    <input type="file" name="fotoRest" placeholder="Foto" name="fotoRestaurante">
+                                    <input type="file" name="foto" placeholder="Foto" name="fotoRestaurante">
                                 </div>
                             </div>
                             <span class="create-account"></span>

@@ -36,8 +36,8 @@ class RestauranteRepository{
     public function store(Request $request){
         $request->validate($this->restaurante->rules(), $this->restaurante->feedback());    
         $imagem = $request->file('foto');
-        $name = $imagem->getClientOriginalName(); 
-        $path = $imagem->storeAs('imagens', $name, 'public');
+        // $name = $imagem->getClientOriginalName(); 
+        // $path = $imagem->storeAs('imagens', $name, 'public');
 
         //dd($imagem);
         //$path = $imagem->storeAs('imagens', $imagem, 's3');
@@ -46,8 +46,8 @@ class RestauranteRepository{
         //$path = $request->file('foto')->store('./imagens/', 's3');
 
 
-        //$path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        //Storage::disk('s3')->setVisibility($path, 'public');
+        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        Storage::disk('s3')->setVisibility($path, 'public');
        
         
         return $this->restaurante->create([
@@ -58,8 +58,8 @@ class RestauranteRepository{
             "bairro" => $request->bairro,
             "cidade" => $request->cidade,
             "estado" =>  $request->estado,
-            //"foto" => Storage::disk('s3')->url($path),
-            "foto" => $path,
+            "foto" => Storage::disk('s3')->url($path),
+            // "foto" => $path,
             "cep" =>  $request->cep,
             "level" => $request->level,
             "categoria_restaurante_id" => $request->categoria_restaurante_id,

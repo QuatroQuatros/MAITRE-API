@@ -16,6 +16,7 @@ class Prato extends Model
      */
     protected $fillable = [
         'nome',
+        'foto',
         'descPrato',
         'valor',
         'categoria_id',
