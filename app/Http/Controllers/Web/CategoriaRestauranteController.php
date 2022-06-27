@@ -13,6 +13,6 @@ class CategoriaRestauranteController extends Controller
             'categoria' => $request->categoria,
         ]);
 
-        return view('auth.restaurante-register', ['categorias' => CategoriaRestaurante::all()]);
+        // return redirect('/restaurantes/create')->withInput();
     }
 }

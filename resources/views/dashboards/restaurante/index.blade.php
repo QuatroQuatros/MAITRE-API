@@ -8,7 +8,7 @@
             <div class="middle">
                 <div class="left">
                     <h3>Total de reservas(hoje)</h3>
-                    <h1>$25,024</h1>
+                    <h1>{{$reservasHoje->id}}</h1>
                 </div>
             </div>
             <small class="text-muted">Last 24 hours</small>
@@ -17,8 +17,8 @@
         <div class="expenses">
             <div class="middle">
                 <div class="left">
-                    <h3>Status do restaurante</h3>
-                    <h1>vazio</h1>
+                    <h3>Porcentagem de mesas disponíveis</h3>
+                    <h1>{{number_format((float)$mesasDisponiveis, 2, '.', '')}} %</h1>
                 </div>
             </div>
             <small class="text-muted">Last 24 hours</small>
@@ -36,21 +36,35 @@
                 <div class="col col-4">Status</div>
             </li>
             @foreach($reservas as $r)
-                <a href="#modal" onclick="carregaModal()">
-                    <li class="table-row">
-                        <input type="hidden" value="{{$r->id}}" id="id">
-                        <div class="col col-1" data-label="Nome do cliente">{{$r->nome}}</div>
-                        <div class="col col-2" data-label="Email Cliente">{{$r->email}}</div>
-                        <div class="col col-3" data-label="Telefone">$341</div>
-                        @if($r->status_reserva_id == 1)
-                            <div class="col col-4" data-label="Status"><span class="warning" id="status">Pendente</span></div>
-                        @elseif($r->status_reserva_id == 2)
-                            <div class="col col-4" data-label="Status"><span class="success" id="status">Aprovado</span></div>
-                        @else
-                            <div class="col col-4" data-label="Status"><span class="danger" id="status">Cancelado</span></div>
-                        @endif  
-                    </li>
-                </a>
+               
+                    
+                        <li class="table-row">
+                            <input type="hidden" value="{{$r->id}}" id="id">
+                            <div class="col col-1" data-label="Nome do cliente">{{$r->nome}}</div>
+                            <div class="col col-2" data-label="Email Cliente">{{$r->email}}</div>
+                            <div class="col col-3" data-label="Telefone">$341</div>
+                            @if($r->status_reserva_id == 1)                   
+                                <div class="col col-4" data-label="Status">
+                                    <a href="#modal" onclick="carregaModal({{$r->id}})">
+                                        <span class="warning" id="status{{$r->id}}">Pendente</span>
+                                    </a>
+                                </div>
+                            @elseif($r->status_reserva_id == 2)
+                                <div class="col col-4" data-label="Status">
+                                    <a href="#modalInfo" onclick="carregaModal({{$r->id}})">
+                                        <span class="success" id="status{{$r->id}}">Aprovado</span>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="col col-4" data-label="Status">
+                                    <a href="#modalInfo" onclick="carregaModal({{$r->id}})">
+                                        <span class="danger" id="status{{$r->id}}">Cancelado</span>
+                                    </a>
+                                </div>
+                            @endif  
+                        </li>
+                    
+
             @endforeach
 
            
@@ -190,7 +204,7 @@
                 </div>
             </div>
         </a>
-        <a href="../diverso/premium.php">
+        <a href="/restaurantes/premium">
             <div class="item customers">
                 <div class="icon">
                     <span class="material-icons-sharp">upgrade</span>
@@ -249,6 +263,49 @@
     <a href="#!" class="outside-trigger"></a>
 </div>
 
+<!-- end Modal Dados-->
+
+<!-- Modal Info -->
+<div class="modal-wrapper" id="modalInfo">
+    <div class="modal-body card">
+        <div class="modal-header">
+            <h2 class="heading">Dados da reserva</h2>
+            <a href="#!" role="button" class="close" aria-label="close this modal">
+                <svg viewBox="0 0 24 24">
+                    <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="central">
+            <h3>Nome completo: <span class="text-muted" id="nome2"> Winycios alves nascimento </span></h3>
+        </div>
+        <div class="central">
+            <h3>Email : <span class="text-muted" id="email2"> 527.690.598-31 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Telefone : <span class="text-muted" id="telefone2"> (11) 946233-4046 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Data reserva : <span class="text-muted" id="data2"> 13/09/2004 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Horario da Reserva : <span class="text-muted" id="horario2"> 13:30 </span></h3>
+        </div>
+        <div class="central">
+            <h3>Quantidade de pessoas : <span class="text-muted" id="qtd2"> 5 </span></h3>
+        </div>
+
+
+
+        <div class="button-center">
+            <a href="" class="button button__link">Fechar</a> 
+        </div>
+    </div>
+    <a href="#!" class="outside-trigger"></a>
+</div>
+<!-- End Modal Info -->
+
 
 <!-- Modal Input-->
 <div class="popup" id="popup">
@@ -261,21 +318,20 @@
                 </tr>
                 <tr>
                     <td data-th="Mesas">
-                        <ul id="result"></ul>
+                        <ul id="mesas"></ul>
                     </td>
                     <td data-th="Qtde">
-                        <ul>Retirar</ul>
+                        <ul id="assentos"></ul>
                     </td>
                 </tr>
                 <tfoot class="rwd-table">
                     <tr>
-                        <th>Total de cadeiras que seram usadas :</th>
+                        <th id="totalMesas">Total de mesas selecionadas: 0</th>
                     </tr>
                     <tr>
-                        <td data-th="Total de assentos">
-                            <ul>Dados</ul>
-                        </td>
+                        <th id="totalAssentos">Total de assentos: 0</th>
                     </tr>
+                   
                 </tfoot>
             </table>
             <h4>Mesas adicionadas</h4>
@@ -283,36 +339,39 @@
         </div>
         <div class="popup__text">
             <div class="central">
-                <h3>Nome completo: <span class="text-muted" id="nome"> Winycios alves nascimento </span></h3>
+                <h3>Nome completo: <span class="text-muted" id="nome1"> Winycios alves nascimento </span></h3>
             </div>
             <div class="central">
-                <h3>Email : <span class="text-muted" id="email"> 527.690.598-31 </span></h3>
+                <h3>Email : <span class="text-muted" id="email1"> 527.690.598-31 </span></h3>
             </div>
             <div class="central">
-                <h3>Telefone : <span class="text-muted" id="telefone"> (11) 946233-4046 </span></h3>
+                <h3>Telefone : <span class="text-muted" id="telefone1"> (11) 946233-4046 </span></h3>
             </div>
             <div class="central">
-                <h3>Data reserva : <span class="text-muted" id="data"> 13/09/2004 </span></h3>
+                <h3>Data reserva : <span class="text-muted" id="data1"> 13/09/2004 </span></h3>
             </div>
             <div class="central">
-                <h3>Horario da Reserva : <span class="text-muted" id="horario"> 13:30 </span></h3>
+                <h3>Horario da Reserva : <span class="text-muted" id="horario1"> 13:30 </span></h3>
             </div>
             <div class="central">
-                <h3>Quantidade de pessoas : <span class="text-muted" id="qtd"> 5 </span></h3>
+                <h3>Quantidade de pessoas : <span class="text-muted" id="qtd1"> 5 </span></h3>
+                <input type="hidden" value="" id="qtdP">
             </div>
     
-            <form action="" method="post" id="contact_form">
+            <form id="contact_form">
                 <div class="name">
                     <label for="name">
                         <h3>Duração da reserva</h3>
                     </label>
-                    <input type="time" name="txDuReserva" id="txDuReserva" required>
+                    <input type="time" name="duracao" id="duracao" required>
                 </div>
                 <p class='subject'>
                     <label class='label' for='select'></label>
-                    <select placeholder="Dia da semana" id="selectMesa" name="txMesas">
+                    <select placeholder="Selecione a quantidade de mesas" id="selectMesa" name="txMesas">
                         <option selected value="0">Mesas disponiveis no momento:</option>
-                        <option value="1">Mesa 1 = 5</option>
+                        @foreach($mesas as $m)
+                            <option value='{{$m->id}}, {{$m->capacidade}}, {{$m->mesa}}'>Mesa {{$m->mesa}} = {{$m->capacidade}}</option>
+                        @endforeach
                     </select>
                 <div style="display:inline-flex; gap: 10px;">
                     <span class="button button__link" id="btn" onclick="addMesa()">Cadastrar</span>
@@ -320,8 +379,8 @@
                 </div>
                 </p>
                 <div class="button-center">
-                    <a href="#!" class="button button__link">Rejeitar reserva</a>
-                    <button class="button button__link" onclick="launch_toast()">Confirmar reserva</button>
+                    <a href="#!" onclick="rejeitarReserva()" class="button button__link">Rejeitar reserva</a>
+                    <a onclick="aprovarReserva(event)" class="button button__link">Confirmar reserva</a>
                 </div>
             </form>
             <div id="toast">

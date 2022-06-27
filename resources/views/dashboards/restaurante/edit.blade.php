@@ -35,8 +35,8 @@
                         <button class="btn btn-login rest" disabled onclick="launch_toast()">Salvar<i class="fas fa-arrow-right"></i></button>
                     </form>
                     <div class="form-row button-login long">
-                        <a href="../diverso/horario.php"><button class="btn buttonLocation">Horários<i class="fas fa-arrow-right"></i></button></a>
-                        <a href="../diverso/cardapio.php"><button class="btn buttonLocation">Pratos<i class="fas fa-arrow-right"></i></button></a>
+                        <a href="/horarios/create"><button class="btn buttonLocation">Horários<i class="fas fa-arrow-right"></i></button></a>
+                        <a href="/pratos/cardapio"><button class="btn buttonLocation">Pratos<i class="fas fa-arrow-right"></i></button></a>
                     </div>
                 </div>
                 <div id="toast">
@@ -195,7 +195,7 @@
         <div class="containerform">
             <div class="register">
                 <span class="material-icons-sharp">event</span>
-                <strong>Cadastre/atualize um horário</strong>
+                <strong>Atualizar catégoria</strong>
                 <form>
                     <fieldset>
                         <div class="form">
@@ -204,13 +204,9 @@
                                 <label class="form-label" for="input">Dias</label>
                                 <select class="form-text" name="txDia">
                                     <option selected value="0">Escolha a categoria:</option>
-                                    <option select value="1">SEGUNDA-FEIRA</option>
-                                    <option select value="2">TERÇA-FEIRA</option>
-                                    <option select value="3">QUARTA-FEIRA</option>
-                                    <option select value="4">QUINTA-FEIRA</option>
-                                    <option select value="5">SEXTA-FEIRA</option>
-                                    <option select value="6">SABADO</option>
-                                    <option select value="7">DOMINGO</option>
+                                    @foreach($categorias as $c)
+                                        <option value="{{$c->id}}">{{$c->categoria}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <span class="create-account"></span>

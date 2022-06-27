@@ -13,13 +13,17 @@ class PratoController extends Controller
   
     public function index()
     {
-        //
+        $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
+       
+        $id = $rest->id;
+        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::where('restaurante_id', $id)->get(), 'categorias' => Categoria::all()]);
     }
 
    
     public function create()
     {
-        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::all(), 'categorias' => Categoria::all()]);
+        
+        return $this->index();
     }
 
   
@@ -28,7 +32,6 @@ class PratoController extends Controller
         $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
        
         $id = $rest->id;
-
         Prato::create([
             "nome" => $request->nome,
             "descPrato" => $request->descPrato,
@@ -37,28 +40,8 @@ class PratoController extends Controller
             "restaurante_id" => $id
         ]);
 
-        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::all(),'categorias' => Categoria::all()]);
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
+        return $this->index();
     }
 
 
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -34,7 +34,13 @@ class CategoriaController extends Controller
 
     public function store(Request $request){
         $this->categoriaRepository->store($request);
-        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::all(),'categorias' => Categoria::all()]);
+        $level = \Auth::user()->level;
+        if($level == 2){
+            return view('dashboards.restaurante.cardapio', ['pratos' => Prato::all(),'categorias' => Categoria::all()]);
+        }else{
+            return $this->index_response();
+        }
+       
 
         //return $this->index_response();
     }

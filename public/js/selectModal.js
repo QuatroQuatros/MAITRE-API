@@ -1,12 +1,27 @@
 
-    $(document).ready(function() {
+$(document).ready(function() {
 
-        $('#link').on('change', function() {
-            
-            var url = $(this).val();
-            if (url == '#categoria') {
-                window.open(url, '_top');
-            }
-            return false;
-        });
+    $('#link1').on('change', function() {
+
+        
+        var url = $(this).val();
+        if (url == '#adicionar') {
+            window.open(url, '_top');
+        }
+        return false;
     });
+});
+
+
+$(document).ready(function() {
+
+    $('#link2').on('change', function() {
+        
+        
+        var url = $(this).val();
+        if (url == '#adicionar') {
+            window.open(url, '_top');
+        }
+        return false;
+    });
+});

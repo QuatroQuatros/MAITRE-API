@@ -1,0 +1,6 @@
+quando for o perfil do restaurante usar web
+quando for o perfil do cliente no aap
+
+inicia apresentando o site
+
+cria uma conta para um restaurante

@@ -182,10 +182,10 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                     <div class="col-lg-8 details order-2 order-lg-1">
                                                         <h3>{{$e->nome}}</h3>
                                                         <p class="fst-italic">{{$e->descPrato}}</p>
-                                                        <p>R${{$e->valor}}</p>
+                                                        <p>R$ {{number_format((float)$e->valor, 2, '.', '')}}</p>
                                                     </div>
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                                        <img src="/img/specials-1.jpg" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,13 +195,14 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                     <div class="col-lg-8 details order-2 order-lg-1">
                                                         <h3>{{$e->nome}}</h3>
                                                         <p class="fst-italic">{{$e->descPrato}}</p>
-                                                        <p>R${{$e->valor}}</p>
+                                                        <p>R$ {{number_format((float)$e->valor, 2, '.', '')}}</p>
                                                     </div>
+                                                    
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
+                                                        <img src="/img/specials-2.jpg" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                         
                                         @endif
                                     @endforeach
                                     
@@ -212,24 +213,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
             </div>
         </section><!-- End cardapio Section -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nome do prato</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end modal-->
+
 
         <!--cardapio completo-->
         <section class="menu">
@@ -254,19 +238,58 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                 </div>
 
                 <div class="row menu-container">
+                   
                     @foreach($pratos as $p)
+                   
                         <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
                             <div class="menu-content">
-                                <a  data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
+                                <a onclick="modalPrato( {{$p->id}})" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span id="{{$p->id}}">R$</span>
                             </div>
                             <div class="menu-ingredients">
                                 {{$p->descPrato}}
                             </div>
                         </div>
+                        <script>
+                            var valor = document.getElementById({{$p->id}})
+                            valor.innerHTML += parseFloat({{$p->valor}}).toFixed(2)
+                        </script>
                     @endforeach
 
                     
                 </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="nomePrato">Nome do prato</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="/img/chefs/chefs-1.jpg" class="img-prato" alt="">
+                                    <div class="section-subtitle">
+                                        <h4>DES<span>CRIÇÃO</span></h4>
+                                    </div>
+                                    <div class="menu-ingredients" id="desc">
+                                        Lorem, deren, trataro, filede, nerada
+                                    </div>
+                                    <div class="section-title">
+                                        <h4>Preço: R$ <span id="preco">$14.99</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end modal-->
 
         </section><!-- End Menu Section -->
 
@@ -289,6 +312,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                             <div class="validate"></div>
                         </div>   
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                            <input type="hidden" value="{{ $restaurante->id }}" id="rest_id"/>
                             <input type="date" class="form-control" name="data" id="dataInput" onchange="getDia()">
                             <div class="validate"></div>
                         </div>
@@ -331,11 +355,11 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                         @endfor
                                         <!--<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>-->
                                     </div>
-                                    <p>
+                                    {{-- <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                         Caso você queria fazer um comentário, é só apertar no botão abaixo.
                                         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                         @endif
@@ -418,6 +442,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
        
     </main>
 
+    <script src="/js/modalPrato.js"></script>
     <script>
         //Script para definir a data minima e maxima do calendario de reservas.
 
@@ -443,7 +468,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
         function getDia(){
             var data = document.getElementById('dataInput').value
+            var id = document.getElementById('rest_id').value;
             var select = document.getElementById('horarios');
+
 
             $('#horarios').empty();
 
@@ -460,7 +487,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
             var d = new Date(data);
             var dia = DiaSemana[d.getDay()];
-            var url = 'http://127.0.0.1:8000/api/horarios/' + dia
+            var url = 'http://127.0.0.1:8000/api/horarios/'+ id +'/' + dia
             console.log(url)
             fetch(url)
             .then((resp) => resp.json())

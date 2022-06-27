@@ -11,53 +11,136 @@
 
           <div class="carousel-inner" role="listbox">
 
-              <!-- Slide 1 -->
-              <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg);">
-                  <div class="carousel-container">
-                      <div class="carousel-content">
-                          <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
-                          <p class="animate__animated animate__fadeInUp">Servindo a você.</p>
-                          <div>
-                              <a href="/restaurantes"
-                                  class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
-                              <a href="#restaurantePremium"
-                                  class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+            @auth
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2 class="animate__animated animate__fadeInDown"><span>Seja bem vindo ao </span>MaÎtre</h2>
+                            <p class="animate__animated animate__fadeInUp">Olá {{auth()->user()->name}} </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url(/img/slide/slide-1.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                            <p class="animate__animated animate__fadeInUp">Servindo a você.</p>
+                            <div>
+                                <a href="/restaurantes"
+                                    class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                <a href="#restaurantePremium"
+                                    class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endauth
+              
+                
+            @guest
+                <!-- Slide 1 -->
+                <div class="carousel-item active" style="background-image: url(/img/slide/slide-1.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                            <p class="animate__animated animate__fadeInUp">Servindo a você.</p>
+                            <div>
+                                <a href="/restaurantes"
+                                    class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                <a href="#restaurantePremium"
+                                    class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-              <!-- Slide 2 -->
-              <div class="carousel-item" style="background-image: url(/img/slide/slide-2.jpg);">
-                  <div class="carousel-container">
-                      <div class="carousel-content">
-                        <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
-                          <p class="animate__animated animate__fadeInUp">Encontre os melhores restaurantes perto de você.</p>
-                          <div>
-                              <a href="/restaurantes"
-                                  class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
-                              <a href="#restaurantePremium"
-                                  class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item" style="background-image: url(/img/slide/slide-2.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                            <p class="animate__animated animate__fadeInUp">Encontre os melhores restaurantes perto de você.</p>
+                            <div>
+                                <a href="/restaurantes"
+                                    class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                <a href="#restaurantePremium"
+                                    class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-              <!-- Slide 3 -->
-              <div class="carousel-item" style="background-image: url(/img/slide/slide-3.jpg);">
-                  <div class="carousel-container">
-                      <div class="carousel-content">
-                        <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
-                          <p class="animate__animated animate__fadeInUp">Fazer reservas nos seus restaurantes favoritos nunca foi tão fácil.</p>
-                          <div>
-                              <a href="/restaurantes"
-                                  class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
-                              <a href="#restaurantePremium"
-                                  class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item" style="background-image: url(/img/slide/slide-3.jpg);">
+                    <div class="carousel-container">
+                        <div class="carousel-content">
+                            <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                            <p class="animate__animated animate__fadeInUp">Fazer reservas nos seus restaurantes favoritos nunca foi tão fácil.</p>
+                            <div>
+                                <a href="/restaurantes"
+                                    class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                <a href="#restaurantePremium"
+                                    class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endguest
+
+            @auth
+                @if(count($premium) == 0)
+                    <!-- Slide 2 -->
+                    <div class="carousel-item" style="background-image: url(/img/slide/slide-2.jpg);">
+                        <div class="carousel-container">
+                            <div class="carousel-content">
+                                <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                                <p class="animate__animated animate__fadeInUp">Encontre os melhores restaurantes perto de você.</p>
+                                <div>
+                                    <a href="/restaurantes"
+                                        class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                    <a href="#restaurantePremium"
+                                        class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-item" style="background-image: url(/img/slide/slide-3.jpg);">
+                        <div class="carousel-container">
+                            <div class="carousel-content">
+                                <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
+                                <p class="animate__animated animate__fadeInUp">Fazer reservas nos seus restaurantes favoritos nunca foi tão fácil.</p>
+                                <div>
+                                    <a href="/restaurantes"
+                                        class="btn-menu animate__animated animate__fadeInUp scrollto">Restaurantes</a>
+                                    <a href="#restaurantePremium"
+                                        class="btn-book animate__animated animate__fadeInUp scrollto">Premium</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                @else
+                    @foreach($premium as $p)
+                        <div class="carousel-item" style="background-image: url(/img/slide/slide-2.jpg);">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2 class="animate__animated animate__fadeInDown"><span>{{$p->nome}}</span></h2>
+                                    <p class="animate__animated animate__fadeInUp">{{$p->descricao}}</p>
+                                    <p class="animate__animated animate__fadeInUp"><span class="golden">{{$p->endereco}}, {{$p->numero}} - {{$p->bairro}}, {{$p->cidade}} - {{$p->estado}}, {{$p->cep}}</span></p>
+                                    <div>
+                                        <a href="/restaurantes/{{$p->id}}" class="btn-menu animate__animated animate__fadeInUp scrollto">VER MAIS</a>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            @endauth
 
           </div>
 
@@ -75,61 +158,60 @@
 <main id="main">
 
 <!-- ======= restaurantes Premium Section ======= -->
-  <section id="restaurantePremium" class="events">
-    <div class="container">
+@guest
+    @if(count($premium) != 0)
+        <section id="restaurantePremium" class="events">
+            <div class="container">
 
-        <div class="section-title">
-            <h2>Restaurantes <span>Em Destaque</span></h2>
-        </div>
+                <div class="section-title">
+                    <h2>Restaurantes <span>Em Destaque</span></h2>
+                </div>
 
-        <div class="events-slider swiper">
-            <div class="swiper-wrapper">
+                <div class="events-slider swiper">
+                    <div class="swiper-wrapper">
 
 
-                @foreach($restaurantes as $r)
-                    @if($r->level == 2)
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="{{$r->foto}}" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$r->nome}}</h3>
-                                    
-                                    <p class="fst-italic">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore
-                                        magna aliqua.
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                            commodo
-                                            consequat.</li>
-                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
-                                            voluptate velit.</li>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                            commodo
-                                            consequat.</li>
-                                    </ul>
-                                    <p>
-                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                        in
-                                        reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur
-                                    </p>
-                                    <a href="/restaurantes/{{$r->id}}"><button type="submit"
-                                            class="button-coment">Visitar restaurante</button></a>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
-                    @endif
-                @endforeach
+                        @foreach($restaurantes as $r)
+                            @if($r->level == 2)
+                                <div class="swiper-slide">
+                                    <div class="row event-item">
+                                        <div class="col-lg-6">
+                                            <img src="{{$r->foto}}" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                            <h3>{{$r->nome}}</h3>
+                                            
+                                            <p class="fst-italic">
+                                                {{$r->descricao}}
+                                            </p>
+                                            <ul>
+                                                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
+                                                    commodo
+                                                    consequat.</li>
+                                                <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
+                                                    voluptate velit.</li>
+                                                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
+                                                    commodo
+                                                    consequat.</li>
+                                            </ul>
+                                            <p>
+                                                {{$r->endereco}}, {{$r->numero}} - {{$r->bairro}}, {{$r->cidade}} - {{$r->estado}}, {{$r->cep}}
+                                            </p>
+                                            <a href="/restaurantes/{{$r->id}}"><button type="submit"
+                                                    class="button-coment">Visitar restaurante</button></a>
+                                        </div>
+                                    </div>
+                                </div><!-- End testimonial item -->
+                            @endif
+                        @endforeach
 
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
-            <div class="swiper-pagination"></div>
-        </div>
-    </div>
-</section><!-- End restaurante premiu Section -->
+        </section><!-- End restaurante premiu Section -->
+    @endif
+@endguest
 
   <!--======= restaurantes Section ======= -->
   <section id="restaurantes" class="chefs">
@@ -163,6 +245,9 @@
                                 <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                     class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
                                     class="bi bi-star-fill"></i>
+                            </div>
+                            <div class="social">
+                                <p>{{$r->categoria}}</p>
                             </div>
                             <div class="center-button">
                                 <a href="/restaurantes/{{$r->id}}"><button type="submit"

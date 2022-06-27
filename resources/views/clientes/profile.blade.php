@@ -287,6 +287,47 @@
                                     </label>
                                     <label class="label-input" for="">
                                         <i class="fa-solid fa-road icon-modify"></i>
+                                        <select id="estado" name="estado">
+                                            <option>Estado:</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                        </select>
+                                    </label>
+                                    <label class="label-input" for="">
+                                        <i class="fa-solid fa-road icon-modify"></i>
+                                        <input type="text" name="cidade" id="cidade" placeholder="Cidade :">
+                                    </label>
+                                    <label class="label-input" for="">
+                                        <i class="fa-solid fa-road icon-modify"></i>
+                                        <input type="text" name="bairro" id="bairro" placeholder="Bairro :">
+                                    </label>
+                                    <label class="label-input" for="">
+                                        <i class="fa-solid fa-road icon-modify"></i>
                                         <input type="text" name="endereco" id="rua" placeholder="Rua :">
                                     </label>
                                     <label class="label-input" for="">
@@ -304,137 +345,4 @@
                 </div>
             </div>
 
-            <section id="contact" class="contact">
-                <div class="php-email-form">
-                    <div class="section-title">
-                        <h2>Suas<span> Reservas</span></h2>
-                    </div>
-                    <div class="recent-orders">
-                    <table>
-                <thead>
-                    <tr>
-                        <th>Data da Reserva</th>
-                        <th>Horario Da Reserva</th>
-                        <th>Restaurante da Reserva</th>
-                        <th>Quantidade de Pessoas</th>
-                        <th>status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($reservas as $r)
-                    <tr>
-                        <td data-title="Data">{{$r->data}}</td>
-                        <td data-title="Horario">{{$r->data}}</td>
-                        <td data-title="restaurante">{{$r->data}}<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">{{$r->data}}<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="successfull">{{$r->data}}</td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <td data-title="Data">Colocar do banco</td>
-                        <td data-title="Horario">Colocar do banco</td>
-                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="warning">Pendente</td>
-                    </tr>
-                    <tr>
-                        <td data-title="Data">Colocar do banco</td>
-                        <td data-title="Horario">Colocar do banco</td>
-                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="warning">Pendente</td>
-                    </tr>
-                    <tr>
-                        <td data-title="Data">Colocar do banco</td>
-                        <td data-title="Horario">Colocar do banco</td>
-                        <td data-title="restaurante">Colocar do banco<button type="submit" class="button-option warning" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                        <td data-title="pessoas">Colocar do banco<button type="submit" class="button-option danger" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                        <td data-title="status" class="danger">Cancelado</td>
-                    </tr>
-                </tbody>
-            </table>
-                    </div>
-                </div>
-            </section>
-
-
-            <!--reservas-->
-            <!-- Modal Exclusao-->
-            <div class="modal fade" id="modalExluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalExcluirLabel">Tem certeza ?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" class="">
-                                A reserva do dia (**/**/****) será excluida permanentemente tem certeza ?
-                                <button type="button" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a href="">Sim</a></button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--end modal-->
-
-            <!--modal Alteração-->
-            <div class="modal fade" id="modalAlt" tabindex="-1" aria-labelledby="modalAlterarLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modaAlterarLabel">Alteração de reserva</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="" class="">
-                                <div class="rowCenter">
-                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                        <input type="number" class="form-120" name="qtdePessoa" id="qtdePessoa" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
-                                        <div class="validate"></div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                        <input type="text" class="form-120" name="nomeRest" id="nomeRest" placeholder="Nome do restaurante" data-msg="Escreva seu nome">
-                                        <div class="validate"></div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                        <select placeholder="dia da reserva" class="form-120" id="Horario da reserva" name="horarioReserva">
-                                            <option selected value="0">Dia da reserva</option>
-                                            <option select value="1">SEGUNDA-FEIRA</option>
-                                            <option select value="2">TERÇA-FEIRA</option>
-                                            <option select value="3">QUARTA-FEIRA</option>
-                                            <option select value="4">QUINTA-FEIRA</option>
-                                            <option select value="5">SEXTA-FEIRA</option>
-                                            <option select value="6">SABADO</option>
-                                            <option select value="7">DOMINGO</option>
-                                        </select>
-                                        <div class="validate"></div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                        <select placeholder="Horario da reserva" class="form-120" id="HorarioReserva" name="horarioReserva">
-                                            <option selected value="0">Horario da reserva</option>
-                                            <option select value="13"></option>
-                                            <option select value="14"></option>
-                                            <option select value="15"></option>
-                                            <option select value="16"></option>
-                                            <option select value="17"></option>
-                                            <option select value="18"></option>
-                                            <option select value="19"></option>
-                                        </select>
-                                        <div class="validate"></div>
-                                    </div>
-                                </div>
-                                <br>
-                                <button type="button" class="btn btn-primaryBoot">Alterar reserva</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 @endsection

@@ -5,81 +5,41 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Restaurante;
+
 class PremiumController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        return view('dashboards.restaurante.premium');
+        $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
+        return view('dashboards.restaurante.premium', ['rest' => $rest]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getPremium($id){
+        $r = Restaurante::findOrFail($id);
+
+        if($r->level == 1){
+            $r->level = 2;
+            $r->save();
+            return redirect('/restaurantes/premium');
+        }else{
+            return redirect('/restaurantes/premium');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function cancelPremium($id){
+        $r = Restaurante::findOrFail($id);
+
+        if($r->level == 2){
+            $r->level = 1;
+            $r->save();
+            return redirect('/restaurantes/premium');
+        }else{
+            return redirect('/restaurantes/premium');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+   
 }

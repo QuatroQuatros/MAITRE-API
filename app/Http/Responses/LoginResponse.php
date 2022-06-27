@@ -27,8 +27,7 @@ class LoginResponse implements LoginResponseContract
             $user->first_login_at = Carbon::now();
             $user->last_login_at  = Carbon::now();
             $user->save();
-       }elseif(!$has){
-            return redirect('/restaurantes/create');
+            return redirect('/');
        }
 
         if($level == 1){

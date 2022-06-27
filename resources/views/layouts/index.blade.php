@@ -25,6 +25,9 @@
     <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/DataTables/datatables.min.css">
+
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/modais.css" rel="stylesheet">
     <link href="/css/filtroPesquisa.css" rel="stylesheet">
@@ -55,6 +58,11 @@
                   <li><a class="nav-link scrollto active" href="/">Inicio</a></li>
                   <li><a class="nav-link scrollto" href="/app">APP</a></li>
                   <li><a class="nav-link scrollto" href="/restaurantes">Restaurantes</a></li>
+                  @auth
+                    @if(auth()->user()->level == 1)
+                        <li><a class="nav-link scrollto" href="/reservas">Reservas</a></li>
+                    @endif
+                  @endauth
                   
               </ul>
               <i class="bi bi-list mobile-nav-toggle"></i>
@@ -65,13 +73,14 @@
           @endguest
 
           @auth
-          @if(auth()->user()->level == 2)
-          <a href="/restaurantes/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
-          @elseif(auth()->user()->level == 3)
-          <a href="/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
-          @else
-           <a href="/clientes/{{auth()->user()->id}}"  class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a>
-          @endif
+            @if(auth()->user()->level == 2)
+                <a href="/restaurantes/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
+            @elseif(auth()->user()->level == 3)
+                <a href="/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
+            @else
+                <a href="/clientes/{{auth()->user()->id}}" class="book-a-table-btn scrollto"><i class="bi bi-person-circle"></i> OLÁ, {{auth()->user()->name}}</a>
+                {{-- <a href="/clientes/{{auth()->user()->id}}"  class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a> --}}
+            @endif
           <form action="/logout" method="POST">
               @csrf
               <a href="/logout" class="book-a-table-btn scrollto" onclick="event.preventDefault();
@@ -114,6 +123,10 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+
+
+    
+
   <!-- Vendor JS Files -->
   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="/vendor/glightbox/js/glightbox.min.js"></script>
@@ -125,7 +138,11 @@
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
   <script src="/js/cep.js"></script>
+  <script src="/js/toast.js"></script>
 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="/vendor/DataTables/datatables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="/vendor/DataTables/datatables.js"></script>
 
   <script src="/js/filtros.js"></script>
 
@@ -153,7 +170,7 @@
                     }
                 }else{
                     $("#resultado").empty();
-                    $("#resultado").append( "<a class='busca'>" + 'Produto não encontrado' + "</a>");
+                    $("#resultado").append( "<a class='busca'>" + 'Restaurante não encontrado' + "</a>");
                 }
                 
             },

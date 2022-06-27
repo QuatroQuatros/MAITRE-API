@@ -12,18 +12,33 @@
             <thead>
                 <tr>
                     <th>Mesa</th>
-                    <th>quantidade por pessoa </th>
-                    <th>Alteração</th>
-                    <th>Exclusão</th>
+                    <th>Capacidade </th>
+                    <th>Disponível </th>
+                    <th>Alterar</th>
+                    <th>Inativar</th>
+                    <th>Reativar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($mesas as $m)
                     <tr>
-                        <td data-label="Mesa">1</td>
-                        <td data-label="Qtde por pessoa">5</td>
-                        <td><a href="#modalMesa" class="warning">Alterar mesa</a></td>
-                        <td><a href="#modal" role="button" class="danger">excluir mesa</a></td>
+                        <td data-label="Mesa">{{$m->mesa}}</td>
+                        <td data-label="Capacidade">{{$m->capacidade}}</td>
+                        @if($m->disponivel == 1)
+                            <td data-label="Disponível">Sim</td>
+                        @else
+                            <td data-label="Disponível">Não</td>
+                        @endif
+                        <td><a href="#modalAtualizar" onclick="modalAtualizar({{$m->id}})"" class="warning">Alterar mesa</a></td>
+                        @if($m->disponivel != 0)
+                            <td><a href="#modalInativar" onclick="abreModal({{$m->id}})" class="warning">Inativar mesa</a></td>
+                            <td><a class="warning"> @php echo '&nbsp' @endphp</a></td>
+                        @else
+                            <td><a class="warning"> @php echo '&nbsp' @endphp </a></td>
+                            <td><a href="#modalReativar" onclick="abreModal({{$m->id}})" class="warning">Reativar mesa</a></td>
+                        @endif
+                        <td><a href="#modal" onclick="abreModal({{$m->id}})" role="button" class="danger">excluir mesa</a></td>
                     </tr>
                 @endforeach
                
@@ -39,7 +54,7 @@
 <!----------- end main ABERTA NO MENU.PHP ------------->
 
 
-<!-- modal cadastro/atualização -->
+<!-- modal Cadastro -->
 <div class="modal-container" id="modalMesa" style="background: rgb(12 12 12 / 57%);">
     <div class="modal">
         <p class="modal__text">
@@ -47,25 +62,23 @@
         <div class="containerform">
             <div class="register">
                 <span class="material-icons-sharp">table_bar</span>
-                <strong>Cadastre/atualize uma mess</strong>
-                <form>
+                <strong>Cadastre uma mesa</strong>
+                <form action="/mesas/create" method="post">
+                    @csrf
+                    <input type='hidden' value='1' name="disponivel"/>
                     <fieldset>
                         <div class="form">
                             <div class="form-row">
                                 <i class="fas fa-table"></i>
-                                <label class="form-label" id="numMesa" name="numMesa" for="input">Mesa</label>
-                                <input type="number" class="form-text">
+                                <label class="form-label" id="numMesa"  for="input">Mesa</label>
+                                <input type="number" name="mesa" class="form-text">
                             </div>
                             <div class="form-row">
                             <i class="fas fa-user"></i>
-                                <label class="form-label" id="numQtdeMesa" name="numQtdeMesa" for="input">Qtde de pessoas por mesa</label>
-                                <input type="number" class="form-text">
+                                <label class="form-label" id="numQtdeMesa" for="input">Capacidade</label>
+                                <input type="number"  name="capacidade" class="form-text">
                             </div>
-                            <div class="form-row">
-                                <i class="fas fa-stopwatch-20"></i>
-                                <label class="form-label" for="input">intervalo de reserva</label>
-                                <input type="number" class="form-text">
-                            </div>
+                            
                             <span class="create-account"></span>
                             <div class="form-row button-login">
                                 <button class="btn btn-login" onclick="launch_toast()">Finalizar<i class="fas fa-arrow-right"></i></button>
@@ -82,7 +95,90 @@
         <a href="#m1-c" class="link-2"></a>
     </div>
 </div>
-<!-- /modal Cadastro/atualizacao -->
+<!-- /modal Cadastro-->
+
+
+<!-- modal Atualização -->
+<div class="modal-container" id="modalAtualizar" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <span class="material-icons-sharp">table_bar</span>
+                <strong>Atualize uma mesa</strong>   
+                    <fieldset>
+                        <input type="hidden" value="{{\Auth::user()->id}}" id="restId"/>
+                        <div class="form">
+                            <div class="form-row">
+                                <i class="fas fa-table"></i>
+                                <label class="form-label" for="input">Mesa</label>
+                                <input type="number" name="mesa" id="mesa" class="form-text">
+                            </div>
+                            <div class="form-row">
+                            <i class="fas fa-user"></i>
+                                <label class="form-label"  for="input">Capacidade</label>
+                                <input type="number"  name="capacidade" id="capacidade" class="form-text">
+                            </div>
+                            
+                            <span class="create-account"></span>
+                            <div class="form-row button-login">
+                                <button class="btn btn-login" onclick="atualizarMesa(event)">Finalizar<i class="fas fa-arrow-right"></i></button>
+                                <div id="toast">
+                                    <div id="desc">Dado inserido com sucesso</div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+            </div>
+        </div>
+        </p>
+        <a href="#m1-c" class="link-2"></a>
+    </div>
+</div>
+<!-- /modal Atualizacao -->
+
+<!-- Modal inativar-->
+<div class="modal-container" id="modalInativar" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <strong>Esse dado será reativado. Os usuário poderão ve-lo novamente. Deseja reativar?</strong>
+
+                <div class="button-center">
+            <a href="" class="button button__link">Não</a>
+            <a href="" onclick="inativarMesa(event)" class="button button__link">Sim</a>
+        </div>
+            </div>
+        </div>
+        </p>
+        <a href="#!" class="link-2"></a>
+    </div>
+</div>
+<!-- Modal inativar-->
+
+<!-- Modal reativar-->
+<div class="modal-container" id="modalReativar" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <strong>Esse dado será reativado. Os usuário poderão ve-lo novamente. Deseja reativar?</strong>
+
+                <div class="button-center">
+            <a href="" class="button button__link">Não</a>
+            <a href="" onclick="reativarMesa(event)" class="button button__link">Sim</a>
+        </div>
+            </div>
+        </div>
+        </p>
+        <a href="#!" class="link-2"></a>
+    </div>
+</div>
+<!-- Modal reativar-->
 
 <!-- Modal exclusao-->
 <div class="modal-wrapper" id="modal">
@@ -97,13 +193,17 @@
         </div>
         <h3>Esse dado será excluido permanentemente, tem certeza ?</h3>
 
+       
+
         <div class="button-center">
             <a href="" class="button button__link">Não</a>
-            <a href="" class="button button__link">Sim</a>
+            <a href="" onclick="deletarMesa(event)" class="button button__link">Sim</a>
         </div>
     </div>
     <a href="#!" class="outside-trigger"></a>
 </div>
+
+
 
 <!--light and white mode-->
 
@@ -146,5 +246,113 @@
 </div>
 <!--FECHAMENTO DA DIV CONTAINER, ABERTA EM MENU.PHP-->
 </div>
+<script>
+    var id;
+    function abreModal(x){
+        id = x;
+
+        console.log(id)
+    }
+
+
+    async function deletarMesa(e){
+        e.preventDefault();
+        console.log('deletar mesa', id)
+
+        await fetch('http://127.0.0.1:8000/api/mesas/destroy/'+id,{
+             method: 'DELETE',
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                alert('destruiu')
+            }
+        })
+    }
+
+    async function modalAtualizar(x){
+        id = x;
+
+        console.log(id)
+
+        var mesa = document.getElementById('mesa')
+        var cap = document.getElementById('capacidade')
+        await fetch('http://127.0.0.1:8000/api/mesas/'+id,{
+             method: 'GET',
+             headers: { 'Content-Type': 'application/json' },
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                return resp.json()
+            }
+        })
+        .then((data) =>{
+            mesa.value = data.mesa
+            cap.value = data.capacidade
+        })
+    }
+
+
+    async function atualizarMesa(e){     
+        e.preventDefault();
+        console.log('atualizar mesa', id)
+
+        var mesa = document.getElementById('mesa').value
+        var cap = document.getElementById('capacidade').value
+        var restId = document.getElementById('restId').value
+
+       
+
+        console.log(mesa)
+        console.log(cap)
+        console.log(restId)
+
+        await fetch('http://127.0.0.1:8000/api/mesas/atualizar/'+id,{
+             method: 'PUT',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({ mesa: mesa, capacidade:cap, id: restId })
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                alert('atualizado')
+            }
+        })
+    }
+
+
+
+    async function inativarMesa(e){     
+        e.preventDefault();
+        console.log('inativar mesa', id)
+
+        await fetch('http://127.0.0.1:8000/api/mesas/inativar/'+id,{
+             method: 'PATCH',
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                alert('inativado')
+            }
+        })
+    }
+
+    async function reativarMesa(e){
+        e.preventDefault();
+        console.log('deletar mesa', id)
+
+        await fetch('http://127.0.0.1:8000/api/mesas/reativar/'+id,{
+             method: 'PATCH',
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                alert('reativou')
+            }
+        })
+    }
+
+
+</script>
 
 @endsection

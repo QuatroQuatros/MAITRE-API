@@ -10,6 +10,9 @@
     <link href="" rel="apple-touch-icon">
     <title>DASHBOARD || Restaurante</title>
 
+    <!--modern -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
       <!--Load the AJAX API-->
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -45,8 +48,10 @@
     <aside>
         <div class="top">
             <div class="logo">
-                <img src="/img/logos/logo.png">
-                <h2>MAÎ<span class="primary">TRE</span></h2>
+                <a href="/">
+                    <img src="/img/logos/logo.png">
+                    <h2>MAÎ<span class="primary">TRE</span></h2>
+                </a>
             </div>
         </div>
         <div class="close" id="close-btn">

@@ -38,7 +38,9 @@ class PratoController extends Controller
 
     public function update(Request $request, $id)
     {
-        return Prato::where('id', $id)->update($request->only('nome','descPrato','valor'));
+        $prato =  Prato::findOrFail($id);
+        $prato->update($request->only('nome','foto','descPrato','valor', 'categoria_id'));
+        return $prato;
     }
 
   

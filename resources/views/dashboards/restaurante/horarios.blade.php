@@ -14,8 +14,10 @@
                     <tr>
                         <th>Dia</th>
                         <th>horário</th>
-                        <th>Exclusão</th>
-                        <th>Reativação</th>
+                        <th>Inativar</th>
+                        <th>Reativar</th>
+                        <th>Excluir</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -24,8 +26,9 @@
                             <tr>
                                 <td data-label="dia">{{$h->diaSemana}}</td>
                                 <td data-label="horário">{{$h->horario}}</td>
-                                <td><a href="#modal" onclick="modalExcluir({{$h->id}})" role="button" class="danger">Inativar Horário</a></td>
+                                <td><a href="#modal" onclick='teste({{$h->id}})' role="button" class="danger">Inativar Horário</a></td>
                                 <td><a class="warning"> @php echo '&nbsp' @endphp </a></td>
+                                <td><a href="#modalExcluir" onclick='excluir({{$h->id}})' role="button" class="danger">Excluir Horário</a></td>
                             </tr>
                         @else
                             <tr>
@@ -33,8 +36,10 @@
                                 <td data-label="horário">{{$h->horario}}</td>
                                 <td><a class="warning"> @php echo '&nbsp' @endphp </a></td>
                                 <td><a href="#modalReativar" onclick="modalReativar({{$h->id}})" role="button" class="danger">Reativar Horário</a></td>
+                                <td><a href="#modalExcluir" onclick='excluir({{$h->id}})' role="button" class="danger">Excluir Horário</a></td>
                             </tr>
                         @endif
+                        
                     @endforeach
                 </tbody>
             </table>
@@ -100,46 +105,68 @@
     <!-- /modal 1 -->
 
     <!-- Modal Exclusao-->
-    <div class="modal-wrapper" id="modal">
-        <div class="modal-body card">
-            <div class="modal-header">
-                <h2 class="heading">tem certeza ?</h2>
-                <a href="#!" role="button" class="close" aria-label="close this modal">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
-                    </svg>
-                </a>
-            </div>
-            <h3>Esse dado será inativado, tem certeza ?</h3>
 
-            <div class="button-center">
+    <div class="modal-container" id="modal" style="background: rgb(12 12 12 / 57%);">
+        <div class="modal">
+            <p class="modal__text">
+
+            <div class="containerform">
+                <div class="register">
+                    <strong>Esse dado será inativado, tem certeza ?</strong>
+    
+                    <div class="button-center">
                 <a href="" class="button button__link">Não</a>
-                <a href="" onclick="excluir(event)" class="button button__link">Sim</a>
+                <a href="" onclick="inativar(event)" class="button button__link">Sim</a>
             </div>
+                </div>
+            </div>
+            </p>
+            <a href="#!" class="link-2"></a>
         </div>
-        <a href="#!" class="outside-trigger"></a>
     </div>
 
-    <!-- Modal reativação-->
-    {{-- <div class="modal-wrapper" id="modalReativar">
-        <div class="modal-body card">
-            <div class="modal-header">
-                <h2 class="heading">tem certeza ?</h2>
-                <a href="#!" role="button" class="close" aria-label="close this modal">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
-                    </svg>
-                </a>
-            </div>
-            <h3>Esse dado será reativado, tem certeza ?</h3>
 
-            <div class="button-center">
+
+    <!-- modal 1 -->
+    <div class="modal-container" id="modalReativar" style="background: rgb(12 12 12 / 57%);">
+        <div class="modal">
+            <p class="modal__text">
+
+            <div class="containerform">
+                <div class="register">
+                    <strong>Esse dado será reativado, tem certeza ?</strong>
+    
+                    <div class="button-center">
                 <a href="" class="button button__link">Não</a>
                 <a href="" onclick="ativar(event)" class="button button__link">Sim</a>
             </div>
+                </div>
+            </div>
+            </p>
+            <a href="#!" class="link-2"></a>
         </div>
-        <a href="#!" class="outside-trigger"></a>
-    </div> --}}
+    </div>
+
+    <!-- excluir -->
+    <div class="modal-container" id="modalExcluir" style="background: rgb(12 12 12 / 57%);">
+        <div class="modal">
+            <p class="modal__text">
+
+            <div class="containerform">
+                <div class="register">
+                    <strong>Esse dado será reativado, tem certeza ?</strong>
+    
+                    <div class="button-center">
+                <a href="" class="button button__link">Não</a>
+                <a href="" onclick="excluir(event)" class="button button__link">Sim</a>
+            </div>
+                </div>
+            </div>
+            </p>
+            <a href="#!" class="link-2"></a>
+        </div>
+    </div>
+  
 
     <!--light and white mode-->
 
@@ -185,13 +212,31 @@
 
     <script>
         var id;
-        function modalExcluir(t){
+        function teste(t){
             id = t;
             console.log(t)
             console.log(id)
         }
 
         async function excluir(e){
+
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               }
+           });
+
+           request = $.ajax({
+               url: "/api/horarios/forceDelete/" + e,
+               type: "DELETE",
+               success: function(result) {
+                   alert('excluido')
+               }
+           });
+              
+       }
+
+        async function inativar(e){
            
             $.ajaxSetup({
                 headers: {
@@ -203,11 +248,29 @@
                 url: "/api/horarios/" + id,
                 type: "DELETE",
                 success: function(result) {
-                    console.log('batata')
+                    alert('inativado')
                 }
             });
                
         }
+
+        async function modalReativar(t){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            request = $.ajax({
+                url: "/api/horarios/restore/" + t,
+                type: "get",
+                success: function(result) {
+                    alert('reativado')
+                }
+            });
+               
+        }
+        
 
 
     </script>

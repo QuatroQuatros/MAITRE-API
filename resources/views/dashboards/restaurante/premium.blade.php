@@ -37,9 +37,15 @@
                                     <li>--</li>
                                 </ul>
                             </div>
-                            <footer class="pricing-footer">
-                                <a class="select">Em uso</a>
-                            </footer>
+                            @if($rest->level == 1)
+                                <footer class="pricing-footer">
+                                    <a class="select">Em Uso</a>
+                                </footer>
+                            @else
+                                <footer class="pricing-footer">
+                                    <a class="select" href="#modal">Cancelar</a>
+                                </footer>
+                            @endif
                         </li>
                         <li data-type="yearly" class="is-hidden">
                             <header class="pricing-header">
@@ -62,9 +68,15 @@
 
                                 </ul>
                             </div>
-                            <footer class="pricing-footer">
-                                <a class="select">Em uso</a>
-                            </footer>
+                            @if($rest->level == 1)
+                                <footer class="pricing-footer">
+                                    <a class="select">Em Uso</a>
+                                </footer>
+                            @else
+                                <footer class="pricing-footer">
+                                    <a class="select" href="#modal">Cancelar</a>
+                                </footer>
+                            @endif
                         </li>
                     </ul>
                 </li>
@@ -75,7 +87,7 @@
                                 <h2>Premium</h2>
                                 <div class="price">
                                     <span class="currency">R$</span>
-                                    <span class="value">500</span>
+                                    <span class="value">40.00</span>
                                     <span class="duration">mês</span>
                                 </div>
                             </header>
@@ -90,16 +102,22 @@
                                     <li><em></em> Primeira indicação de restaurantes</li>
                                 </ul>
                             </div>
-                            <footer class="pricing-footer">
-                                <a class="select" href="#modalMesa">Aprimorar</a>
-                            </footer>
+                            @if($rest->level == 1)
+                                <footer class="pricing-footer">
+                                    <a class="select" href="#modalMesa">Aprimorar</a>
+                                </footer>
+                            @else
+                                <footer class="pricing-footer">
+                                    <a class="select">Em Uso</a>
+                                </footer>
+                            @endif
                         </li>
                         <li data-type="yearly" class="is-hidden">
                             <header class="pricing-header">
                                 <h2>Premium</h2>
                                 <div class="price">
                                     <span class="currency">R$</span>
-                                    <span class="value">5700</span>
+                                    <span class="value">435.00</span>
                                     <span class="duration">ano</span>
                                 </div>
                             </header>
@@ -114,9 +132,15 @@
                                     <li><em></em> Primeira indicação de restaurantes</li>
                                 </ul>
                             </div>
-                            <footer class="pricing-footer">
-                                <a class="select" href="#modalMesa">Aprimorar</a>
-                            </footer>
+                            @if($rest->level == 1)
+                                <footer class="pricing-footer">
+                                    <a class="select" href="#modalMesa">Aprimorar</a>
+                                </footer>
+                            @else
+                                <footer class="pricing-footer">
+                                    <a class="select">Em Uso</a>
+                                </footer>
+                            @endif
                         </li>
                     </ul>
                 </li>
@@ -125,6 +149,27 @@
     </div>
 </main>
 <!----------- end main ABERTA NO MENU.PHP ------------->
+
+<div class="modal-container" id="modal" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+
+        <div class="containerform">
+            <div class="register">
+                <h2><b>
+                    Ao cancelar o plano premium, seu restaurante irá parar de ser um dos primeiros a serem listados e você não terá mais acesso a gráficos e relátorios. Deseja cancelar?
+                </b></h2>
+                <div class="button-center">
+            <a href="" class="button button__link">Não</a>
+            <a href="" onclick="cancelarPlano(event, {{$rest->id}})" class="button button__link">Sim</a>
+        </div>
+            </div>
+        </div>
+        </p>
+        <a href="#!" class="link-2"></a>
+    </div>
+</div>
+<!-- Modal inativar-->
 
 <!-- modal cadastro/atualização -->
 <div class="modal-container" id="modalMesa" style="background: rgb(12 12 12 / 57%);">
@@ -136,7 +181,9 @@
                         <img src="/img/logos/atlanticCompleto.jpeg" class="product" alt="Shoes" />
                     </div>
                     <div class="rightside">
-                        <form action="">
+                        <form action="/restaurantes/premium/{{$rest->id}}" method="POST">
+                            @csrf
+                            @method('PATCH')
                             <h1>Pagamento</h1>
                             <h2>Informações do cartão</h2>
                             <p>Nome </p>
@@ -194,5 +241,22 @@
 </div>
 <!--FECHAMENTO DA DIV CONTAINER, ABERTA EM MENU.PHP-->
 </div>
+<script>
+
+    async function cancelarPlano(e, id){
+        e.preventDefault();
+        await fetch('/api/restaurantes/premium/cancelar/'+id,{
+             method: 'PATCH',
+             headers: { 'Content-Type': 'application/json' },
+        })
+        .then((resp) =>{
+            if(resp.ok){
+                window.location.href = '/restaurantes/premium'
+                alert('cancelou')
+            }
+        })
+    }
+
+</script>
 
 @endsection
