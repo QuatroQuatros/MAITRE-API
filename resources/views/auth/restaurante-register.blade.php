@@ -404,11 +404,18 @@
 
         <script>
             async function sla(e){
+                var local = 'http://127.0.0.1:8000/api/';
+                var host = 'https://maitre-app.herokuapp.com/api/';
+
+
+
                 var select = document.getElementById('link');
                 var opt = document.createElement('option');
                 var cat = document.getElementById('nomeCat').value;
                 e.preventDefault()
-                fetch("http://127.0.0.1:8000/api/categoria-restaurantes",
+                //fetch(local + "/categoria-restaurantes",
+                 //fetch(host + "/categoria-restaurantes",
+                fetch("/api/categoria-restaurantes",
                 {
                     method: "POST",
                     headers: {

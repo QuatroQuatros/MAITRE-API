@@ -4,6 +4,9 @@ var step_list = document.querySelectorAll(".progress-bar li");
 var num = document.querySelector(".step-number");
 let formnumber=0;
 
+var local = 'http://127.0.0.1:8000/api/';
+var host = 'https://maitre-app.herokuapp.com/api/';
+
 next_click.forEach(function(next_click_form){
     next_click_form.addEventListener('click',function(){
         if(!validateform()){
@@ -288,7 +291,9 @@ async function cadastrarHorario(){
 }
 
 async function createHorario(dia, horario){
-    const response = await fetch('http://127.0.0.1:8000/api/horarios',{
+    // const response = await fetch(local + '/horarios',{
+        //const response = await fetch(host + '/horarios',{
+        const response = await fetch('/api/horarios',{
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -333,7 +338,9 @@ async function cadastrarMesa(){
 }
 
 async function createMesa(mesa, cap){
-    const response = await fetch('http://127.0.0.1:8000/api/mesas',{
+   // const response = await fetch(local +'/mesas',{
+    //const response = await fetch(host +'/mesas',{
+        const response = await fetch('/api/mesas',{
         method: "POST",
         headers: {
             'Accept': 'application/json',

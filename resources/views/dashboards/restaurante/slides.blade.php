@@ -193,14 +193,20 @@
     async function excluirSlide(e){
         e.preventDefault();
 
+        var local = 'http://127.0.0.1:8000/api/';
+        var host = 'https://maitre-app.herokuapp.com/api/';
 
 
-        await fetch('http://127.0.0.1:8000/api/slides/'+id,{
+
+        //await fetch(local + '/slides/'+id,{
+        //await fetch(host + '/slides/'+id,{
+        await fetch('/api/slides/'+id,{
              method: 'DELETE',
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/restaurantes/slides'
+                window.location.href = '/slides'
+                //window.location.href = host +'/slides'
                 alert('destruiu')
             }
         })
@@ -215,7 +221,9 @@
 
 
 
-        await fetch('http://127.0.0.1:8000/api/slides/'+id,{
+       //await fetch(local + '/slides/'+id,{
+        //await fetch(host + '/slides/'+id,{
+        await fetch('/api/slides/'+id,{
              method: 'GET',
         })
         .then((resp) =>{

@@ -259,12 +259,12 @@
         e.preventDefault();
         console.log('deletar mesa', id)
 
-        await fetch('http://127.0.0.1:8000/api/mesas/destroy/'+id,{
+        await fetch('/api/mesas/destroy/'+id,{
              method: 'DELETE',
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                window.location.href = '/mesas/create'
                 alert('destruiu')
             }
         })
@@ -277,7 +277,7 @@
 
         var mesa = document.getElementById('mesa')
         var cap = document.getElementById('capacidade')
-        await fetch('http://127.0.0.1:8000/api/mesas/'+id,{
+        await fetch('/api/mesas/'+id,{
              method: 'GET',
              headers: { 'Content-Type': 'application/json' },
         })
@@ -307,14 +307,14 @@
         console.log(cap)
         console.log(restId)
 
-        await fetch('http://127.0.0.1:8000/api/mesas/atualizar/'+id,{
+        await fetch('/api/mesas/atualizar/'+id,{
              method: 'PUT',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ mesa: mesa, capacidade:cap, id: restId })
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                window.location.href = '/mesas/create'
                 alert('atualizado')
             }
         })
@@ -326,12 +326,12 @@
         e.preventDefault();
         console.log('inativar mesa', id)
 
-        await fetch('http://127.0.0.1:8000/api/mesas/inativar/'+id,{
+        await fetch('/api/mesas/inativar/'+id,{
              method: 'PATCH',
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                window.location.href = '/mesas/create'
                 alert('inativado')
             }
         })
@@ -341,12 +341,12 @@
         e.preventDefault();
         console.log('deletar mesa', id)
 
-        await fetch('http://127.0.0.1:8000/api/mesas/reativar/'+id,{
+        await fetch('/api/mesas/reativar/'+id,{
              method: 'PATCH',
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/mesas/create'
+                window.location.href = '/mesas/create'
                 alert('reativou')
             }
         })

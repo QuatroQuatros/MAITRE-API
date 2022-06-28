@@ -259,8 +259,8 @@
 <script>
     var id;
 
-    var local = 'http://127.0.0.1:8000/api/'
-    var host = 'https://maitre-app.herokuapp.com/api/'
+    var local = 'http://127.0.0.1:8000/api/';
+    var host = 'https://maitre-app.herokuapp.com/api/';
 
 
     function abreModal(x){
@@ -277,13 +277,16 @@
 
 
         //await fetch(local + '/pratos/'+id,{
-        await fetch(host + '/pratos/'+id,{
+        // await fetch(host + '/pratos/'+id,{
+            await fetch('/api/pratos/'+id,{
+
              method: 'DELETE',
         })
         .then((resp) =>{
             if(resp.ok){
                 //window.location.href = local + '/pratos/cardapio'
-                window.location.href = host + '/pratos/cardapio'
+                // window.location.href = host + '/pratos/cardapio'
+                window.location.href = '/pratos/cardapio'
                 alert('destruiu')
             }
         })
@@ -299,7 +302,7 @@
         var desc = document.getElementById('desc')
         var valor = document.getElementById('valor')
         //await fetch(local + '/pratos/'+id,{
-        await fetch(host + '/pratos/'+id,{
+        await fetch('/api/pratos/'+id,{
              method: 'GET',
              headers: { 'Content-Type': 'application/json' },
         })
@@ -333,7 +336,8 @@
         console.log(valor)
 
         //await fetch(local + '/pratos/'+id,{
-        await fetch(host + '/pratos/'+id,{
+        //await fetch(host + '/pratos/'+id,{
+        await fetch('/api/pratos/'+id,{
              method: 'PUT',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ 
@@ -346,7 +350,8 @@
         .then((resp) =>{
             if(resp.ok){
                 //window.location.href = local + '/pratos/cardapio'
-                window.location.href = host + '/pratos/cardapio'
+                //window.location.href = host + '/pratos/cardapio'
+                window.location.href = '/pratos/cardapio'
                 //window.location.href = 'http://127.0.0.1:8000/pratos/cardapio'
                 alert('atualizado')
             }

@@ -122,7 +122,7 @@ function rejeitarReserva(){
 }
 
 async function mesaReservas(mesa, duracao){
-    const response = await fetch('http://127.0.0.1:8000/api/mesas/reserva',{
+    const response = await fetch('/api/mesas/reserva',{
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -175,7 +175,7 @@ async function aprovarReserva(e){
                     $("#status" + id).removeClass().addClass("success");
                     $('#status'+ id).text('Aprovado');
                     alert('reserva aprova com sucesso!')
-                    window.location.href="http://127.0.0.1:8000/restaurantes/admin"
+                    window.location.href="/restaurantes/admin"
                 
             
             
