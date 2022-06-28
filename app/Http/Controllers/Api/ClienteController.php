@@ -23,7 +23,7 @@ class ClienteController extends Controller
 
     public function show($id){
         //$cliente = Cliente::findOrFail($id);
-        return User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first();
+        return response()->json(['cliente' => User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first()]);
         //return response($cliente, 200);
     }
 
