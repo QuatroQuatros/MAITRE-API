@@ -460,7 +460,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
         var date = yyyy + '-' + mm + '-' + dd;
         //var dateNext = yyyy + '-' + mmNext;
-        var dateNext = yyyy + '-' + mmNext + '-01';
+        var dateNext = yyyy + '-' + mmNext + '-31';
 
         document.getElementById('dataInput').setAttribute("min", date);
         document.getElementById('dataInput').setAttribute("max", dateNext);

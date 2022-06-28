@@ -20,6 +20,14 @@ class AdminController extends Controller
         return view('dashboards.admin.index', compact('users'), compact('clientes'));
     }
 
+    public function restDash(){
+        return view('dashboards.admin.restaurante');
+    }
+
+    public function restDestroy($id){
+        return view('dashboards.admin.restaurante');
+    }
+
 
 
 }

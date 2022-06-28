@@ -63,6 +63,21 @@
                 </div>
                 <div>
                     <div class="itemJun">
+                        <a class="abriModal" href="#modalTelefone">
+                            <div class="icon">
+                                <span class="material-icons-sharp">contact_page</span>
+                            </div>
+                            <div class="right">
+                                <div class="info">
+                                    <h3>Telefone</h3>
+                                    <smal class="text-muted">Ultimo vez online 1 horas</smal>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="itemJun">
                         <a class="abriModal" href="#modalEndereco">
                             <div class="icon">
                                 <span class="material-icons-sharp">navigation</span>
@@ -187,6 +202,45 @@
 </div>
 
 
+<div class="modal-container" id="modalTelefone" style="background: rgb(12 12 12 / 57%);">
+    <div class="modal">
+        <p class="modal__text">
+        <div class="containerform">
+            <div class="register">
+                <span class="material-icons-sharp">inventory</span>
+                <strong>Contato do restaurante</strong>
+                <form>
+                    <fieldset>
+                        <div class="form">
+                            <div class="form-row">
+                            <i class="fas fa-address-book"></i>
+                                <label class="form-label" for="input">Nome de contato</label>
+                                <input type="text" id="txContato" name="txContato" class="form-text">
+                            </div>
+                            <div class="form-row">
+                                <i class="fas fa-list-ol"></i>
+                                <label class="form-label" for="input">Telefone</label>
+                                <input type="text" id="txTel" name="txTel" class="form-text">
+                            </div>
+
+                            <span class="create-account"></span>
+                            <div class="form-row button-login">
+                                <button class="btn btn-login">Finalizar<i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+            </div>
+        </div>
+        </p>
+        <a href="#!" class="link-2"></a>
+    </div>
+</div>
+
+<!-- /modal telefone -->
+
+
 <!-- modal categoria -->
 <div class="modal-container" id="categoria" style="background: rgb(12 12 12 / 57%);">
     <div class="modal">
@@ -196,14 +250,15 @@
             <div class="register">
                 <span class="material-icons-sharp">event</span>
                 <strong>Atualizar catégoria</strong>
-                <form>
+                <form action="/res">
                     <fieldset>
                         <div class="form">
                             <div class="form-row">
                                 <i class="fas fa-calendar-check"></i>
                                 <label class="form-label" for="input">Dias</label>
-                                <select class="form-text" name="txDia">
+                                <select class="form-text" name="txDia" id='link'>
                                     <option selected value="0">Escolha a categoria:</option>
+                                
                                     @foreach($categorias as $c)
                                         <option value="{{$c->id}}">{{$c->categoria}}</option>
                                     @endforeach
@@ -222,8 +277,7 @@
         <a href="#m1-c" class="link-2"></a>
     </div>
 </div>
-</div>
-<!-- /modal categoria -->
+
 
 <!-- modal endereço -->
 <div class="modal-container" id="modalEndereco" style="background: rgb(12 12 12 / 57%);">

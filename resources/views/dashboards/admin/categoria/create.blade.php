@@ -6,7 +6,6 @@
 
     <div class="insights">
         <div class="income">
-            <span class="material-icons-sharp">analytics</span>
             <div class="middle">
                 <div class="left">
                     <h3>Total de categorias</h3>

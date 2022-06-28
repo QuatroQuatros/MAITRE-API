@@ -25,4 +25,16 @@ class CategoriaRestauranteController extends Controller
             'categoria' => $request->categoria
         ]);
     }
+
+    public function update(Request $request){
+        return CategoriaRestaurante::update([
+            'categoria' => $request->categoria,
+        ]);
+
+       
+    }
+
+    public function destroy($id){
+       return  CategoriaRestaurante::destroy($id);   
+    }
 }

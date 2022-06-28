@@ -27,7 +27,7 @@ fieldset {
     align-items: center;
     border-radius: 3px;
     border: 0;
-    color: var(--color-light);
+/*    color: var(--color-light);*/
     cursor: pointer;
     display: flex;
     font-size: 16px;
@@ -40,7 +40,7 @@ fieldset {
 }
 
 .btn .fas.fa-arrow-right {
-    color: var(--color-light);
+/*    color: var(--color-light);*/
     font-size: 12px;
     line-height: 12px;
     margin: 0 0 0 10px;

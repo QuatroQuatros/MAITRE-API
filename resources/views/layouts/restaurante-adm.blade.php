@@ -25,9 +25,9 @@
     <link rel="stylesheet" href="/css/adm.css">
     <link rel="stylesheet" href="/css/lightbox.css">
     <link rel="stylesheet" href="/css/modal.css">
-    {{-- <link rel="stylesheet" href="/css/forms.css"> --}}
     <link rel="stylesheet" href="/css/formsRest.css">
     <link rel="stylesheet" href="/css/price.css">
+    <link rel="stylesheet" href="/css/partePremium.css">
     <link rel="stylesheet" href="/css/pagamento.css">
 
     <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
@@ -87,11 +87,25 @@
                     </a>
                 </div>
             </div>
+            <div class="dropdownRes">
+                <a class="active">
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3>Dados       </h3>
+                </a>
+                <div class="dropdown-contentRes">
+                <a href="/restaurantes/edit/{{Auth::user()->id}}" class="active">
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3>Dados do restaurante</h3>
+                </a>
+                <a href="/restaurantes/slides" class="active">
+                    <span class="material-icons-sharp">slideshow</span>
+                    <h3>Sliders</h3>
+                </a>
+                <a class="active"></a>
+                </div>
+            </div>
 
-            <a href="/restaurantes/edit/{{Auth::user()->id}}" class="active">
-                <span class="material-icons-sharp">inventory</span>
-                <h3>Dados do restaurante</h3>
-            </a>
+            
             <a href="/horarios/create" class="active">
                 <span class="material-icons-sharp">event</span>
                 <h3>Horários</h3>

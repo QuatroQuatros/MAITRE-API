@@ -49,6 +49,11 @@ Route::delete('/horarios/forceDelete/{id}', [HorarioController::class, 'forceDel
 
 Route::apiResource('/reservas/rejeitar', ReservasController::class);
 
+Route::get('/slides/{id}', [RestauranteController::class, 'verSlide']);
+Route::delete('/slides/{id}', [RestauranteController::class, 'apagarSlide']);
+Route::put('/slides/{id}', [RestauranteController::class, 'atualizarSlide']);
+
+Route::get('/reservas/{id}', [ReservasController::class, 'show']);
 Route::patch('/reservas/checkin/{id}', [ReservasController::class, 'checkin']);
 Route::patch('/reservas/checkout/{id}', [ReservasController::class, 'checkout']);
 Route::delete('/reservas/cancelar/{id}', [ReservasController::class, 'destroy']);

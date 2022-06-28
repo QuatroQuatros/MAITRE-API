@@ -40,6 +40,19 @@ class ReservasController extends Controller
         return redirect()->back();
     }
 
+    public function update(Request $request){
+        $r = Reserva::where('id', $request->reserva_id)->first();
+        $r->update([
+            'horario' => $request->horario,
+            'data' => $request->data,
+            'diaSemana' => $request->dia,
+            'qtdPessoas' => $request->qtdPessoas,
+        ]);
+        $r->save();
+
+        return $this->index();
+    }
+
     public function find($id){
         return Reserva::select('reservas.id','dia_semanas.diaSemana', 'reservas.horario', 'reservas.data', 'reservas.qtdPessoas', 'clientes.nome', 'users.email')
         ->join('clientes', 'reservas.cliente_id', 'clientes.id')

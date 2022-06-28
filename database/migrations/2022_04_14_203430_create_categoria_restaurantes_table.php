@@ -18,6 +18,35 @@ return new class extends Migration
             $table->string('categoria')->unique();
             $table->timestamps();
         });
+
+           $categorias =  array(
+            [
+                'categoria' => 'Pizzaria',
+            ],
+            [
+                'categoria' => 'Oriental',
+            ],
+            [
+                'categoria' => 'Hamburgueria',
+            ],
+            [
+                'categoria' => 'Frutos do mar',
+            ],
+            [
+                'categoria' => 'Buffet',
+            ],
+            [
+                'categoria' => 'Volante',
+            ],
+            [
+                'categoria' => 'Rodízio',
+            ],
+        );
+        foreach ($categorias as $categoria){
+            $cat = new CategoriaRestaurante(); 
+            $cat->categoria =$categoria['categoria'];
+            $cat->save();
+        }
     }
 
     /**

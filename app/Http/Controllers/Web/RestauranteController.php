@@ -16,6 +16,8 @@ use App\Models\PratoEspecial;
 use App\Models\Mesas;
 use App\Repositories\RestauranteRepository;
 
+use App\Models\FotoRestaurante;
+
 use DB;
 use Carbon\Carbon;
 
@@ -150,16 +152,40 @@ class RestauranteController extends Controller
         
     }
 
-    public function teste(Request $request){
-        $busca = $request->query();
-        // if($busca['search']){
-        //     return Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id') ->
-        //     whereIn('categoria_restaurantes.categoria', $busca['search'])->get();
-        // }
-
-
-
-
-        return $busca;
+    public function slides(){
+        $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
+       
+        $id = $rest->id;
+        return view('dashboards.restaurante.slides', ['slides' => FotoRestaurante::where('restaurante_id', $id)->get()]);
     }
+
+    public function criarSlide(Request $request){
+        $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
+       
+        $id = $rest->id;
+        FotoRestaurante::create([
+            "foto" => $request->foto,
+            "descFoto" => $request->descFoto,
+            "restaurante_id" => $id
+        ]);
+
+        return $this->slides();
+    }
+
+    public function atualizarSlide(Request $request){
+
+        $slide = FotoRestaurante::findOrFail($request->slide_id);
+        $slide->update($request->only('foto', 'descFoto'));
+        $slide->save();
+        return $this->slides();
+
+    }
+
+    public function apagarSlide($id){
+        FotoRestaurante::destroy($id);
+        return $this->slides();
+        
+    }
+
+
 }

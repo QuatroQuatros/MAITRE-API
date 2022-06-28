@@ -9,6 +9,8 @@
     });
     google.charts.setOnLoadCallback(drawLineChart);
     google.charts.setOnLoadCallback(drawBarChart);
+    google.charts.setOnLoadCallback(drawCategoriaRestaurantes);
+    google.charts.setOnLoadCallback(drawCategoriaPratos);
     
     function drawLineChart() {
         var data = google.visualization.arrayToDataTable([
@@ -32,6 +34,113 @@
         chart.draw(data, options);
     }
     
+    function drawCategoriaRestaurantes() {
+        var data = google.visualization.arrayToDataTable([
+            ['categoria', 'Restaurantes'],
+            ['caseiro', 13],
+            ['arabe', 2.3],
+            ['Mediterraneo', 38],
+            ['oriental', 20],
+            ['Marmitas', 72],
+            ['Italiana', 29],
+            ['Lanches', 2.5],
+        ]);
+
+
+        var options = {
+            title: 'Categoria de pratos',
+            legend: 'none',
+            pieSliceText: 'label',
+            slices: {
+                4: {
+                    offset: 0.2
+                },
+                12: {
+                    offset: 0.3
+                },
+                14: {
+                    offset: 0.4
+                },
+                15: {
+                    offset: 0.5
+                },
+            },
+
+            curveType: 'function',
+            legend: {
+                position: 'bottom',
+                textStyle: {
+                    color: '#677483',
+                    fontSize: 16
+                },
+            },
+            chartArea: {
+                backgroundColor: {
+                    fill: '--color-background',
+                    fillOpacity: 0
+                },
+            },
+
+            backgroundColor: {
+                fill: '--color-background',
+                fillOpacity: 0
+            },
+
+            titleTextStyle: {
+                color: '#677483',
+                fontSize: '16',
+                fontName: 'arial',
+            },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('categoria_restaurantes'));
+        chart.draw(data, options);
+    }
+
+    function drawCategoriaPratos() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work', 11],
+            ['Eat', 2],
+            ['Commute', 2],
+            ['Watch TV', 2],
+            ['Sleep', 7]
+        ]);
+
+        var options = {
+            title: 'Categoria dos restaurantes',
+            pieHole: 0.4,
+
+            curveType: 'function',
+            legend: {
+                position: 'bottom',
+                textStyle: {
+                    color: '#677483',
+                    fontSize: 16
+                },
+            },
+            chartArea: {
+                backgroundColor: {
+                    fill: '--color-background',
+                    fillOpacity: 0
+                },
+            },
+
+            backgroundColor: {
+                fill: '--color-background',
+                fillOpacity: 0
+            },
+
+            titleTextStyle: {
+                color: '#677483',
+                fontSize: '16',
+                fontName: 'arial',
+            },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('categoria_pratos'));
+        chart.draw(data, options);
+    }
     
     function drawBarChart() {
         var data = google.visualization.arrayToDataTable([
@@ -69,6 +178,7 @@
         chart.draw(data, google.charts.Bar.convertOptions(options));
     }
     </script>
+    
     
     
     <main>
@@ -155,94 +265,19 @@
                     <small class="text-muted">Admin</small>
                 </div>
                 <div class="profile-photo">
-                    <img src="/img/logos/atlanticSemfundo.png">
+                    <img src="../../Assets/img/logos/atlanticSemfundo.png">
                 </div>
             </div>
         </div>
-    
-        <!--end top-->
-        <div class="recent-updates">
-            <h2>Ultimas mensagens</h2>
-            <div class="updates">
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="/img/img1.jpg">
-                    </div>
-                    <div class="message">
-                        <p><b>Glayson mendes</b> Otimas cores de layout...</p>
-                        <small class="text-muted">2 minutes ago</small>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="/img/img2.jpg">
-                    </div>
-                    <div class="message">
-                        <p><b>Mike tyson</b> Belo trabalho com a...</p>
-                        <small class="text-muted">2 minutes ago</small>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="/img/img3.jpg">
-                    </div>
-                    <div class="message">
-                        <p><b>Mike tyson</b> Gostaria de aumentar minha...</p>
-                        <small class="text-muted">2 minutes ago</small>
-                    </div>
-                </div>
-                <div class="update">
-                    <div class="profile-photo">
-                        <img src="/img/img5.jpg">
-                    </div>
-                    <div class="message">
-                        <p><b>Mike tyson</b> Não gostei, melhor procurar ...</p>
-                        <small class="text-muted">2 minutes ago</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!------------------- end recent updates --------------------->
         <div class="sales-analytics">
-            <h2>Moderadores</h2>
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-icons-sharp">person</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>Moderador</h3>
-                        <smal class="text-muted">Ultimo vez online 5 horas</smal>
-                    </div>
-                    <h3>Vinicius</h3>
-                </div>
-            </div>
+            
             <div class="item offline">
-                <div class="icon">
-                    <span class="material-icons-sharp">person</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>Moderador</h3>
-                        <smal class="text-muted">Ultimo vez online 3 horas</smal>
-                    </div>
-                    <h3>Lais</h3>
-                </div>
+                <div id="categoria_restaurantes" style="width: 100%; height: 350px;"></div>
             </div>
-            <div class="item customers">
-                <div class="icon">
-                    <span class="material-icons-sharp">person</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>Moderador</h3>
-                        <smal class="text-muted">Ultimo vez online 1 horas</smal>
-                    </div>
-                    <h3>Winyc</h3>
-                </div>
+            <div class="item online">
+                <div id="categoria_pratos" style="width: 100%; height: 500px;"></div>
             </div>
         </div>
-    </div>
     <!--FECHAMENTO DA DIV CONTAINER, ABERTA EM MENU.PHP-->
     </div>
 

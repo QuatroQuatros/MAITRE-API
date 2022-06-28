@@ -35,9 +35,13 @@ class VerifyCsrfToken extends Middleware
         '/api/pratos/*',
         '/api/restaurantes/premium/cancelar/*',
         '/api/mesas/reserva',
+        '/api/slides/*',
+        '/api/reservas/*',
         '/api/reservas/checkin/*',
         '/api/reservas/checkout/*',
         '/api/reservas/cancelar/*',
+        '/api/categorias/restaurantes',
+        '/api/categoria-restaurantes/*',
         "/mesas/{id}",
 
     ];

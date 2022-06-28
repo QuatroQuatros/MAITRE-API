@@ -10,6 +10,12 @@ use Carbon\Carbon;
 
 class ReservasController extends Controller
 {
+    public function show($id){
+        return  Reserva::findOrFail($id);
+    }
+
+
+
     public function update(Request $request, $id){
         $r = Reserva::findOrFail($id);
 

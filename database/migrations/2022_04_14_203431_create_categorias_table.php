@@ -18,6 +18,47 @@ class CreateCategoriasTable extends Migration
             $table->string('descCategoria')->unique();
             $table->timestamps();
         });
+
+                     $data =  array(
+            [
+                'descCategoria' => 'Entradas',
+            ],
+            [
+                'descCategoria' => 'Saladas',
+            ],
+            [
+                'descCategoria' => 'Sobremesas',
+            ],
+            [
+                'descCategoria' => 'Guarnição',
+            ],
+            [
+                'descCategoria' => 'Aperitivos',
+            ],
+            [
+                'descCategoria' => 'Bebidas',
+            ],
+            [
+                'descCategoria' => 'Sopas',
+            ],
+            [
+                'descCategoria' => 'Carnes',
+            ],
+            [
+                'descCategoria' => 'Principais',
+            ],
+            [
+                'descCategoria' => 'Vegetariano',
+            ],
+            [
+                'descCategoria' => 'Vegano',
+            ],
+        );
+        foreach ($categorias as $categoria){
+            $cat = new Categoria(); 
+            $cat->categoria =$categoria['descCategoria'];
+            $cat->save();
+        }
     }
 
     /**

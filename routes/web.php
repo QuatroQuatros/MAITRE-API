@@ -34,9 +34,21 @@ Route::post('/create/user', [UserController::class, 'store']);
 
 Route::prefix('/admin')->group(function(){
     Route::get('/', [AdminController::class, 'index'])->middleware('auth', 'admin');
+   
     Route::get('/categorias/create', [CategoriaController::class, 'create'])->middleware('auth', 'admin');
     Route::post('/categorias/create', [CategoriaController::class, 'store'])->middleware('auth', 'admin');
     Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->middleware('auth', 'admin');
+    Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->middleware('auth', 'admin');
+
+
+    Route::get('/restaurantes', [AdminController::class, 'restDash'])->middleware('auth', 'admin');
+    Route::delete('/restaurantes/{id}', [AdminController::class, 'restDestroy'])->middleware('auth', 'admin');
+    
+    Route::get('/categorias/restaurantes/create', [CategoriaRestauranteController::class, 'index'])->middleware('auth', 'admin');
+    Route::post('/categorias/restaurantes/create', [CategoriaRestauranteController::class, 'store'])->middleware('auth', 'admin');
+    Route::delete('/categorias/restaurantes/{id}}', [CategoriaRestauranteController::class, 'destroy'])->middleware('auth', 'admin');
+    Route::put('/categorias/restaurantes/atualizar', [CategoriaRestauranteController::class, 'update'])->middleware('auth', 'admin');
+   
 
 });
 
@@ -68,6 +80,9 @@ Route::prefix('/pratos/especiais')->group(function(){
 Route::prefix('/restaurantes')->group(function(){
 
     Route::get('/admin', [RestauranteController::class, 'home'])->middleware('auth', 'restaurante');
+    Route::get('/slides', [RestauranteController::class, 'slides'])->middleware('auth', 'restaurante');
+    Route::post('/slides', [RestauranteController::class, 'criarSlide'])->middleware('auth', 'restaurante');
+    Route::put('/slides', [RestauranteController::class, 'atualizarSlide'])->middleware('auth', 'restaurante');
     Route::get('/reservas', [RestauranteController::class, 'reservas'])->middleware('auth', 'restaurante');
     Route::get('/create', [RestauranteController::class, 'create'])->middleware('auth', 'restaurante', 'has_restaurante');
     Route::post('/create', [RestauranteController::class, 'store'])->middleware('auth', 'restaurante');
@@ -97,6 +112,7 @@ Route::prefix('/reservas')->group(function(){
     Route::get('/', [ReservasController::class, 'index']);
     Route::get('/{id}', [ReservasController::class, 'find']);
     Route::post('/create', [ReservasController::class, 'store'])->middleware('auth', 'cliente');
+    Route::put('/alterar', [ReservasController::class, 'update'])->middleware('auth', 'cliente');
     Route::patch('/rejeitar/{id}', [ReservasController::class, 'rejeitar']);
     Route::patch('/aprovar/{id}', [ReservasController::class, 'aprovar']);
     Route::patch('/checkin/{id}', [ReservasController::class, 'checkin']);
