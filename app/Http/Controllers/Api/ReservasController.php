@@ -36,4 +36,16 @@ class ReservasController extends Controller
         return $r->save();
     
     }
+
+    public function destroy($id){
+        $r = Reserva::findOrFail($id);
+        $r->status_reserva_id = 4;
+        return $r->save();
+    }
+
+    public function atualizar(Request $request, $id){
+        $r = Reserva::findOrFail($id);
+
+        $r->update($request->only('horario', 'data', 'qtdPessoas', 'diaSemana'));
+    }
 }

@@ -37,6 +37,7 @@ class VerifyCsrfToken extends Middleware
         '/api/mesas/reserva',
         '/api/reservas/checkin/*',
         '/api/reservas/checkout/*',
+        '/api/reservas/cancelar/*',
         "/mesas/{id}",
 
     ];

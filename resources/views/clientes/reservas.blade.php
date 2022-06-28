@@ -34,8 +34,8 @@
                                         <td data-title="Dia da semana">{{$r->diaSemana}}</td>
                                         <td data-title="Restaurante">{{$r->nome}}</td>
                                         <td data-title="pessoas">{{$r->qtdPessoas}}</td>
-                                        <td data-title="exclusão"><button type="submit" class="button-option" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                                        <td data-title="alteração"><button type="submit" class="button-option" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                                        <td data-title="exclusão"><button type="submit"  onclick="abreModal(event, {{$r->id}})"  class="button-option" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                                        <td data-title="alteração"><button type="submit" onclick="modalAlterar(event, {{$r->id}})" class="button-option" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
                                         <td data-title="status" class="warning">Pendente</td>
                                     </tr>
                                 @endif
@@ -198,7 +198,7 @@
                     <div class="modal-body">
                         <form action="" class="">
                             A reserva do dia (**/**/****) será excluida permanentemente tem certeza ?
-                            <button type="button" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a style="color: white;" href="">Sim</a></button>
+                            <button type="button" onclick="cancelarReserva(event)" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a style="color: white;" href="">Sim</a></button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -220,7 +220,7 @@
                     <div class="modal-body">
                         <form action="" class="">
                             A reserva do dia (**/**/****) será cancelada permanentemente tem certeza ?
-                            <button type="button" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a style="color: white;" href="">Sim</a></button>
+                            <button type="button" onclick="cancelarReserva(event)" class="btn btn-primaryBoot" data-bs-dismiss="modal"><a style="color: white;" href="">Sim</a></button>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -288,6 +288,25 @@
             function abreModal(e, x){
                 e.preventDefault()
                 id = x
+            }
+
+            async function cancelarReserva(e){
+                e.preventDefault()
+                await fetch('http://127.0.0.1:8000/api/reservas/cancelar/' + id,{
+                    method: "DELETE",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',          
+                    },
+                })
+                .then((resp)=>{
+                    if(resp.ok){
+                        var today = new Date();
+                        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+                        alert('reserva cancelada com sucesso às ' + time)
+                        window.location.href = 'http://127.0.0.1:8000/reservas'
+                    }
+                })
             }
 
             async function checkin(e){

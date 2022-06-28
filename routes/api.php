@@ -57,6 +57,7 @@ Route::apiResource('/reservas/rejeitar', ReservasController::class);
 
 Route::patch('/reservas/checkin/{id}', [ReservasController::class, 'checkin']);
 Route::patch('/reservas/checkout/{id}', [ReservasController::class, 'checkout']);
+Route::delete('/reservas/cancelar/{id}', [ReservasController::class, 'destroy']);
 
 
 Route::get('/premium', [RestauranteController::class, 'premium']);
