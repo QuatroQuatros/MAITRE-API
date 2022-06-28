@@ -17,10 +17,6 @@ use App\Http\Middleware\Restaurante;
 use Illuminate\Support\Facades\Route;
 
 
-
-use App\Models\User;
-
-
 Route::get('/', function(){
     return "4.444";
 });
@@ -37,8 +33,6 @@ Route::apiResource('/mesas', MesaController::class);
 Route::apiResource('/mesas/reserva', MesaReservaController::class);
 Route::apiResource('/pratos', PratoController::class);
 Route::apiResource('/pratos/especiais', PratoEspecialController::class);
-
-Route::get('/user/photo', [UserController::class, 'teste']);
 
 Route::get('/horarios/restore/{id}', [HorarioController::class, 'restore']);
 
@@ -82,7 +76,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
 Route::get('/testeLogin', [AuthController::class, 'teste'])->middleware('auth:sanctum');;
-Route::get('/cliente/getId', [AuthController::class, 'getId'])->middleware('auth:sanctum');
+Route::get('/getId', [AuthController::class, 'getId'])->middleware('auth:sanctum');
 
 
 

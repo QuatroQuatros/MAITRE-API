@@ -247,16 +247,9 @@
                                     <div class="validate"></div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                                    <select placeholder="dia da reserva" class="form-120" id="Horario da reserva" name="horarioReserva">
-                                        <option selected value="0">Dia da reserva</option>
-                                        <option select value="1">SEGUNDA-FEIRA</option>
-                                        <option select value="2">TERÇA-FEIRA</option>
-                                        <option select value="3">QUARTA-FEIRA</option>
-                                        <option select value="4">QUINTA-FEIRA</option>
-                                        <option select value="5">SEXTA-FEIRA</option>
-                                        <option select value="6">SABADO</option>
-                                        <option select value="7">DOMINGO</option>
-                                    </select>
+                                    <input  type="date" placeholder="dia da reserva" class="form-120" id="Horario da reserva" name="horarioReserva">
+                                        
+
                                     <div class="validate"></div>
                                 </div>
                             </div>

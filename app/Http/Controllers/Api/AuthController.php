@@ -89,6 +89,6 @@ class AuthController extends Controller
 
     public function getId(){
         $id = auth()->user()->id;
-        return Cliente::select('id', 'user_id')->where('user_id', $id)->get();
+        return Cliente::select('id', 'user_id')->where('user_id', $id)->first();
     }
 }
