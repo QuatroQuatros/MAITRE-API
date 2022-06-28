@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Categoria;
+
 class CreateCategoriasTable extends Migration
 {
     /**
@@ -19,7 +21,7 @@ class CreateCategoriasTable extends Migration
             $table->timestamps();
         });
 
-                     $data =  array(
+            $categorias =  array(
             [
                 'descCategoria' => 'Entradas',
             ],
@@ -56,7 +58,7 @@ class CreateCategoriasTable extends Migration
         );
         foreach ($categorias as $categoria){
             $cat = new Categoria(); 
-            $cat->categoria =$categoria['descCategoria'];
+            $cat->descCategoria =$categoria['descCategoria'];
             $cat->save();
         }
     }

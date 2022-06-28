@@ -258,6 +258,11 @@
 </div>
 <script>
     var id;
+
+    var local = 'http://127.0.0.1:8000/api/'
+    var host = 'https://maitre-app.herokuapp.com/api/'
+
+
     function abreModal(x){
         id = x;
 
@@ -269,12 +274,16 @@
         e.preventDefault();
         console.log('deletar prato', id)
 
-        await fetch('http://127.0.0.1:8000/api/pratos/'+id,{
+
+
+        //await fetch(local + '/pratos/'+id,{
+        await fetch(host + '/pratos/'+id,{
              method: 'DELETE',
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/pratos/cardapio'
+                //window.location.href = local + '/pratos/cardapio'
+                window.location.href = host + '/pratos/cardapio'
                 alert('destruiu')
             }
         })
@@ -289,7 +298,8 @@
         var nome = document.getElementById('nome')
         var desc = document.getElementById('desc')
         var valor = document.getElementById('valor')
-        await fetch('http://127.0.0.1:8000/api/pratos/'+id,{
+        //await fetch(local + '/pratos/'+id,{
+        await fetch(host + '/pratos/'+id,{
              method: 'GET',
              headers: { 'Content-Type': 'application/json' },
         })
@@ -322,7 +332,8 @@
         console.log(desc)
         console.log(valor)
 
-        await fetch('http://127.0.0.1:8000/api/pratos/'+id,{
+        //await fetch(local + '/pratos/'+id,{
+        await fetch(host + '/pratos/'+id,{
              method: 'PUT',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify({ 
@@ -334,7 +345,9 @@
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = 'http://127.0.0.1:8000/pratos/cardapio'
+                //window.location.href = local + '/pratos/cardapio'
+                window.location.href = host + '/pratos/cardapio'
+                //window.location.href = 'http://127.0.0.1:8000/pratos/cardapio'
                 alert('atualizado')
             }
         })

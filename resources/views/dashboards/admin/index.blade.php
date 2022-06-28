@@ -34,10 +34,10 @@
         chart.draw(data, options);
     }
     
-    function drawCategoriaRestaurantes() {
+    function drawCategoriaPratos() {
         var data = google.visualization.arrayToDataTable([
             ['categoria', 'Restaurantes'],
-            ['caseiro', 13],
+            ['caseiro', 0],
             ['arabe', 2.3],
             ['Mediterraneo', 38],
             ['oriental', 20],
@@ -97,7 +97,7 @@
         chart.draw(data, options);
     }
 
-    function drawCategoriaPratos() {
+    function drawCategoriaRestaurantes() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             ['Work', 11],
@@ -265,7 +265,7 @@
                     <small class="text-muted">Admin</small>
                 </div>
                 <div class="profile-photo">
-                    <img src="../../Assets/img/logos/atlanticSemfundo.png">
+                    <img src="/img/logos/atlanticSemfundo.png">
                 </div>
             </div>
         </div>
