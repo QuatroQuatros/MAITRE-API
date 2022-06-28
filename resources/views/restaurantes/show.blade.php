@@ -2,7 +2,7 @@
 
 @section('title')
 
-MAÎTRE || {{strtoupper($restaurante->nome)}}
+MAÎTRE ||}}
 @endsection
 
 @section('content')
