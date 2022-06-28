@@ -80,6 +80,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');;
+Route::get('/testeLogin', [AuthController::class, 'teste'])->middleware('auth:sanctum');;
+Route::get('/cliente/getId', [AuthController::class, 'getId'])->middleware('auth:sanctum');
 
 
 
