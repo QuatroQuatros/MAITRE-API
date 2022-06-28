@@ -26,20 +26,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($reservas as $r)
-                                @if($r->status_reserva_id == 1)
-                                    <tr>
-                                        <td data-title="Data">{{ date("d/m/Y", strtotime($r->data))}}</td>
-                                        <td data-title="Horário">{{$r->horario}}</td>
-                                        <td data-title="Dia da semana">{{$r->diaSemana}}</td>
-                                        <td data-title="Restaurante">{{$r->nome}}</td>
-                                        <td data-title="pessoas">{{$r->qtdPessoas}}</td>
-                                        <td data-title="exclusão"><button type="submit"  onclick="abreModal(event, {{$r->id}})"  class="button-option" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
-                                        <td data-title="alteração"><button type="submit" onclick="abreModalAtualizar(event, {{$r->id}}, {{$r->restaurante_id}})" class="button-option" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
-                                        <td data-title="status" class="warning">Pendente</td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                            @if(count($reservas) != 0)
+                                @foreach($reservas as $r)
+                                    @if($r->status_reserva_id == 1)
+                                        <tr>
+                                            <td data-title="Data">{{ date("d/m/Y", strtotime($r->data))}}</td>
+                                            <td data-title="Horário">{{$r->horario}}</td>
+                                            <td data-title="Dia da semana">{{$r->diaSemana}}</td>
+                                            <td data-title="Restaurante">{{$r->nome}}</td>
+                                            <td data-title="pessoas">{{$r->qtdPessoas}}</td>
+                                            <td data-title="exclusão"><button type="submit"  onclick="abreModal(event, {{$r->id}})"  class="button-option" data-bs-toggle="modal" data-bs-target="#modalExluir">(Excluir)</button></td>
+                                            <td data-title="alteração"><button type="submit" onclick="abreModalAtualizar(event, {{$r->id}}, {{$r->restaurante_id}})" class="button-option" data-bs-toggle="modal" data-bs-target="#modalAlt">(Alterar)</button></td>
+                                            <td data-title="status" class="warning">Pendente</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            @else
+                                <td data-title="Data"> @php echo '&nbsp' @endphp </td>
+                                <td data-title="Horário"> @php echo '&nbsp' @endphp </td>
+                                <td data-title="Dia da semana"> @php echo '&nbsp' @endphp </td>
+                                <td data-title="Restaurante"> @php echo '&nbsp' @endphp </td>
+                                <td data-title="pessoas"> @php echo '&nbsp' @endphp </td>
+                                <td data-title="exclusão"><button type="submit" class="button-option" > @php echo '&nbsp' @endphp </button></td>
+                                <td data-title="alteração"><button type="submit" class="button-option" > @php echo '&nbsp' @endphp </button></td>
+                                <td data-title="status" class="warning"> @php echo '&nbsp' @endphp </td>
+                            @endif
                         </tbody>
                     </table>
                     
@@ -67,6 +78,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if(count($reservas) != 0)
                             @foreach($reservas as $r)
                                 @if($r->status_reserva_id == 2 || $r->status_reserva_id == 5)
                                     <tr>
@@ -88,6 +100,15 @@
                                     </tr>
                                 @endif
                             @endforeach
+                        @else
+                            <td data-title="Data"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Horário"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Dia da semana"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Restaurante"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="pessoas"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="exclusão"><button type="submit" class="button-option" > @php echo '&nbsp' @endphp </button></td>
+                            <td data-title="status" class="warning"> @php echo '&nbsp' @endphp </td>
+                        @endif
                         </tbody>
                     </table>
                    
@@ -114,6 +135,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if(count($reservas) != 0)
                             @foreach($reservas as $r)
                                 @if($r->status_reserva_id == 3 || $r->status_reserva_id == 4 || $r->status_reserva_id == 6)
                                     <tr>
@@ -135,6 +157,14 @@
                                     </tr>
                                 @endif
                             @endforeach
+                        @else
+                            <td data-title="Data"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Horário"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Dia da semana"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="Restaurante"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="pessoas"> @php echo '&nbsp' @endphp </td>
+                            <td data-title="status" class="warning"> @php echo '&nbsp' @endphp </td>
+                        @endif
                         </tbody>
                     </table>
                     
@@ -320,7 +350,7 @@
                 var data = document.getElementById('dataInput')
                 var opc = document.getElementById('opc1');
 
-                await fetch('http://127.0.0.1:8000/api/reservas/' + id,{
+                await fetch('/api/reservas/' + id,{
                     method: "GET",
                     headers: {
                         'Accept': 'application/json',
@@ -344,7 +374,7 @@
 
             async function cancelarReserva(e){
                 e.preventDefault()
-                await fetch('http://127.0.0.1:8000/api/reservas/cancelar/' + id,{
+                await fetch('/api/reservas/cancelar/' + id,{
                     method: "DELETE",
                     headers: {
                         'Accept': 'application/json',
@@ -356,14 +386,14 @@
                         var today = new Date();
                         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
                         alert('reserva cancelada com sucesso às ' + time)
-                        window.location.href = 'http://127.0.0.1:8000/reservas'
+                        window.location.href = '/reservas'
                     }
                 })
             }
 
             async function checkin(e){
                 e.preventDefault()
-                await fetch('http://127.0.0.1:8000/api/reservas/checkin/' + id,{
+                await fetch('/api/reservas/checkin/' + id,{
                     method: "PATCH",
                     headers: {
                         'Accept': 'application/json',
@@ -377,14 +407,14 @@
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
                     if(resp.ok){
                         alert('checkin feito com sucesso às ' + time)
-                        window.location.href = 'http://127.0.0.1:8000/reservas'
+                        window.location.href = '/reservas'
                     }
                 })
             }
 
             async function checkout(e){
                 e.preventDefault()
-                await fetch('http://127.0.0.1:8000/api/reservas/checkout/' + id,{
+                await fetch('/api/reservas/checkout/' + id,{
                     method: "PATCH",
                     headers: {
                         'Accept': 'application/json',
@@ -398,7 +428,7 @@
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
                     if(resp.ok){
                         alert('checkout feito com sucesso às ' + time)
-                        window.location.href = 'http://127.0.0.1:8000/reservas'
+                        window.location.href = '/reservas'
                     }
                 })
             }
@@ -424,7 +454,7 @@
 
             var d = new Date(data);
             var dia = DiaSemana[d.getDay()];
-            var url = 'http://127.0.0.1:8000/api/horarios/'+ restId +'/' + dia
+            var url = '/api/horarios/'+ restId +'/' + dia
             console.log(url)
             fetch(url)
             .then((resp) => resp.json())

@@ -332,7 +332,7 @@
                             </div>
                             <span class="create-account"></span>
                             <div class="form-row button-login">
-                                <button class="btn btn-login">Finalizar<i class="fas fa-arrow-right"></i></button>
+                                <button type="submit" class="btn btn-login">Finalizar<i class="fas fa-arrow-right"></i></button>
                             </div>
                         </div>
                     </fieldset>

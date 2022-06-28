@@ -487,7 +487,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
             var d = new Date(data);
             var dia = DiaSemana[d.getDay()];
-            var url = 'http://127.0.0.1:8000/api/horarios/'+ id +'/' + dia
+            var url = '/api/horarios/'+ id +'/' + dia
             console.log(url)
             fetch(url)
             .then((resp) => resp.json())
