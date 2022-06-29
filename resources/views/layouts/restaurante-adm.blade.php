@@ -80,10 +80,6 @@
                         <h3>Grafícos</h3>
                     </a>
                     <a href="/restaurantes/graficos" class="active">
-                        <span class="material-icons-sharp">analytics</span>
-                        <h3>Grafíco inteligente</h3>
-                    </a>
-                    <a href="/restaurantes/graficos" class="active">
                     </a>
                 </div>
             </div>

@@ -50,17 +50,17 @@ class PratoEspecialController extends Controller
         $id = $rest->id;
 
         $imagem = $request->file('foto');
-        $name = $imagem->getClientOriginalName(); 
-        $path = $imagem->storeAs('imagens', $name, 'public');
-        // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        // Storage::disk('s3')->setVisibility($path, 'public');
+        // $name = $imagem->getClientOriginalName(); 
+        // $path = $imagem->storeAs('imagens', $name, 'public');
+        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        Storage::disk('s3')->setVisibility($path, 'public');
 
         PratoEspecial::create([
             "nome" => $request->nome,
             "descPrato" => $request->descPrato,
             "valor" => $request->valor,
-            // "foto" => Storage::disk('s3')->url($path),
-            "foto" => $path,
+            "foto" => Storage::disk('s3')->url($path),
+            //"foto" => $path,
             'dia_semana_id' => $request->dia_semana_id,
             "categoria_id" => $request->categoria_id,
             "restaurante_id" => $id

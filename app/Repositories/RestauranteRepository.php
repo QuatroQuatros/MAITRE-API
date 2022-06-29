@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Restaurante;
+use App\Models\FoneRestaurante;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,8 +28,13 @@ class RestauranteRepository{
         //$this->restaurante = $this->restaurante->findOrFail($id);
         
         return $this->restaurante->leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
-        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
-        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->where('restaurantes.id', $id)->first();
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', 'fone_restaurantes.descFone',
+        'restaurantes.descricao', 'restaurantes.endereco', 'restaurantes.bairro', 'restaurantes.cidade',
+        'restaurantes.estado', 'restaurantes.cep',
+        DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->join('fone_restaurantes', 'fone_restaurantes.restaurante_id', 'restaurantes.id' )
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto', 'fone_restaurantes.descFone',
+        'restaurantes.descricao', 'restaurantes.endereco', 'restaurantes.bairro', 'restaurantes.cidade', 'restaurantes.estado', 'restaurantes.cep')->where('restaurantes.id', $id)->first();
         //return $this->restaurante->findOrFail($id);
 
     }
@@ -36,8 +42,8 @@ class RestauranteRepository{
     public function store(Request $request){
         $request->validate($this->restaurante->rules(), $this->restaurante->feedback());    
         $imagem = $request->file('foto');
-        // $name = $imagem->getClientOriginalName(); 
-        // $path = $imagem->storeAs('imagens', $name, 'public');
+        $name = $imagem->getClientOriginalName(); 
+        $path = $imagem->storeAs('imagens', $name, 'public');
 
         //dd($imagem);
         //$path = $imagem->storeAs('imagens', $imagem, 's3');
@@ -46,11 +52,13 @@ class RestauranteRepository{
         //$path = $request->file('foto')->store('./imagens/', 's3');
 
 
-        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        Storage::disk('s3')->setVisibility($path, 'public');
+        // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        // Storage::disk('s3')->setVisibility($path, 'public');
        
+
+
         
-        return $this->restaurante->create([
+        $this->restaurante = $this->restaurante->create([
             "nome" => $request->nome,
             "descricao" => $request->descricao,
             "endereco" => $request->endereco,
@@ -58,13 +66,19 @@ class RestauranteRepository{
             "bairro" => $request->bairro,
             "cidade" => $request->cidade,
             "estado" =>  $request->estado,
-            "foto" => Storage::disk('s3')->url($path),
-            // "foto" => $path,
+            // "foto" => Storage::disk('s3')->url($path),
+            "foto" => $path,
             "cep" =>  $request->cep,
             "level" => $request->level,
             "categoria_restaurante_id" => $request->categoria_restaurante_id,
             "user_id" => $request->user_id
         ]);
+
+        FoneRestaurante::create([
+            'descFone' => $request->fone,
+            'restaurante_id' => $this->restaurante->id
+        ]);
+
 
     }
 

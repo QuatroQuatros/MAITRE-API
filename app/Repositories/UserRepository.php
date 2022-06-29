@@ -45,6 +45,7 @@ class UserRepository{
             $id = $user->id;
 
             $request->merge(['user_id' => $id]);
+            $request->merge(['foto' => $request->foto]);
             $request->merge(['categoria_id' => 1]);
     
             if($user->level == 1){

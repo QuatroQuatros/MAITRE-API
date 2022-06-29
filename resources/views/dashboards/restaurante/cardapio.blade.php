@@ -25,7 +25,7 @@
                     <tr>
                         <td data-label="Prato"><a href="{{$p->foto}}" data-lightbox="portfolio"><img class="prato" src="{{$p->foto}}"></a></td>
                         <td data-label="Nome">{{$p->nome}}</td>
-                        <td data-label="Categoria">{{$p->categoria_id}}</td>
+                        <td data-label="Categoria">{{$p->descCategoria}}</td>
                         <td data-label="Descrição">{{$p->descPrato}}</td>
                         <td data-label="Valor">{{$p->valor}}</td>
                         <td><a href="#modalAtualizar" onclick="modalAtualizar({{$p->id}})" class="warning">Alterar prato</a></td>

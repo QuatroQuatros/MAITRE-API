@@ -19,78 +19,54 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                 <div class="events-slider swiper">
                     <div class="swiper-wrapper">
 
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
+                        @if(count($slides) == 0)
+                            <div class="swiper-slide">
+                                <div class="row event-item">
+                                    <div class="col-lg-6">
+                                        <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                        <h3>{{$restaurante->nome}}</h3>
+                                        <p class="fst-italic">
+                                            Descrição sobre o restaurante
+                                        </p>
+                                        <ul>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
+                            </div><!-- End testimonial item -->
+                        @else
 
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/app/public/{{$restaurante->foto}}" class="img-fluid" alt="">
+                            <div class="swiper-slide">
+                                <div class="row event-item">
+                                    <div class="col-lg-6">
+                                        <img src="/storage/app/public/{{$restaurante->foto}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                        <h3>{{$restaurante->nome}}</h3>
+                                        <p class="fst-italic">
+                                           {{$restaurante->descricao}}
+                                        </p>
+                                        {{-- <ul>
+                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
+                                                ex ea commodo consequat.</li>
+                                            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
+                                                reprehenderit in voluptate velit.</li>
+                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
+                                                ex ea commodo consequat.</li>
+                                        </ul>
+                                        <p>
+                                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                            dolor in reprehenderit in voluptate
+                                            velit esse cillum dolore eu fugiat nulla pariatur
+                                        </p> --}}
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
-                                            reprehenderit in voluptate velit.</li>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                    </ul>
-                                    <p>
-                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
-                                            reprehenderit in voluptate velit.</li>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                    </ul>
-                                    <p>
-                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
+                            </div><!-- End testimonial item -->
+                        @endif
 
                     </div>
                     
@@ -122,13 +98,13 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 <div class="col-lg-3 col-md-6 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Sobre o restaurante:</h4>
-                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                    <p>{{$restaurante->descricao}}</p>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Localização:</h4>
-                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                    <p>{{$restaurante->endereco}}, {{$restaurante->numero}}<br>{{$restaurante->bairro}}, {{$restaurante->cidade}} - {{$restaurante->estado}}, {{$restaurante->cep}}</p>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
@@ -140,7 +116,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
                                     <i class="bi bi-phone"></i>
                                     <h4>Contato</h4>
-                                    <p>11 91234-5678<br>info@example.com</p>
+                                    <p>{{$restaurante->descFone}}</p>
                                 </div>
                             </div>
                         </div>
@@ -243,7 +219,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                    
                         <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
                             <div class="menu-content">
-                                <a onclick="modalPrato( {{$p->id}})" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span id="{{$p->id}}">R$</span>
+                                <a onclick="modalPrato({{$p->id}})" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span id="{{$p->id}}">R$</span>
                             </div>
                             <div class="menu-ingredients">
                                 {{$p->descPrato}}

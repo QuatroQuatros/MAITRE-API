@@ -10,8 +10,8 @@
             <div class="containerImg mt-5">
                 <div class="premium-form">
                     <div style="display: flex;align-items: center;">
-                        <img class="img" id="preview" src="">
-                        <form action="/restaurantes/slides" method="POST" enctype="multipart/form-data">
+                        <img class="img" id="preview">
+                        <form class="form-upload" action="/restaurantes/slides" method="POST" enctype="multipart/form-data" role="form">
                         @csrf
                             <div class="wrapper">
                                 <h2>Descrição do banner</h2>
@@ -21,13 +21,13 @@
                             <div class="form-row button-login centerPremium">
                                 <label class="input-personalizado">
                                     <span class="botao-selecionar">Trocar banner</span>
-                                    <img class="imagem" />
-                                    <input type="file" class="input-file" id="img-input" onchange="readURL(this);" name="foto" accept="image/*">
-                                    <input type="submit" class="input-file">
+                                    <img class="imagem" id="testeIMG"/>
+                                    <input type="file" class="input-file" id="img-input" name="foto" onchange="previewIMG(this)" accept="image/*">
+                            <input type="submit" class="input-file">
                                 </label>
                             </div>
                             <div style="display: flex;justify-content: center;padding: 10px;">
-                                <input type="submit" class="btn ">Salvar<i class="fas fa-arrow-right"></i><input/>
+                                <input type="submit" class="btn "><input/>
                             </div>
                         </form>
                 </div>
@@ -184,6 +184,53 @@
         textarea.style.height = `${scHeight}px`;
     });
 
+ 
+
+    // const previewImg = $('.imagem');
+    const previewImg = $('#preview')
+    const fileChooser = $('.input-file');
+
+    function previewIMG(e){
+        // const fileToUpload = e.target.files.item(0);
+        // const reader = new FileReader();
+        // reader.onload = e => previewImg.src = e.target.result;
+        // reader.readAsDataURL(fileToUpload);
+
+
+        if (e.files && e.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#preview').hide();
+
+                $('#preview').attr('src', e.target.result);
+
+                $('#preview').show();
+                //$('.file-upload-content').show();
+
+                //$('.image-title').html(input.files[0].name);
+        };
+
+        reader.readAsDataURL(e.files[0]);
+
+        } else {
+            removeUpload();
+        }
+
+        console.log('teste')
+
+    }
+
+
+
+    // fileChooser.onchange = e => {
+    
+
+    // };
+    
+
+
     function abreModal(x){
 
         id = x;
@@ -193,13 +240,7 @@
     async function excluirSlide(e){
         e.preventDefault();
 
-        var local = 'http://127.0.0.1:8000/api/';
-        var host = 'https://maitre-app.herokuapp.com/api/';
-
-
-
-        //await fetch(local + '/slides/'+id,{
-        //await fetch(host + '/slides/'+id,{
+   
         await fetch('/api/slides/'+id,{
              method: 'DELETE',
         })

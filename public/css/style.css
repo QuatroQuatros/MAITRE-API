@@ -330,6 +330,15 @@ h1, h2, h3 {
   visibility: visible;
 }
 
+
+/* modificado */
+@media (min-width: 1200px)
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100% !important;
+}
+
+
+
 @media (max-width: 1366px) {
   .navbar .dropdown .dropdown ul {
     left: -90%;

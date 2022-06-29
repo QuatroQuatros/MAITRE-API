@@ -251,7 +251,7 @@
                             </div>
                             <div class="center-button">
                                 <a href="/restaurantes/{{$r->id}}"><button type="submit"
-                                        class="button-coment">Visitar restaurante</button></a>
+                                class="button-coment">Visitar restaurante</button></a>
                             </div>
                         </div>
                     </div>

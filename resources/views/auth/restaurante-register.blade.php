@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="input-text">
                                     <div class="input-div">
-                                        <input type="text" name="tel"  required require>
+                                        <input type="text" name="fone"  required require>
                                         <span>Tel.Restaurante(contato)</span>
                                     </div>
                                 </div>

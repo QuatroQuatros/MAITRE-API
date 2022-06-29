@@ -78,10 +78,9 @@ Route::prefix('/pratos/especiais')->group(function(){
 
 
 Route::prefix('/restaurantes')->group(function(){
-    Route::get('/', [RestauranteController::class, 'index']);
-    Route::get('/{id}', [RestauranteController::class, 'show']);
 
-    
+
+
     Route::get('/admin', [RestauranteController::class, 'home'])->middleware('auth', 'restaurante');
     Route::get('/slides', [RestauranteController::class, 'slides'])->middleware('auth', 'restaurante');
     Route::post('/slides', [RestauranteController::class, 'criarSlide'])->middleware('auth', 'restaurante');
@@ -96,7 +95,11 @@ Route::prefix('/restaurantes')->group(function(){
 
     Route::get('/premium', [PremiumController::class, 'index'])->middleware('auth', 'restaurante');
     Route::patch('/premium/{id}', [PremiumController::class, 'getPremium'])->middleware('auth', 'restaurante');
-    Route::patch('/premium/cancelar/{id}', [PremiumController::class, 'cancelPremium'])->middleware('auth', 'restaurante');;
+    Route::patch('/premium/cancelar/{id}', [PremiumController::class, 'cancelPremium'])->middleware('auth', 'restaurante');
+
+    Route::get('/', [RestauranteController::class, 'index']);
+    Route::get('/{id}', [RestauranteController::class, 'show']);
+
 
 
     

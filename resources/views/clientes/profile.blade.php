@@ -116,13 +116,15 @@
                             <div class="rowCenter">
                                 <div class="text-center">
                                     <div id="img-container">
-                                        <img src="../assets/img/chefs/chefs-1.jpg" class="img-logo" id="preview" alt="">
+                                        <img src="{{$cliente->foto}}" class="img-logo" id="preview" alt="">
                                     </div>
-                                    <form class="form-uploadNot" action="" method="post" role="form">
+                                    <form class="form-uploadNot" action="/clientes/{{$cliente->user_id}}" method="post" role="form">
+                                        @csrf
+                                        @method('put')
                                         <label class="input-personalizado">
                                             <span class="botao-selecionar">Trocar foto</span>
                                             <img class="imagem" />
-                                            <input type="file" class="input-file" id="img-input" name="imagem" accept="image/*">
+                                            <input type="file" class="input-file" id="img-input" name="foto" accept="image/*">
                                         </label>
                                         <div class="modal-footer"></div>
                                         <a href=""><button class="btn btn-primaryBoot">Salvar Foto</button></a>

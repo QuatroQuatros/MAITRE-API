@@ -7,7 +7,10 @@ fileChooser.onchange = e => {
   const reader = new FileReader();
   reader.onload = e => previewImg.src = e.target.result;
   reader.readAsDataURL(fileToUpload);
+
+  console.log('teste')
 };
+
 
 /*mudar password para text*/
 (function($) {

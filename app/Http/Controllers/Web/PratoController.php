@@ -18,7 +18,7 @@ class PratoController extends Controller
         $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
        
         $id = $rest->id;
-        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::where('restaurante_id', $id)->get(), 'categorias' => Categoria::all()]);
+        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->get(), 'categorias' => Categoria::all()]);
     }
 
    

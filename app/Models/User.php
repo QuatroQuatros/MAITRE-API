@@ -54,7 +54,7 @@ class User extends Authenticatable
         return [
             "nome" => 'required|string',
             "email" => 'required|string|unique:users',
-            "password" => 'required|string',
+            "password" => 'required|string||min:8',
             
         ];
     }

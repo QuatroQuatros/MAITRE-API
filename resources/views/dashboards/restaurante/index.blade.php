@@ -126,72 +126,10 @@
         </div>
     </div>
     <!--end top-->
-    <div class="recent-updates">
-        <h2 class="text-muted">Ultimas avaliações</h2>
-        <div class="updates">
-            <div class="update">
-                <div class="profile-photo">
-                    <img src="/img/img1.jpg">
-                </div>
-                <div class="message">
-                    <p><b>Dacuel</b> <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                    </p>
-                </div>
-            </div>
-            <div class="update">
-                <div class="profile-photo">
-                    <img src="/img/img2.jpg">
-                </div>
-                <div class="message">
-                    <p><b>Vyobain</b> <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                    </p>
-                </div>
-            </div>
-            <div class="update">
-                <div class="profile-photo">
-                    <img src="/img/img3.jpg">
-                </div>
-                <div class="message">
-                    <p><b>Oslove</b> <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-
-                    </p>
-                </div>
-            </div>
-            <div class="update">
-                <div class="profile-photo">
-                    <img src="/img/img5.jpg">
-                </div>
-                <div class="message">
-                    <p><b>Moyto</b> <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                        <span class="material-icons-sharp">stars</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div class="sales-analytics">
         <h2 class="text-muted">Opção de conta</h2>
-        <a href="#inativar">
-            <div class="item online">
-                <div class="icon">
-                    <span class="material-icons-sharp">disabled_by_default</span>
-                </div>
-                <div class="right">
-                    <div class="info">
-                        <h3>Inativar restaurante</h3>
-                    </div>
-                </div>
-            </div>
-        </a>
+        
         <a href="#exclusao">
             <div class="item offline">
                 <div class="icon">

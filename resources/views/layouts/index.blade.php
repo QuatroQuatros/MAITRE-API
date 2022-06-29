@@ -60,7 +60,7 @@
                   <li><a class="nav-link scrollto" href="/restaurantes">Restaurantes</a></li>
                   @auth
                     @if(auth()->user()->level == 1)
-                        <li><a class="nav-link scrollto" href="/reservas">Reservas</a></li>
+                        <li><a class="nav-link scrollto" href="/reservas">Minhas Reservas</a></li>
                     @endif
                   @endauth
                   
@@ -78,7 +78,8 @@
             @elseif(auth()->user()->level == 3)
                 <a href="/admin" class="book-a-table-btn scrollto"><i class="far fa-user"></i>  DASHBOARD</a>
             @else
-                <a href="/clientes/{{auth()->user()->id}}" class="book-a-table-btn scrollto"><i class="bi bi-person-circle"></i> OLÁ, {{auth()->user()->name}}</a>
+                <a href="/clientes/{{auth()->user()->id}}" class="book-a-table-btn scrollto"><i class="bi bi-person-circle">
+                    </i> OLÁ, {{explode(" ", auth()->user()->name)[0]}}</a>
                 {{-- <a href="/clientes/{{auth()->user()->id}}"  class="book-a-table-btn scrollto"><i class="far fa-user"></i>  MEU PERFIL</a> --}}
             @endif
           <form action="/logout" method="POST">
