@@ -18,7 +18,7 @@ class CreateFotoRestaurantesTable extends Migration
         Schema::create('foto_restaurantes', function (Blueprint $table) {
             $table->id();
             $table->string('foto', 400)->nullable();
-            $table->string('descFoto');
+            $table->text('descFoto');
             $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
             $table->softDeletes();
             $table->timestamps();

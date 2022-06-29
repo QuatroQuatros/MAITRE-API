@@ -94,7 +94,7 @@ class RestauranteController extends Controller
         ->orderBy('pratos_especiais.dia_semana_id')
         ->where('restaurante_id', $id)->get();
 
-        $slides = FotoRestaurante::where('foto_restaurantes.id', $id)->get();
+        $slides = FotoRestaurante::where('foto_restaurantes.restaurante_id', $id)->get();
 
 
         return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides]);
@@ -165,10 +165,15 @@ class RestauranteController extends Controller
 
     public function criarSlide(Request $request){
         $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
+
+        $imagem = $request->file('foto');
+        $name = $imagem->getClientOriginalName(); 
+        $path = $imagem->storeAs('imagens', $name, 'public');
+       
        
         $id = $rest->id;
         FotoRestaurante::create([
-            "foto" => $request->foto,
+            "foto" => $path,
             "descFoto" => $request->descFoto,
             "restaurante_id" => $id
         ]);

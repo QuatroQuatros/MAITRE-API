@@ -19,53 +19,43 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                 <div class="events-slider swiper">
                     <div class="swiper-wrapper">
 
-                        @if(count($slides) == 0)
-                            <div class="swiper-slide">
+                        <div class="swiper-slide">
                                 <div class="row event-item">
                                     <div class="col-lg-6">
                                         <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
                                     </div>
                                     <div class="col-lg-6 pt-4 pt-lg-0 content">
                                         <h3>{{$restaurante->nome}}</h3>
-                                        <p class="fst-italic">
-                                            Descrição sobre o restaurante
-                                        </p>
-                                        <ul>
-                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                        </ul>
+                                        <div class="containerDesc">
+                                            <p class="fst-italic descSlide">
+                                                {{$restaurante->descricao}}
+                                            </p>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div><!-- End testimonial item -->
-                        @else
 
-                            <div class="swiper-slide">
-                                <div class="row event-item">
-                                    <div class="col-lg-6">
-                                        <img src="/storage/app/public/{{$restaurante->foto}}" class="img-fluid" alt="">
+                        @if(count($slides) != 0)
+                            
+                            @foreach($slides as $s)
+                                <div class="swiper-slide">
+                                    <div class="row event-item">
+                                        <div class="col-lg-6">
+                                            <img src="/storage/{{$s->foto}}" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                            <h3>{{$restaurante->nome}}</h3>
+                                            <div class="containerDesc">
+                                                <p class="fst-italic descSlide">
+                                                   {{$s->descFoto}}
+                                                </p>
+                                            </div>
+           
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                        <h3>{{$restaurante->nome}}</h3>
-                                        <p class="fst-italic">
-                                           {{$restaurante->descricao}}
-                                        </p>
-                                        {{-- <ul>
-                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.</li>
-                                            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
-                                                reprehenderit in voluptate velit.</li>
-                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                                ex ea commodo consequat.</li>
-                                        </ul>
-                                        <p>
-                                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                            dolor in reprehenderit in voluptate
-                                            velit esse cillum dolore eu fugiat nulla pariatur
-                                        </p> --}}
-                                    </div>
-                                </div>
-                            </div><!-- End testimonial item -->
+                                </div><!-- End testimonial item -->
+                            @endforeach
                         @endif
 
                     </div>
@@ -98,7 +88,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 <div class="col-lg-3 col-md-6 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Sobre o restaurante:</h4>
-                                    <p>{{$restaurante->descricao}}</p>
+                                    <p>{{$restaurante->nome}}</p>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6 info">

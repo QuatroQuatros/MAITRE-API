@@ -51,7 +51,7 @@
             <tbody>
                 @foreach($slides as $s)
                     <tr>
-                        <td data-label="Prato"><a href="{{$s->foto}}" data-lightbox="portfolio">Ver banner</a></td>
+                        <td data-label="Prato"><a href="/storage/{{$s->foto}}" data-lightbox="portfolio">Ver banner</a></td>
                         <td data-label="Descrição">{{$s->descFoto}}</td>
                         <td><a href="#modalBanner" onclick="abreModalAtualizar({{$s->id}})" class="warning">Alterar slide</a></td>
                         <td><a href="#modal" onclick="abreModal({{$s->id}})" role="button" class="danger">Excluir slide</a></td>
@@ -246,7 +246,7 @@
         })
         .then((resp) =>{
             if(resp.ok){
-                window.location.href = '/slides'
+                window.location.href = '/restaurantes/slides'
                 //window.location.href = host +'/slides'
                 alert('destruiu')
             }

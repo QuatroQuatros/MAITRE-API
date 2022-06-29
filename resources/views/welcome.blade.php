@@ -176,7 +176,7 @@
                                 <div class="swiper-slide">
                                     <div class="row event-item">
                                         <div class="col-lg-6">
-                                            <img src="{{$r->foto}}" class="img-fluid" alt="">
+                                            <img src="/storage/{{$r->foto}}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-lg-6 pt-4 pt-lg-0 content">
                                             <h3>{{$r->nome}}</h3>
@@ -238,7 +238,7 @@
             @if($r->level == 1)
                 <div class="col-lg-4 col-md-6">
                     <div class="member">
-                        <div class="pic"><img class="restaurante-img" src="{{$r->foto}}" class="img-fluid" alt=""></div>
+                        <div class="pic"><img class="restaurante-img" src="/storage/{{$r->foto}}" class="img-fluid" alt=""></div>
                         <div class="member-info">
                             <h4>{{$r->nome}}</h4>
                             <div class="stars">

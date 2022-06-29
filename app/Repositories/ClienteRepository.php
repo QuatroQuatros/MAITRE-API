@@ -32,13 +32,17 @@ class ClienteRepository{
         ]);*/
 
         $imagem = $request->file('foto');
-        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        Storage::disk('s3')->setVisibility($path, 'public');
+        // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        // Storage::disk('s3')->setVisibility($path, 'public');
+        $name = $imagem->getClientOriginalName(); 
+        $path = $imagem->storeAs('imagens', $name, 'public');
+
 
         $cliente = new Cliente;
 
         $cliente->nome = $request->nome;
-        $cliente->foto = Storage::disk('s3')->url($path);
+        // $cliente->foto = Storage::disk('s3')->url($path);
+        $cliente->foto = $path;
         $cliente->cpf = $request->cpf;
         $cliente->endereco = $request->endereco;
         $cliente->bairro = $request->bairro;
