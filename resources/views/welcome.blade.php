@@ -242,9 +242,17 @@
                         <div class="member-info">
                             <h4>{{$r->nome}}</h4>
                             <div class="stars">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                    class="bi bi-star-fill"></i>
+                                @if($estrelas != null)
+                                    @for($i = 0; $i < $estrelas[$loop->index]->estrelas; $i++)
+                                        <i class="bi bi-star-fill"></i>
+                                    @endfor
+                                @else
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                @endif
                             </div>
                             <div class="social">
                                 <p>{{$r->categoria}}</p>

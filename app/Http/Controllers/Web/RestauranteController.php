@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Redirect;
 
-
+use App\Models\Cliente;
 use App\Models\CategoriaRestaurante;
 use App\Models\Restaurante;
 use App\Models\Reserva;
@@ -30,10 +30,12 @@ class RestauranteController extends Controller
     }
 
     public function index(){
+
+        $estrelas =  Restaurante::leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')->select(DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))->get();
         $restaurantes = Restaurante::select('restaurantes.id', 'restaurantes.foto', 'restaurantes.nome', 'categoria_restaurantes.categoria')->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
         //$restaurantes = Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
         //$restaurantes = Restaurante::all();
-        return view('restaurantes.list', ['restaurantes' => $restaurantes , 'categorias' => CategoriaRestaurante::all()]);
+        return view('restaurantes.list', ['restaurantes' => $restaurantes , 'categorias' => CategoriaRestaurante::all(), 'estrelas' => $estrelas]);
     }
 
     public function home(){
@@ -87,7 +89,16 @@ class RestauranteController extends Controller
 
     public function show($id){
 
+        $c = Cliente::where('user_id', auth()->user()->id)->first();
+
+        $cliente = Reserva::where('status_reserva_id', 6)->where('restaurante_id', $id)->where('cliente_id', $c->id)->exists();
+
         $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
+
+        
+
+
+
         $categorias = Prato::select('categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->distinct()->get();
         $pratos = Prato::select('pratos.id','pratos.categoria_id', 'pratos.nome', 'pratos.valor', 'pratos.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos.categoria_id', 'categorias.id')->where('restaurante_id', $id)->distinct()->get();
         $especiais = PratoEspecial::select('pratos_especiais.categoria_id', 'dia_semanas.diaSemana', 'pratos_especiais.nome',  'pratos_especiais.valor', 'pratos_especiais.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos_especiais.categoria_id', 'categorias.id')->join('dia_semanas', 'dia_semanas.id', 'pratos_especiais.dia_semana_id')
@@ -96,8 +107,9 @@ class RestauranteController extends Controller
 
         $slides = FotoRestaurante::where('foto_restaurantes.restaurante_id', $id)->get();
 
+        //sdd($cliente);
 
-        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides]);
+        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides, 'cliente' => $cliente]);
     }
 
     public function store(Request $request){

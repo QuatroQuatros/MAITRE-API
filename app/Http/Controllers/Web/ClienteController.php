@@ -9,9 +9,12 @@ use App\Models\Reserva;
 use App\Models\Cliente;
 use App\Models\User;
 
+
 use App\Models\FoneCliente;
 
 use App\Repositories\ClienteRepository;
+
+use DB;
 
 class ClienteController extends Controller
 {
@@ -23,13 +26,13 @@ class ClienteController extends Controller
 
 
     public function index(){
-
+        $estrelas =  Restaurante::leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')->select(DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))->get();
 
         $restaurantes = Restaurante::select('restaurantes.id', 'restaurantes.foto', 'restaurantes.nome', 'restaurantes.level','categoria_restaurantes.categoria')->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
         //$restaurantes = Restaurante::all();        
         // $restaurantes = Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
         $premium = Restaurante::where('level', 2)->get();
-        return view('welcome', ['restaurantes' => $restaurantes, 'premium' => $premium]);
+        return view('welcome', ['restaurantes' => $restaurantes, 'premium' => $premium, 'estrelas' => $estrelas]);
     }
 
     public function store(Request $request, $id){

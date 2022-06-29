@@ -303,7 +303,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
         <section id="comentario" class="testimonials">
             <div class="container position-relative">
                 <div class="section-title">
-                    <h2><span>Alguns comentarios</span></h2>
+                    <h2><span>Alguns comentários</span></h2>
                 </div>
 
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -354,7 +354,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                     
                     <div class="swiper-pagination"></div>
                     <div class="center-button">
-                        <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>
+                        @if($cliente == true)
+                            <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>
+                        @endif
                     </div>
                 </div>
 
@@ -391,7 +393,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Escreva seu comentario</label>
+                                <label for="message-text" class="col-form-label">Escreva seu comentário</label>
                                 <textarea class="form-control" name="descAvaliacao" id="message-text"></textarea>
                             </div>
                             <div class="modal-footer">

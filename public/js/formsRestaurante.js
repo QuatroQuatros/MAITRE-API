@@ -4,8 +4,6 @@ var step_list = document.querySelectorAll(".progress-bar li");
 var num = document.querySelector(".step-number");
 let formnumber=0;
 
-var local = 'http://127.0.0.1:8000/api/';
-var host = 'https://maitre-app.herokuapp.com/api/';
 
 next_click.forEach(function(next_click_form){
     next_click_form.addEventListener('click',function(){
