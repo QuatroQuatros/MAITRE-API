@@ -10,6 +10,19 @@ use App\Models\Reserva;
 
 class ReservasController extends Controller
 {
+
+    public function index(){
+        $c = Cliente::select('id')->where('user_id', auth()->user()->id)->first();
+        $reservas = Reserva::select('reservas.id', 'reservas.data', 'reservas.horario',
+        'reservas.qtdPessoas','reservas.restaurante_id', 'reservas.status_reserva_id', 
+        'dia_semanas.diaSemana', 'restaurantes.nome')
+        ->join('dia_semanas', 'dia_semanas.id', 'reservas.diaSemana')
+        ->join('restaurantes', 'restaurantes.id', 'reservas.restaurante_id')
+        ->where('cliente_id', $c->id)->get();
+        return view('clientes.reservas', ['reservas' => $reservas]);
+    }
+
+
     public function store(Request $request){
         //dd(auth()->user()->id);
         //$c = Cliente::findOrFail(auth()->user()->id);
@@ -25,6 +38,19 @@ class ReservasController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function update(Request $request){
+        $r = Reserva::where('id', $request->reserva_id)->first();
+        $r->update([
+            'horario' => $request->horario,
+            'data' => $request->data,
+            'diaSemana' => $request->dia,
+            'qtdPessoas' => $request->qtdPessoas,
+        ]);
+        $r->save();
+
+        return $this->index();
     }
 
     public function find($id){
@@ -46,11 +72,12 @@ class ReservasController extends Controller
         $r = Reserva::findOrFail($id);
         $r->status_reserva_id = $request->status_reserva_id;
         $r->save();
-        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'clientes.nome', 'users.email')
-        ->join('clientes', 'reservas.cliente_id', 'clientes.id')
-        ->join('users', 'clientes.user_id', 'users.id')
-        ->get();
-        return view('dashboards.restaurante.reservas', ['reservas' => $reservas]);
+        return $r;
+        // $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'clientes.nome', 'users.email')
+        // ->join('clientes', 'reservas.cliente_id', 'clientes.id')
+        // ->join('users', 'clientes.user_id', 'users.id')
+        // ->get();
+        // return view('dashboards.restaurante.reservas', ['reservas' => $reservas]);
     }
 
 }

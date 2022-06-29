@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Categoria;
+
 class CreateCategoriasTable extends Migration
 {
     /**
@@ -18,6 +20,47 @@ class CreateCategoriasTable extends Migration
             $table->string('descCategoria')->unique();
             $table->timestamps();
         });
+
+            $categorias =  array(
+            [
+                'descCategoria' => 'Entradas',
+            ],
+            [
+                'descCategoria' => 'Saladas',
+            ],
+            [
+                'descCategoria' => 'Sobremesas',
+            ],
+            [
+                'descCategoria' => 'Guarnição',
+            ],
+            [
+                'descCategoria' => 'Aperitivos',
+            ],
+            [
+                'descCategoria' => 'Bebidas',
+            ],
+            [
+                'descCategoria' => 'Sopas',
+            ],
+            [
+                'descCategoria' => 'Carnes',
+            ],
+            [
+                'descCategoria' => 'Principais',
+            ],
+            [
+                'descCategoria' => 'Vegetariano',
+            ],
+            [
+                'descCategoria' => 'Vegano',
+            ],
+        );
+        foreach ($categorias as $categoria){
+            $cat = new Categoria(); 
+            $cat->descCategoria =$categoria['descCategoria'];
+            $cat->save();
+        }
     }
 
     /**

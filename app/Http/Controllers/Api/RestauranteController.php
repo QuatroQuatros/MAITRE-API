@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Restaurante;
+use App\Models\FotoRestaurante;
 use Illuminate\Http\Request;
 
 use App\Repositories\RestauranteRepository;
@@ -32,6 +33,8 @@ class RestauranteController extends Controller
 
     }
 
+   
+
     public function update(Request $request, $id){
         return response($this->restauranteRepository->update($request, $id), 202);
     }
@@ -54,6 +57,27 @@ class RestauranteController extends Controller
 
     public function cancelPremium($id){
         return response($this->restauranteRepository->cancelPremium($id));
+    }
+
+    public function atualizarSlide(Request $request, $id){
+
+        $slide = FotoRestaurante::findOrFail($id);
+        $slide->update($request->only('foto', 'descFoto'));
+        return $slide->save();
+        // return redirect('/restaurantes/slides')
+
+    }
+
+    public function verSlide($id){
+        return FotoRestaurante::findOrFail($id);
+        // return redirect('/restaurantes/slides')
+        
+    }
+
+    public function apagarSlide($id){
+        return FotoRestaurante::destroy($id);
+        // return redirect('/restaurantes/slides')
+        
     }
 
 

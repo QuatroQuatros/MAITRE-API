@@ -16,6 +16,8 @@ class Restaurante extends Model
     
     protected $fillable = [
         'nome',
+        'descricao',
+        'endereco',
         'bairro',
         'cidade',
         'estado',
@@ -56,13 +58,14 @@ class Restaurante extends Model
             "cep" => 'required|string',
             "level" => 'required|integer',
             "categoria_restaurante_id" => 'required|integer',
-            "user_id" => 'required|integer',
+            "user_id" => 'required|integer|unique:restaurantes',
         ];
     }
 
     public function feedback(){
         return [
             'required' => 'O campo :attribute é obrigatório',
+            'user_id.unique' => 'Este usuário já possuí um restaurante',
         ];
     }
 }

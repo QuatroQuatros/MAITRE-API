@@ -18,38 +18,28 @@
                                     <div class="carousel-container">
                                         <div class="carousel-content">
                                             <h2 class="animate__animated animate__fadeInDown"><span>MAÎ</span>TRE</h2>
-                                            <p class="animate__animated animate__fadeInUp">
-                                            <div class="section-title">
-                                                <h2><span>Facilite seu dia</span></h2>
-                                            </div>
-                                            </p>
+                                            <h2 class="animate__animated animate__fadeInUp"><span>Facilite seu dia</span></h2>
                                             <p class="animate__animated animate__fadeInUp">Pesquise por restaurantes ou seu prato favorito</p>
                                         </div>
                                     </div>
                                 </div>
-
-
                                 @foreach($restaurantes as $r)
                                     @if($r->level == 2)
-                                        <!-- Slides -->
-                                        <div class="carousel-item" style="background-image: url({{$r->foto}});">
+                                        <div class="carousel-item" style="background-image: url(/img/slide/slide-2.jpg);">
                                             <div class="carousel-container">
                                                 <div class="carousel-content">
                                                     <h2 class="animate__animated animate__fadeInDown"><span>{{$r->nome}}</span></h2>
-                                                    <p class="animate__animated animate__fadeInUp">RESTAURANTE RÚSTICO E ELEGANTE QUE SERVE PRATOS INTERNACIONAIS, BOLOS, PÃES, SOBREMESAS E DOCES ARTESANAIS.</p>
-                                                    <p class="animate__animated animate__fadeInUp"><span class="golden">Alameda Franca, 1243, Rua Haddock Lobo, 1077 - Jardim Paulista, São Paulo - SP, 01422-001</span></p>
+                                                    <p class="animate__animated animate__fadeInUp">{{$r->descricao}}</p>
+                                                    <p class="animate__animated animate__fadeInUp"><span class="golden">{{$r->endereco}}, {{$r->numero}} - {{$r->bairro}}, {{$r->cidade}} - {{$r->estado}}, {{$r->cep}}</span></p>
                                                     <div>
-                                                        <a href="#restaurantes" class="btn-menu animate__animated animate__fadeInUp scrollto">Visitar</a>
-                                                        <a href="#restaurantePremium" class="btn-book animate__animated animate__fadeInUp scrollto">Reservar</a>
+                                                        <a href="/restaurantes/{{$r->id}}" class="btn-menu animate__animated animate__fadeInUp scrollto">VER MAIS</a>
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
                                 @endforeach
-
-                                
-
                             </div>
 
                             <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
@@ -94,7 +84,7 @@
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 @endforeach 
-                                                <input type="submit" value="FILTRAR">
+                                                <button type="submit" id="button" class="button-filter">Filtrar</button>
                                             </form>
                                             
                                         </label>
@@ -156,7 +146,7 @@
                                                         class="bi bi-star-fill"></i>
                                                 </div>
                                                 <div class="social">
-                                                <p>{{$r->categoria}}</p>
+                                                    <p>{{$r->categoria}}</p>
                                                 </div>
                                                 <div class="center-button">
                                                     <a href="/restaurantes/{{$r->id}}"><button type="submit"

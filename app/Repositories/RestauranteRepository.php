@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Restaurante;
+use App\Models\FoneRestaurante;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -27,8 +28,13 @@ class RestauranteRepository{
         //$this->restaurante = $this->restaurante->findOrFail($id);
         
         return $this->restaurante->leftJoin('avaliacoes', 'restaurantes.id', 'avaliacoes.restaurante_id')
-        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
-        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto')->where('restaurantes.id', $id)->first();
+        ->select('restaurantes.id', 'restaurantes.nome', 'restaurantes.foto', 'fone_restaurantes.descFone',
+        'restaurantes.descricao', 'restaurantes.endereco', 'restaurantes.bairro', 'restaurantes.cidade',
+        'restaurantes.estado', 'restaurantes.cep',
+        DB::raw( 'AVG( avaliacoes.estrelas ) as estrelas' ))
+        ->join('fone_restaurantes', 'fone_restaurantes.restaurante_id', 'restaurantes.id' )
+        ->groupBy('restaurantes.id', 'restaurantes.nome','restaurantes.foto', 'fone_restaurantes.descFone',
+        'restaurantes.descricao', 'restaurantes.endereco', 'restaurantes.bairro', 'restaurantes.cidade', 'restaurantes.estado', 'restaurantes.cep')->where('restaurantes.id', $id)->first();
         //return $this->restaurante->findOrFail($id);
 
     }
@@ -49,9 +55,12 @@ class RestauranteRepository{
         // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
         // Storage::disk('s3')->setVisibility($path, 'public');
        
+
+
         
-        return $this->restaurante->create([
+        $this->restaurante = $this->restaurante->create([
             "nome" => $request->nome,
+            "descricao" => $request->descricao,
             "endereco" => $request->endereco,
             "numero" => $request->numero,
             "bairro" => $request->bairro,
@@ -64,6 +73,12 @@ class RestauranteRepository{
             "categoria_restaurante_id" => $request->categoria_restaurante_id,
             "user_id" => $request->user_id
         ]);
+
+        FoneRestaurante::create([
+            'descFone' => $request->fone,
+            'restaurante_id' => $this->restaurante->id
+        ]);
+
 
     }
 
@@ -81,19 +96,19 @@ class RestauranteRepository{
         //     ]);
         // }
         
-       
-        $this->restaurante->update([
-            "nome" => $request->nome,
-            "endereco" => $request->endereco,
-            "numero" => $request->numero,
-            "bairro" => $request->bairro,
-            "cidade" => $request->cidade,
-            "estado" =>  $request->estado,
-            "cep" =>  $request->cep,
-            "categoria_id" => $request->categoria_id,
-        ]);
+        return $this->restaurante->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+        // $this->restaurante->update([
+        //     "nome" => $request->nome,
+        //     "endereco" => $request->endereco,
+        //     "numero" => $request->numero,
+        //     "bairro" => $request->bairro,
+        //     "cidade" => $request->cidade,
+        //     "estado" =>  $request->estado,
+        //     "cep" =>  $request->cep,
+        //     "categoria_id" => $request->categoria_id,
+        // ]);
 
-        return $this->restaurante;
+        //return $this->restaurante;
 
 
     }

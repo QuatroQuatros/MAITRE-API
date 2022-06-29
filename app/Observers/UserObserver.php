@@ -10,7 +10,7 @@ class UserObserver
  
     public function created(User $user)
     {
-        SendWelcomeEmail::dispatch($user);
+        //SendWelcomeEmail::dispatch($user);
     }
 
     public function updated(User $user)

@@ -75,7 +75,7 @@
                 <small class="text-muted">Cliente</small>
             </div>
             <div class="profile-photo">
-                <img src="../../Assets/img/logos/atlanticSemfundo.png">
+                <img src="/img/logos/atlanticSemfundo.png">
             </div>
         </div>
     </div>

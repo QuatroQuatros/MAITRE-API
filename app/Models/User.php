@@ -21,10 +21,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use SoftDeletes;
-    use CascadeSoftDeletes;
 
-
-    protected $cascadeDeletes = ['restaurantes'];
 
     protected $fillable = [
         'name',
@@ -57,7 +54,7 @@ class User extends Authenticatable
         return [
             "nome" => 'required|string',
             "email" => 'required|string|unique:users',
-            "password" => 'required|string',
+            "password" => 'required|string||min:8',
             
         ];
     }

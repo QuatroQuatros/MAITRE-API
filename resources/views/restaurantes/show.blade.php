@@ -19,78 +19,54 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                 <div class="events-slider swiper">
                     <div class="swiper-wrapper">
 
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
+                        @if(count($slides) == 0)
+                            <div class="swiper-slide">
+                                <div class="row event-item">
+                                    <div class="col-lg-6">
+                                        <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                        <h3>{{$restaurante->nome}}</h3>
+                                        <p class="fst-italic">
+                                            Descrição sobre o restaurante
+                                        </p>
+                                        <ul>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                            <li><i class="bi bi-check-circle"></i>Horarios</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                        <li><i class="bi bi-check-circle"></i>Horarios</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
+                            </div><!-- End testimonial item -->
+                        @else
 
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/app/public/{{$restaurante->foto}}" class="img-fluid" alt="">
+                            <div class="swiper-slide">
+                                <div class="row event-item">
+                                    <div class="col-lg-6">
+                                        <img src="/storage/app/public/{{$restaurante->foto}}" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                        <h3>{{$restaurante->nome}}</h3>
+                                        <p class="fst-italic">
+                                           {{$restaurante->descricao}}
+                                        </p>
+                                        {{-- <ul>
+                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
+                                                ex ea commodo consequat.</li>
+                                            <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
+                                                reprehenderit in voluptate velit.</li>
+                                            <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
+                                                ex ea commodo consequat.</li>
+                                        </ul>
+                                        <p>
+                                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                                            dolor in reprehenderit in voluptate
+                                            velit esse cillum dolore eu fugiat nulla pariatur
+                                        </p> --}}
+                                    </div>
                                 </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
-                                            reprehenderit in voluptate velit.</li>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                    </ul>
-                                    <p>
-                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="row event-item">
-                                <div class="col-lg-6">
-                                    <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
-                                </div>
-                                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                    <h3>{{$restaurante->nome}}</h3>
-                                    <p class="fst-italic">
-                                        Descrição sobre o restaurante
-                                    </p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in
-                                            reprehenderit in voluptate velit.</li>
-                                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip
-                                            ex ea commodo consequat.</li>
-                                    </ul>
-                                    <p>
-                                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                        dolor in reprehenderit in voluptate
-                                        velit esse cillum dolore eu fugiat nulla pariatur
-                                    </p>
-                                </div>
-                            </div>
-                        </div><!-- End testimonial item -->
+                            </div><!-- End testimonial item -->
+                        @endif
 
                     </div>
                     
@@ -122,13 +98,13 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 <div class="col-lg-3 col-md-6 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Sobre o restaurante:</h4>
-                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                    <p>{{$restaurante->descricao}}</p>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6 info">
                                     <i class="bi bi-geo-alt"></i>
                                     <h4>Localização:</h4>
-                                    <p>A108 Adam Street<br>New York, NY 535022</p>
+                                    <p>{{$restaurante->endereco}}, {{$restaurante->numero}}<br>{{$restaurante->bairro}}, {{$restaurante->cidade}} - {{$restaurante->estado}}, {{$restaurante->cep}}</p>
                                 </div>
 
                                 <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
@@ -140,7 +116,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                 <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
                                     <i class="bi bi-phone"></i>
                                     <h4>Contato</h4>
-                                    <p>11 91234-5678<br>info@example.com</p>
+                                    <p>{{$restaurante->descFone}}</p>
                                 </div>
                             </div>
                         </div>
@@ -182,10 +158,10 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                     <div class="col-lg-8 details order-2 order-lg-1">
                                                         <h3>{{$e->nome}}</h3>
                                                         <p class="fst-italic">{{$e->descPrato}}</p>
-                                                        <p>R${{$e->valor}}</p>
+                                                        <p>R$ {{number_format((float)$e->valor, 2, '.', '')}}</p>
                                                     </div>
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="../assets/img/specials-1.jpg" alt="" class="img-fluid">
+                                                        <img src="/img/specials-1.jpg" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,13 +171,14 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                     <div class="col-lg-8 details order-2 order-lg-1">
                                                         <h3>{{$e->nome}}</h3>
                                                         <p class="fst-italic">{{$e->descPrato}}</p>
-                                                        <p>R${{$e->valor}}</p>
+                                                        <p>R$ {{number_format((float)$e->valor, 2, '.', '')}}</p>
                                                     </div>
+                                                    
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="../assets/img/specials-2.jpg" alt="" class="img-fluid">
+                                                        <img src="/img/specials-2.jpg" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>                                         
                                         @endif
                                     @endforeach
                                     
@@ -212,24 +189,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
             </div>
         </section><!-- End cardapio Section -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nome do prato</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end modal-->
+
 
         <!--cardapio completo-->
         <section class="menu">
@@ -254,19 +214,58 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                 </div>
 
                 <div class="row menu-container">
+                   
                     @foreach($pratos as $p)
+                   
                         <div class="col-lg-6 menu-item filter-{{$p->descCategoria}}">
                             <div class="menu-content">
-                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span>R${{$p->valor}}</span>
+                                <a onclick="modalPrato({{$p->id}})" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$p->nome}}</a><span id="{{$p->id}}">R$</span>
                             </div>
                             <div class="menu-ingredients">
                                 {{$p->descPrato}}
                             </div>
                         </div>
+                        <script>
+                            var valor = document.getElementById({{$p->id}})
+                            valor.innerHTML += parseFloat({{$p->valor}}).toFixed(2)
+                        </script>
                     @endforeach
 
                     
                 </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="nomePrato">Nome do prato</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center">
+                                    <img src="/img/chefs/chefs-1.jpg" class="img-prato" alt="">
+                                    <div class="section-subtitle">
+                                        <h4>DES<span>CRIÇÃO</span></h4>
+                                    </div>
+                                    <div class="menu-ingredients" id="desc">
+                                        Lorem, deren, trataro, filede, nerada
+                                    </div>
+                                    <div class="section-title">
+                                        <h4>Preço: R$ <span id="preco">$14.99</span></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button"  class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end modal-->
 
         </section><!-- End Menu Section -->
 
@@ -289,6 +288,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                             <div class="validate"></div>
                         </div>   
                         <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                            <input type="hidden" value="{{ $restaurante->id }}" id="rest_id"/>
                             <input type="date" class="form-control" name="data" id="dataInput" onchange="getDia()">
                             <div class="validate"></div>
                         </div>
@@ -331,11 +331,11 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                         @endfor
                                         <!--<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>-->
                                     </div>
-                                    <p>
+                                    {{-- <p>
                                         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
                                         Caso você queria fazer um comentário, é só apertar no botão abaixo.
                                         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                         @endif
@@ -418,6 +418,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
        
     </main>
 
+    <script src="/js/modalPrato.js"></script>
     <script>
         //Script para definir a data minima e maxima do calendario de reservas.
 
@@ -435,7 +436,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
         var date = yyyy + '-' + mm + '-' + dd;
         //var dateNext = yyyy + '-' + mmNext;
-        var dateNext = yyyy + '-' + mmNext + '-01';
+        var dateNext = yyyy + '-' + mmNext + '-31';
 
         document.getElementById('dataInput').setAttribute("min", date);
         document.getElementById('dataInput').setAttribute("max", dateNext);
@@ -443,7 +444,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
         function getDia(){
             var data = document.getElementById('dataInput').value
+            var id = document.getElementById('rest_id').value;
             var select = document.getElementById('horarios');
+
 
             $('#horarios').empty();
 
@@ -460,7 +463,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
 
             var d = new Date(data);
             var dia = DiaSemana[d.getDay()];
-            var url = 'http://127.0.0.1:8000/api/horarios/' + dia
+            var url = '/api/horarios/'+ id +'/' + dia
             console.log(url)
             fetch(url)
             .then((resp) => resp.json())

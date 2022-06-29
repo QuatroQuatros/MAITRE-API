@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PratoEspecial;
+use App\Models\Restaurante;
 
 class PratoEspecialController extends Controller
 {
@@ -34,8 +35,11 @@ class PratoEspecialController extends Controller
 
     public function update(Request $request, $id)
     {
-        return PratoEspecial::where('id', $id)->update($request->only('nome','foto','descPrato','valor', 'categoria_id', 'dia_semana_id'));
-    }
+        
+        $prato =  PratoEspecial::findOrFail($id);
+        $prato->update($request->only('nome','foto','descPrato','valor', 'categoria_id', 'dia_semana_id'));
+        return $prato;
+    }   
 
   
     public function destroy($id)

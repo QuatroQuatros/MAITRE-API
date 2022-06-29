@@ -18,7 +18,7 @@ class DiaSemanaController extends Controller
             //dd($dias);
             return response(DiaSemana::select('id', 'diaSemana')->whereIn('id', $dias)->get());
         }else{
-            return response(DiaSemana::all());
+            return response()->json(['erro' => 'nenhum dado fornecido'], 304);
         }
     }
 }

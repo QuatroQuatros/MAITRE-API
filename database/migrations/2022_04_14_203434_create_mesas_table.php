@@ -17,9 +17,9 @@ class CreateMesasTable extends Migration
 
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
-            $table->integer('qtdMesas');
-            $table->integer('capMaxima');
-            $table->integer('mesasDisponiveis');
+            $table->integer('mesa');
+            $table->integer('capacidade');
+            $table->boolean('disponivel')->default(1);
             $table->foreignId('restaurante_id')->onDelete('cascade')->constrained();
             $table->softDeletes();
             $table->timestamps();

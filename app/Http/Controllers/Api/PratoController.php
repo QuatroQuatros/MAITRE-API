@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Prato;
 
@@ -21,10 +22,14 @@ class PratoController extends Controller
 
     public function store(Request $request)
     {
+        $imagem = $request->file('foto');
+        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        Storage::disk('s3')->setVisibility($path, 'public');
         return Prato::create([
             'nome' => $request->nome,
             'descPrato' => $request->descPrato,
             'valor' => $request->valor,
+            "foto" => Storage::disk('s3')->url($path),
             'categoria_id' => $request->categoria_id,
             'restaurante_id' => $request->restaurante_id,
         ]);
@@ -38,7 +43,9 @@ class PratoController extends Controller
 
     public function update(Request $request, $id)
     {
-        return Prato::where('id', $id)->update($request->only('nome','descPrato','valor'));
+        $prato =  Prato::findOrFail($id);
+        $prato->update($request->only('nome','foto','descPrato','valor', 'categoria_id'));
+        return $prato;
     }
 
   

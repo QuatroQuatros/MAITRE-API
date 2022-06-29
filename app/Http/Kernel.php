@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'cliente' => \App\Http\Middleware\Cliente::class,
         'admin' => \App\Http\Middleware\Admin::class,
         'restaurante' => \App\Http\Middleware\Restaurante::class,
+        'has_restaurante' => \App\Http\Middleware\userHasRestaurante::class,
         'userAgent' => \App\Http\Middleware\VerifyUserAgent::class,
 
     ];

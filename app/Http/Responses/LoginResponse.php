@@ -17,7 +17,8 @@ class LoginResponse implements LoginResponseContract
         $user = User::findOrFail($id);
         $level = auth()->user()->level; 
 
-        if (is_null($user->first_login_at) && $level == 2) {
+        $has = Restaurante::where('user_id', $id)->exists();
+        if (is_null($user->first_login_at) && !$has && $level == 2) {
             $user->first_login_at = Carbon::now();
             $user->last_login_at  = Carbon::now();
             $user->update();
@@ -26,8 +27,7 @@ class LoginResponse implements LoginResponseContract
             $user->first_login_at = Carbon::now();
             $user->last_login_at  = Carbon::now();
             $user->save();
-       }elseif(!Restaurante::where('user_id', $id)->exists()){
-            return redirect('/restaurantes/create');
+            return redirect('/');
        }
 
         if($level == 1){

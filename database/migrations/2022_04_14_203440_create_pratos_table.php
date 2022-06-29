@@ -18,6 +18,7 @@ class CreatePratosTable extends Migration
         Schema::create('pratos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('foto', 400)->nullable();
             $table->string('descPrato');
             $table->float('valor');
             $table->foreignId('categoria_id')->constrained();

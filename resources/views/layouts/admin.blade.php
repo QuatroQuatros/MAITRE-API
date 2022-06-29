@@ -17,8 +17,24 @@
      
     <!--Data table-->
     
+    <link rel="stylesheet" href="/css/adm.css">
+    <link rel="stylesheet" href="/css/lightbox.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link rel="stylesheet" href="/css/formsRest.css">
+    <link rel="stylesheet" href="/css/price.css">
+    <link rel="stylesheet" href="/css/partePremium.css">
+    <link rel="stylesheet" href="/css/pagamento.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--Data table-->
+    
     <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
     <link rel="stylesheet" type="text/css" href="/DataTables/datatables.min.css">
+
 
 
     <!--Material CDN-->
@@ -46,27 +62,21 @@
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="../cliente/cliente.php" class="active">
+                <a href="/admin/restaurantes" class="active">
                     <span class="material-icons-sharp">person_outline</span>
-                    <h3>Cliente(Dono)</h3>
+                    <h3>Restaurantes</h3>
                 </a>
-                <a href="../cliente/exclusaoRestaurante.php" class="active">
-                    <span class="material-icons-sharp">no_food</span>
-                    <h3>Exclusão Restaurante</h3>
-                </a>
+                
                 <a href="/admin/categorias/create" class="active">
                     <span class="material-icons-sharp">category</span>
-                    <h3>Categoria</h3>
+                    <h3>Categoria de pratos</h3>
                 </a>
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">mail_outline</span>
-                    <h3>Messages</h3>
-                    <span class="message-count">26</span>
+
+                <a href="/admin/categorias/restaurantes/create" class="active">
+                    <span class="material-icons-sharp">category</span>
+                    <h3>Categoria de restaurantes</h3>
                 </a>
-                <a href="#" class="active">
-                    <span class="material-icons-sharp">inventory</span>
-                    <h3>Joguinho</h3>
-                </a>
+                
                 <form class="form-logout" method="POST" action="/logout">
                     @csrf
                       

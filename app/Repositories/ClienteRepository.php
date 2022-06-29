@@ -8,6 +8,8 @@ use App\Models\Cliente;
 use App\Models\FoneCliente;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Storage;
+
 class ClienteRepository{
 
 	public function __construct(Cliente $cliente){
@@ -28,9 +30,15 @@ class ClienteRepository{
             "numero" => $request->numero,
             "user_id" => $request->user_id
         ]);*/
+
+        $imagem = $request->file('foto');
+        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        Storage::disk('s3')->setVisibility($path, 'public');
+
         $cliente = new Cliente;
 
         $cliente->nome = $request->nome;
+        $cliente->foto = Storage::disk('s3')->url($path);
         $cliente->cpf = $request->cpf;
         $cliente->endereco = $request->endereco;
         $cliente->bairro = $request->bairro;
@@ -54,9 +62,26 @@ class ClienteRepository{
 
 
     public function update(Request $request, $id){
-        $this->cliente = $this->cliente->where('user_id', $id);
+        $this->cliente = $this->cliente->where('user_id', $id);  
 
-        $this->cliente->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+        if($request->has('foto')){
+            $imagem = $request->file('foto');
+
+            $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+            Storage::disk('s3')->setVisibility($path, 'public');
+
+            $this->cliente->foto = Storage::disk('s3')->url($path);
+
+            $this->cliente->save();
+
+            $this->cliente->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+
+            return User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first();
+        }else{
+            $this->cliente->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+        }
+
+       
 
         if($request->has('nome')){
             $u = User::findOrFail($id);

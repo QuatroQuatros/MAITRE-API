@@ -19,7 +19,7 @@
             <div class="content first-content">
                 <div class="first-column">
                     <h2 class="title title-primary">Seja bem-vindo</h2>
-                    <p class="description description-primary">Você esta se cadastrando como usuario</p>
+                    <p class="description description-primary">Você esta se cadastrando como usuário</p>
                     <p class="description description-primary">Gostaria de cadastrar-se como restaurante ?
                         clique abaixo</p>
                     <button id="signin" class="btn btn-primary">Cadastrar como dono</button>
@@ -27,7 +27,7 @@
                     <a href="/login"><button class="btn btn-primary">Voltar(login)</button></a>
                 </div>
                 <div class="second-column">
-                    <h2 class="title title-second">Cadastro como usuario</h2>
+                    <h2 class="title title-second">Cadastro como usuário</h2>
                     <div class="social-media">
                         <ul class="list-social-media">
                             <a class="link-social-media" href="#">
@@ -47,16 +47,16 @@
                             </a>
                         </ul>
                     </div><!-- social media -->
-                    <p class="description description-second">Crie sua conta como usuario :</p>
+                    <p class="description description-second">Crie sua conta como usuário :</p>
                     <form action="/create/user" method="post" role="form" class="formCadas" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="level" value="1">
 
-                        <p class="password">DADOS DO USUARIO</p>
+                        <p class="password">DADOS DO USUÁRIO</p>
                         <div class="form-content">
                             <label class="label-input" for="">
                                 <i class="far fa-user icon-modify"></i>
-                                <input type="text" name="nome" id="nome" placeholder="Nome do usuario">
+                                <input type="text" name="nome" id="nome" placeholder="Nome do usuário">
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-phone-volume icon-modify"></i>
@@ -66,11 +66,11 @@
                         <div class="form-content">
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-clipboard-list icon-modify"></i>
-                                <input type="text" name="cpf" id="cpf" placeholder="Cpf do usuario">
+                                <input type="text" name="cpf" id="cpf" placeholder="CPF do usuário">
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-at icon-modify"></i>
-                                <input type="email" name="email" id="email" placeholder="email do usuario">
+                                <input type="email" name="email" id="email" placeholder="email do usuário">
                             </label>
                         </div>
                         <div class="form-content">
@@ -149,7 +149,7 @@
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-house-user icon-modify"></i>
-                                <input type="number" name="numero" id="num" placeholder="Numero residencial :">
+                                <input type="number" name="numero" id="num" placeholder="Número residencial :">
                             </label>
                         </div>
                         <button class="btn btn-second">Cadastrar dados</button>
@@ -162,9 +162,9 @@
                     <h2 class="title title-primary">Seja bem-vindo</h2>
                     <p class="description description-primary">Você esta se cadastrando como dono de restaurante
                     </p>
-                    <p class="description description-primary">Gostaria de cadastrar-se como usuario ? clique
+                    <p class="description description-primary">Gostaria de cadastrar-se como usuário ? clique
                         abaixo</p>
-                    <button id="signup" class="btn btn-primary">Cadastrar como usuario</button>
+                    <button id="signup" class="btn btn-primary">Cadastrar como usuário</button>
                     <p class="description description-primary">Voltar para tela de login ? </p>
                     <a href="./login.php"><button class="btn btn-primary">Voltar(login)</button><a>
                 </div>
@@ -197,11 +197,11 @@
                         <div class="form-content">
                             <label class="label-input" for="">
                                 <i class="far fa-user icon-modify"></i>
-                                <input type="text" name="nome" id="nomeDono" placeholder="Nome do usuario">
+                                <input type="text" name="nome" id="nomeDono" placeholder="Nome do usuário">
                             </label>
                             <label class="label-input" for="">
                                 <i class="fa-solid fa-at icon-modify"></i>
-                                <input type="email" name="email" id="emailDono" placeholder="email do usuario">
+                                <input type="email" name="email" id="emailDono" placeholder="email do usuário">
                             </label>
                         </div>
                         <div class="form-content">
@@ -216,24 +216,7 @@
                                 <span toggle="#passwordDono2" class="fa fa-fw fa-eye field-icon toggle-password" style="margin-right: 5px;"></span>
                             </label>
                         </div>
-                        <div class="form-content">
-                            <div class="input-div">
-                            <div class="select_mate" data-mate-select="active">
-                                <select name="selectData" onchange="" onclick="return false;" id="">
-                                    <option selected>Selecione o pacote que irá utilizar </option>
-                                    <option value="1">Pacote básico </option>
-                                    <option value="2">Pacote Premium </option>
-                                </select>
-                                <p class="selecionado_opcion" onclick="open_select(this)"></p><span onclick="open_select(this)" class="icon_select_mate"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
-                                        <path d="M0-.75h24v24H0z" fill="none" />
-                                    </svg></span>
-                                <div class="cont_list_select_mate">
-                                    <ul class="cont_select_int"> </ul>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                        
                         <!--
                         <button class="btn btn-second">Continuar cadastro</button>
 -->

@@ -23,8 +23,13 @@ class ClienteController extends Controller
 
 
     public function index(){
-        $restaurantes = Restaurante::all();
-        return view('welcome', ['restaurantes' => $restaurantes]);
+
+
+        $restaurantes = Restaurante::select('restaurantes.id', 'restaurantes.foto', 'restaurantes.nome', 'restaurantes.level','categoria_restaurantes.categoria')->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
+        //$restaurantes = Restaurante::all();        
+        // $restaurantes = Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')->get();
+        $premium = Restaurante::where('level', 2)->get();
+        return view('welcome', ['restaurantes' => $restaurantes, 'premium' => $premium]);
     }
 
     public function store(Request $request, $id){
@@ -58,13 +63,17 @@ class ClienteController extends Controller
     }
 
     public function destroy($id){
-        User::findOrFail($id)->delete();
-        Cliente::where('user_id', $id)->first()->delete();
-        return view('/login');
+
+        $c =Cliente::where('user_id', $id)->first();
+        FoneCliente::where('cliente_id', $c->id)->first()->delete();
+        $c->forceDelete();
+        User::findOrFail($id)->forceDelete();
+        return redirect('/login');
     }
 
     public function profile($id){
-        $reservas = Reserva::where('reservas.cliente_id', $id)->get();
+        $c =  Cliente::where('user_id', $id)->first();
+        $reservas = Reserva::where('cliente_id', $c->id )->get();
         return view('clientes.profile', ['reservas' => $reservas, 'cliente' => User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first()]);
     }
 }

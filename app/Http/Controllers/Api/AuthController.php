@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 
+
+use App\Models\Cliente;
+
 use Carbon\Carbon;
 
 class AuthController extends Controller
@@ -77,5 +80,15 @@ class AuthController extends Controller
     public function logout(){
         auth()->user()->tokens()->delete();
         return response()->json(["message" => "sessão encerrada"]);
+    }
+
+
+    public function teste(){
+        return auth()->user()->email;
+    }
+
+    public function getId(){
+        $id = auth()->user()->id;
+        return Cliente::select('id', 'user_id')->where('user_id', $id)->first();
     }
 }
