@@ -13,33 +13,35 @@
                         <img class="img" id="preview">
                         <form class="form-upload" action="/restaurantes/slides" method="POST" enctype="multipart/form-data" role="form">
                         @csrf
-                            <div class="wrapper">
-                                <h2>Descrição do banner</h2>
-                                <textarea spellcheck="false" placeholder="Escreva sua descrição aqui" name="descFoto" required></textarea>
-                            </div>
-                            </div>
-                            <div class="form-row button-login centerPremium">
-                                <label class="input-personalizado">
-                                    <span class="botao-selecionar">Trocar banner</span>
-                                    <img class="imagem" id="testeIMG"/>
-                                    <input type="file" class="input-file" id="img-input" name="foto" onchange="previewIMG(this)" accept="image/*">
+                        <div class="wrapper">
+                            <h2>Descrição do banner</h2>
+                            <textarea spellcheck="false" placeholder="Escreva sua descrição aqui" name="descFoto" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row button-login centerPremium">
+                        <label class="input-personalizado">
+                            <span class="botao-selecionar">Trocar banner</span>
+                            <img class="imagem" id="testeIMG"/>
+                            <input type="file" class="input-file" id="img-input" name="foto" onchange="previewIMG(this)" accept="image/*">
                             <input type="submit" class="input-file">
-                                </label>
+                        </label>
+
                             </div>
                             <div style="display: flex;justify-content: center;padding: 10px;">
-                                <input type="submit" class="btn "><input/>
+                                <input type="submit" class="btn ">
                             </div>
                         </form>
+
                 </div>
             </div>
         
         </section>
 
         <h1>Sliders atualmente usados</h1>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
-        <table id="example" class="display" style="width:100%">
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
+            <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+            <table id="example" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>Banner</th>
