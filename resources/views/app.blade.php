@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>MAÎTRE APP</title>
-    <link href="/img/favicons/maitre.png" rel="icon">
+    <title>MAÎTRE</title>
+
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -58,7 +58,7 @@
                             <li class="scroll-to-section"><a href="#pricing">Planos</a></li>
                             <li class="scroll-to-section"><a href="#newsletter">Contato</a></li>
                             <li>
-                                <div class="gradient-button"><a href="/index"><i class="fa fa-sign-in-alt"></i> ACESSAR MAÎTRE</a></div>
+                                <div class="gradient-button"><a href="/index"><i class="fa fa-sign-in-alt"></i> Acessar administrador</a></div>
                             </li>
                         </ul>
                         <a class='menu-trigger'>
@@ -81,9 +81,9 @@
                             <div class="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <h2>Obtenha a ultima versão!</h2>
-                                        <p>Fast Location é um App pra agilizar a sua vida e fazer com que você obtenha a
-                                            melhor experiência quando for buscar algum restaurante</p>
+                                        <h2>Obtenha a última versão!</h2>
+                                        <p>Maître o serviço pra agilizar a sua vida e fazer com que você obtenha a
+                                            melhor experiência quando for buscar um restaurante</p>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="white-button first-button scroll-to-section">
@@ -112,7 +112,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
                         <h4>Os melhores <em>Serviços &amp; experiências </em> para você</h4>
-                        <img src="/img/heading-line-dec.png" alt="">
+                        <img src="/images/heading-line-dec.png" alt="">
                         <p>Se você precisa de informações detalhadas de seu restaurante contrate o nosso serviço.</p>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                 <div class="col-lg-3">
                     <div class="service-item third-service">
                         <div class="icon"></div>
-                        <h4>Nosso app Pode te ajudar na hora que for escolher aonde comer</h4>
+                        <h4>Nosso serviço pode  te ajudar na hora que for escolher aonde comer</h4>
                         <p>Afinal ficar em uma lista de espera acaba deixando qualquer um irritado</p>
                         <div class="text-button">
                             <a href="#">Saiba mais <i class="fa fa-arrow-right"></i></a>
@@ -169,21 +169,21 @@
             <div class="row">
                 <div class="col-lg-6 align-self-center">
                     <div class="section-heading">
-                        <h4>Sobre <em>oque fazemos</em> &amp; quem somos.</h4>
-                        <img src="/img/heading-line-dec.png" alt="">
+                        <h4><em>oque fazemos</em> &amp; quem somos.</h4>
+                        <img src="/images/heading-line-dec.png" alt="">
                         <p>Somos a Atlantic uma empresa de tecnologia que veio facilitar a vida do consumidor e claro você dono de um restaurante
                         </p>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="box-item">
-                                <h4><a href="#">Nosso App</a></h4>
+                                <h4><a href="#">App</a></h4>
                                 <p>Nosso app é focado para que você escolhe a melhor opção de acordo com sua vontade e claro que não tenha que ficar em uma fila para poder comer</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="box-item">
-                                <h4><a href="#">Nosso site</a></h4>
+                                <h4><a href="#">Site</a></h4>
                                 <p>Nosso site é feito para você dono de um restaurante que deseja atrair clientes e melhorar a administração de seu restaurante, sendo atualizado de cada reserva e avaliação que é feita sobre seu estabelecimento</p>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="right-image">
-                        <img src="/img/about-right-dec.png" alt="">
+                        <img src="/images/about-right-dec.png" alt="">
                     </div>
                 </div>
             </div>
@@ -210,7 +210,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="section-heading">
                         <h4>Veja oque <em>os nossos clientes dizem</em> sobre nossa empresa</h4>
-                        <img src="/img/heading-line-dec.png" alt="">
+                        <img src="/images/heading-line-dec.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -227,7 +227,7 @@
                                                         <span class="date">30 Novembro 2021</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                        <span class="category">Location Food</span>
+                                                        <span class="category">Maître</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 col-12">
                                                         <i class="fa fa-star"></i>
@@ -269,7 +269,7 @@
                                                         <span class="date">27 Novembro 2021</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                        <span class="category">App &amp; Location Food</span>
+                                                        <span class="category">App &amp; Maître</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 col-12">
                                                         <i class="fa fa-star"></i>
@@ -311,7 +311,7 @@
                                                         <span class="date">21 November 2021</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 d-none d-sm-block">
-                                                        <span class="category">Web &amp; Location Food</span>
+                                                        <span class="category">Web &amp; maître</span>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-4 col-12">
                                                         <i class="fa fa-star"></i>
@@ -449,7 +449,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="pricing-item-regular">
-                        <span class="price">$12</span>
+                        <span class="price"> gratis</span>
                         <h4>Plano básico</h4>
                         <div class="icon">
                             <img src="/img/pricing-table-01.png" alt="">
@@ -458,7 +458,7 @@
                             <li>O seu restaurante será exibido em nosso app</li>
                             <li>funçoes basicas:</li>
                             <li>Suporte</li>
-                            <li>mais opções</li>
+                            <li>poderá ser feito a reserva</li>
                         </ul>
                         <div class="border-button">
                             <a href="#">Contrate agora</a>
@@ -467,26 +467,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="pricing-item-pro">
-                        <span class="price">$25</span>
-                        <h4>Plano intermediario</h4>
-                        <div class="icon">
-                            <img src="/img/pricing-table-01.png" alt="">
-                        </div>
-                        <ul>
-                            <li>O seu restaurante será exibido em nosso app</li>
-                            <li>funçoes basicas:</li>
-                            <li>Suporte</li>
-                            <li>Graficos inteligentes</li>
-                            <li>mais opções</li>
-                        </ul>
-                        <div class="border-button">
-                            <a href="#">Contrate agora</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="pricing-item-regular">
-                        <span class="price">$66</span>
+                        <span class="price">R$ 40.00</span>
                         <h4>Plano premium</h4>
                         <div class="icon">
                             <img src="/img/pricing-table-01.png" alt="">
@@ -497,8 +478,9 @@
                             <li>Suporte</li>
                             <li>Graficos inteligentes</li>
                             <li>poderá ser feito a reserva</li>
-                            <li>mais opções</li>
-
+                            <li>Restaurante em destaques</li>
+                            <li>Restaurante em destaques</li>
+                            <li>Primeira indicação de restaurantes</li>
                         </ul>
                         <div class="border-button">
                             <a href="#">Contrate agora</a>
@@ -511,7 +493,6 @@
 
     <footer id="newsletter">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-3">
                     <div class="footer-widget">

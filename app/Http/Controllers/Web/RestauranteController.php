@@ -62,8 +62,9 @@ class RestauranteController extends Controller
         ->whereDate('created_at', '=', Carbon::today()->toDateString())->first();
 
 
-        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'clientes.nome', 'users.email')
+        $reservas = Reserva::select('reservas.id','reservas.diaSemana', 'reservas.status_reserva_id', 'reservas.horario', 'fone_restaurantes.descFone','clientes.nome', 'users.email')
         ->join('restaurantes', 'restaurantes.id', 'reservas.restaurante_id')
+        ->join('fone_restaurantes', 'restaurantes.id', 'fone_restaurantes.restaurante_id')
         ->join('clientes', 'reservas.cliente_id','clientes.id')
         ->join('users', 'restaurantes.user_id', 'users.id')
         

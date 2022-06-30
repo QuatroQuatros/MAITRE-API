@@ -179,23 +179,14 @@
                                             <img src="/storage/{{$r->foto}}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                            <h3>{{$r->nome}}</h3>
-                                            
-                                            <p class="fst-italic">
-                                                {{$r->descricao}}
-                                            </p>
-                                            <ul>
-                                                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                                    commodo
-                                                    consequat.</li>
-                                                <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in
-                                                    voluptate velit.</li>
-                                                <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea
-                                                    commodo
-                                                    consequat.</li>
-                                            </ul>
+                                            <div class="containerDesc">
+                                                <p class="fst-italic descSlide">
+                                                   {{$r->descricao}}
+
+                                                </p>
+                                            </div>
                                             <p>
-                                                {{$r->endereco}}, {{$r->numero}} - {{$r->bairro}}, {{$r->cidade}} - {{$r->estado}}, {{$r->cep}}
+                                                <i class="bi bi-check-circle"></i>  {{$r->endereco}}, {{$r->numero}} - {{$r->bairro}}, {{$r->cidade}} - {{$r->estado}}, {{$r->cep}}
                                             </p>
                                             <a href="/restaurantes/{{$r->id}}"><button type="submit"
                                                     class="button-coment">Visitar restaurante</button></a>

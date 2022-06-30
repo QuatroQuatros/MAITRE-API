@@ -151,7 +151,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                         <p>R$ {{number_format((float)$e->valor, 2, '.', '')}}</p>
                                                     </div>
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="/img/specials-1.jpg" alt="" class="img-fluid">
+                                                        <img src="/storage/{{$e->nome}}" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
                                             </div>

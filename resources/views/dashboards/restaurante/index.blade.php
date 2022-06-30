@@ -27,7 +27,7 @@
     </div>
     <!---------------- end insights ---------------->
     <div class="containerNoti">
-        <h1>Ultimas reservas feitas</h1>
+        <h1>Últimas reservas feitas</h1>
         <ul class="responsive-table">
             <li class="table-header">
                 <div class="col col-1">Nome do cliente</div>
@@ -42,7 +42,7 @@
                             <input type="hidden" value="{{$r->id}}" id="id">
                             <div class="col col-1" data-label="Nome do cliente">{{$r->nome}}</div>
                             <div class="col col-2" data-label="Email Cliente">{{$r->email}}</div>
-                            <div class="col col-3" data-label="Telefone">$341</div>
+                            <div class="col col-3" data-label="Telefone">{{$r->descFone}}</div>
                             @if($r->status_reserva_id == 1)                   
                                 <div class="col col-4" data-label="Status">
                                     <a href="#modal" onclick="carregaModal({{$r->id}})">
@@ -73,7 +73,7 @@
 
 
     <div class="recent-orders">
-        <h2 class="text-muted">Reservas passadas</h2>
+        <h2 class="text-muted">Reservas finalizadas</h2>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
         <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
@@ -87,12 +87,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td data-label="Nome">Winycios</td>
-                    <td data-label="Email">111.111.111-86</td>
-                    <td data-label="Telefone">11 911111-1111</td>
-                    <td data-label="Dia da Reserva">13/09/2004</td>
-                </tr>
+                @foreach($reservas as $r)
+                    @if($r->status_reserva_id == 6)
+                        <tr>
+                            <td data-label="Nome">{{$r->nome}}</td>
+                            <td data-label="Email">{{$r->email}}</td>
+                            <td data-label="Telefone">{{$r->descFone}}</td>
+                            <td data-label="Dia da Reserva">{{$r->horario}}</td>
+                        </tr>
+                    @else
+                    <tr>
+                        <td data-label="Nome">@php echo '&nbsp' @endphp</td>
+                        <td data-label="Email">@php echo '&nbsp' @endphp</td>
+                        <td data-label="Telefone">@php echo '&nbsp' @endphp</td>
+                        <td data-label="Dia da Reserva">@php echo '&nbsp' @endphp</td>
+                    </tr>
+                    @endif  
+                @endforeach
             </tbody>
         </table>
         <script>
