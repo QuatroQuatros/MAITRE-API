@@ -15,7 +15,7 @@
                             <div class="col-md-6 form-group ">
                                 <div class="text-center">
                                     @if($cliente->foto != null)
-                                        <img src="{{$cliente->foto}}" class="img-logo" alt="">
+                                        <img src="/storage/{{$cliente->foto}}" class="img-logo" alt="">
                                     @else
                                         <img src="{{$cliente->profile_photo_url}}" class="img-logo" alt="">
 
@@ -40,7 +40,7 @@
                                         <div class=" info">
                                             <i class="bi bi-telephone"></i>
                                             <h4 class="pointerCliente" data-bs-toggle="modal" data-bs-target="#modalTel">Seu telefone</h4>
-                                            <p>4002-8922</p>
+                                            <p>{{$fone->descFone}}</p>
                                         </div>
                                         <div class=" info mt-4 mt-lg-0">
                                             <i class="fas fa-user-slash icon-modify"></i>
@@ -116,7 +116,7 @@
                             <div class="rowCenter">
                                 <div class="text-center">
                                     <div id="img-container">
-                                        <img src="{{$cliente->foto}}" class="img-logo" id="preview" alt="">
+                                        <img src="/storage/{{$cliente->foto}}" class="img-logo" id="preview" alt="">
                                     </div>
                                     <form class="form-uploadNot" action="/clientes/{{$cliente->user_id}}" method="post" role="form">
                                         @csrf

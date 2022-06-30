@@ -71,10 +71,14 @@ class ClienteRepository{
         if($request->has('foto')){
             $imagem = $request->file('foto');
 
-            $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-            Storage::disk('s3')->setVisibility($path, 'public');
+            $name = $imagem->getClientOriginalName(); 
+            $path = $imagem->storeAs('imagens', $name, 'public');
 
-            $this->cliente->foto = Storage::disk('s3')->url($path);
+            // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+            // Storage::disk('s3')->setVisibility($path, 'public');
+
+            //$this->cliente->foto = Storage::disk('s3')->url($path);
+            $this->cliente->foto =$path;
 
             $this->cliente->save();
 

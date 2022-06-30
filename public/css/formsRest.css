@@ -46,12 +46,21 @@ fieldset {
     margin: 0 0 0 10px;
 }
 
-.register,
+/*.register,
 .login {
     border-radius: 5px;
     height: auto;
     max-width: 400px;
     padding: 40px 15px;
+    text-align: center;
+}*/
+
+.register,
+.login {
+    border-radius: 5px;
+    height: auto;
+    max-width: 400px;
+    padding: 15px 4px;
     text-align: center;
 }
 
@@ -79,8 +88,8 @@ fieldset {
     border-top: 1px solid #e2e2e2;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-    padding-top: 30px;
+    /*margin-top: 30px;
+    padding-top: 30px;*/
 }
 
 .register .create-account strong,
@@ -272,13 +281,14 @@ fieldset {
 
 .modal {
     width: 40rem;
-    padding: 3rem 2rem;
+   /* padding: 3rem 2rem;*/
     border-radius: .8rem;
     color: var(--color-light);
     background: var(--color-background);
     position: relative;
     overflow: hidden;
     height: auto;
+    /*height: 100%;*/
 }
 
 .modal__title {
@@ -286,8 +296,8 @@ fieldset {
 }
 
 .modal__text {
-    padding: 0 4rem;
-    margin-top: 4rem;
+    /*padding: 0 4rem;
+    margin-top: 4rem;*/
 
     font-size: 1.6rem;
     line-height: 2;

@@ -4,7 +4,7 @@
 $(document).on('submit', '#formCat', function(e) {
     e.preventDefault();
     categorias = []; 
-    var url = "http://127.0.0.1:8000/buscar?"
+    var url = "/buscar?"
     var inputElements = document.getElementsByClassName('filtroCat');
     for(var i=0; inputElements[i]; ++i){
           if(inputElements[i].checked){
@@ -25,7 +25,7 @@ $(document).on('submit', '#formCat', function(e) {
         for(var i = 0; i < data.length; i++){
             $(".row").append(`<div class='col-lg-4 col-md-6'> 
                 <div class='member'> 
-                    <div class="pic"><img class="restaurante-img" src=${data[i].foto} class="img-fluid" alt=""></div>
+                    <div class="pic"><img class="restaurante-img" src=/storage/${data[i].foto} class="img-fluid" alt=""></div>
                     <div class='member-info'>
                         <h4>${data[i].nome}</h4>
                         <div class="stars">

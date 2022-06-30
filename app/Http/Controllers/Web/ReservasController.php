@@ -41,13 +41,16 @@ class ReservasController extends Controller
     }
 
     public function update(Request $request){
-        $r = Reserva::where('id', $request->reserva_id)->first();
-        $r->update([
-            'horario' => $request->horario,
-            'data' => $request->data,
-            'diaSemana' => $request->dia,
-            'qtdPessoas' => $request->qtdPessoas,
-        ]);
+        //$r = Reserva::where('id', $request->reserva_id)->first();
+        $r = Reserva::findOrFail($request->reserva_id);
+
+        $r->update($request->only('horario', 'data', 'dia', 'qtdPessoas'));
+        // $r->update([
+        //     'horario' => $request->horario,
+        //     'data' => $request->data,
+        //     'diaSemana' => $request->dia,
+        //     'qtdPessoas' => $request->qtdPessoas,
+        // ]);
         $r->save();
 
         return $this->index();

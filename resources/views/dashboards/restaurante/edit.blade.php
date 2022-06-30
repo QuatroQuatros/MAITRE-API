@@ -24,7 +24,7 @@
                             </div>
                         </a>
                     </div>
-                    <img class="img" id="preview" src="{{$restaurante->foto}}">
+                    <img class="img" id="preview" src="/storage/{{$restaurante->foto}}">
                     <form class="form-upload" action="" method="post" role="form">
                         <label class="input-personalizado">
                             <span class="botao-selecionar">Trocar foto</span>
@@ -250,7 +250,9 @@
             <div class="register">
                 <span class="material-icons-sharp">event</span>
                 <strong>Atualizar catégoria</strong>
-                <form action="/res">
+                <form action="/restaurantes/edit/{{$restaurante->id}}" method="post">
+                    @csrf
+                    @method('put')
                     <fieldset>
                         <div class="form">
                             <div class="form-row">
@@ -266,7 +268,7 @@
                             </div>
                             <span class="create-account"></span>
                             <div class="form-row button-login">
-                                <button class="btn btn-login">Finalizar<i class="fas fa-arrow-right"></i></button>
+                                <button type="submit" class="btn btn-login">Finalizar<i class="fas fa-arrow-right"></i></button>
                             </div>
                         </div>
                     </fieldset>

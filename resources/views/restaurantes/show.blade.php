@@ -25,7 +25,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                         <img src="/storage/{{$restaurante->foto}}" class="img-fluid" alt="">
                                     </div>
                                     <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                        <h3>{{$restaurante->nome}}</h3>
+                                        
                                         <div class="containerDesc">
                                             <p class="fst-italic descSlide">
                                                 {{$restaurante->descricao}}
@@ -45,7 +45,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                             <img src="/storage/{{$s->foto}}" class="img-fluid" alt="">
                                         </div>
                                         <div class="col-lg-6 pt-4 pt-lg-0 content">
-                                            <h3>{{$restaurante->nome}}</h3>
+                                           
                                             <div class="containerDesc">
                                                 <p class="fst-italic descSlide">
                                                    {{$s->descFoto}}
@@ -165,7 +165,7 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                                                     </div>
                                                     
                                                     <div class="col-lg-4 text-center order-1 order-lg-2">
-                                                        <img src="/img/specials-2.jpg" alt="" class="img-fluid">
+                                                        <img src="/storage/{{$e->foto}}" alt="" class="img-fluid">
                                                     </div>
                                                 </div>
                                             </div>                                         
@@ -354,9 +354,9 @@ MAÎTRE || {{strtoupper($restaurante->nome)}}
                     
                     <div class="swiper-pagination"></div>
                     <div class="center-button">
-                        @if($cliente == true)
-                            <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>
-                        @endif
+                       
+                        <button type="submit" class="button-coment" data-bs-toggle="modal" data-bs-target="#modalComent">Compartilhe sua opinião também</button>
+
                     </div>
                 </div>
 

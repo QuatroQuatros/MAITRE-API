@@ -291,7 +291,7 @@ async function cadastrarHorario(){
 async function createHorario(dia, horario){
     // const response = await fetch(local + '/horarios',{
         //const response = await fetch(host + '/horarios',{
-        const response = await fetch('/api/horarios',{
+        const response = await fetch('http://127.0.0.1:8000/api/horarios',{
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -338,7 +338,7 @@ async function cadastrarMesa(){
 async function createMesa(mesa, cap){
    // const response = await fetch(local +'/mesas',{
     //const response = await fetch(host +'/mesas',{
-        const response = await fetch('/api/mesas',{
+        const response = await fetch('http://127.0.0.1:8000/api/mesas',{
         method: "POST",
         headers: {
             'Accept': 'application/json',

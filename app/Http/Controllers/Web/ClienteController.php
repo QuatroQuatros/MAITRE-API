@@ -76,7 +76,8 @@ class ClienteController extends Controller
 
     public function profile($id){
         $c =  Cliente::where('user_id', $id)->first();
-        $reservas = Reserva::where('cliente_id', $c->id )->get();
-        return view('clientes.profile', ['reservas' => $reservas, 'cliente' => User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first()]);
+        $f = FoneCliente::where('cliente_id', $c->id)->first();
+        
+        return view('clientes.profile', ['fone' => $f, 'cliente' => User::join('clientes', 'clientes.user_id', 'users.id')->where('user_id', $id)->first()]);
     }
 }

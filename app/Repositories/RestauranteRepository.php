@@ -78,6 +78,7 @@ class RestauranteRepository{
             'descFone' => $request->fone,
             'restaurante_id' => $this->restaurante->id
         ]);
+        return $this->restaurante;
 
 
     }
@@ -96,7 +97,7 @@ class RestauranteRepository{
         //     ]);
         // }
         
-        return $this->restaurante->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado'));
+        return $this->restaurante->update($request->only('nome','cep','endereco', 'numero', 'bairro', 'cidade', 'estado', 'categoria_id'));
         // $this->restaurante->update([
         //     "nome" => $request->nome,
         //     "endereco" => $request->endereco,

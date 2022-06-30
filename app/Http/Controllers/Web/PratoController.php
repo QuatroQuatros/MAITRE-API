@@ -18,7 +18,8 @@ class PratoController extends Controller
         $rest = Restaurante::where('user_id', \Auth::user()->id)->first();
        
         $id = $rest->id;
-        return view('dashboards.restaurante.cardapio', ['pratos' => Prato::join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->get(), 'categorias' => Categoria::all()]);
+        $pratos = Prato::select('pratos.id', 'pratos.nome', 'pratos.foto', 'pratos.descPrato', 'pratos.valor','categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->get();
+        return view('dashboards.restaurante.cardapio', ['pratos' => $pratos, 'categorias' => Categoria::all()]);
     }
 
    
@@ -36,14 +37,18 @@ class PratoController extends Controller
         $id = $rest->id;
 
         $imagem = $request->file('foto');
-        $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
-        Storage::disk('s3')->setVisibility($path, 'public');
+        // $path = Storage::disk('s3')->put('imagens', $imagem, 'public');
+        // Storage::disk('s3')->setVisibility($path, 'public');
+
+        $name = $imagem->getClientOriginalName(); 
+        $path = $imagem->storeAs('imagens', $name, 'public');
 
         Prato::create([
             'nome' => $request->nome,
             'descPrato' => $request->descPrato,
             'valor' => $request->valor,
-            "foto" => Storage::disk('s3')->url($path),
+            // "foto" => Storage::disk('s3')->url($path),
+            "foto" => $path,
             'categoria_id' => $request->categoria_id,
             'restaurante_id' => $id,
         ]);

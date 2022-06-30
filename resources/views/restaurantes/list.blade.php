@@ -111,19 +111,7 @@
                                         </label>
                                     </li>
                                 </ul>
-                                <div class="mb-5">
-                                    <h5>Pratos mais pesquisados</h5>
-                                    <div class="tagcloud">
-                                        <a href="#" class="tag-cloud-link">dish</a>
-                                        <a href="#" class="tag-cloud-link">menu</a>
-                                        <a href="#" class="tag-cloud-link">food</a>
-                                        <a href="#" class="tag-cloud-link">sweet</a>
-                                        <a href="#" class="tag-cloud-link">tasty</a>
-                                        <a href="#" class="tag-cloud-link">delicious</a>
-                                        <a href="#" class="tag-cloud-link">desserts</a>
-                                        <a href="#" class="tag-cloud-link">drinks</a>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </nav>
 
@@ -137,7 +125,7 @@
                                 
                                     <div class="col-lg-4 col-md-6">
                                         <div class="member">
-                                            <div class="pic"><img class="restaurante-img" src="{{$r->foto}}" class="img-fluid" alt=""></div>
+                                            <div class="pic"><img class="restaurante-img" src="/storage/{{$r->foto}}" class="img-fluid" alt=""></div>
                                             <div class="member-info">
                                                 <h4>{{$r->nome}}</h4>
                                                 <div class="stars">

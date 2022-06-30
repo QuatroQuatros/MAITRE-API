@@ -1,5 +1,10 @@
 @extends("layouts.index")
 
+@section('title')
+
+MAÎTRE || MINHAS RESERVAS
+@endsection
+
 @section('content')
 
 <img src="/img/bem.jpg" style="width: 100%; height:18vh;" alt="">
@@ -273,8 +278,8 @@
                         <form action="/reservas/alterar" method="post" class="">
                             @csrf
                             @method('put')
-                            <input type="hidden" name="reserva_id"/>
-                            <input type="hidden" name="dia"/>
+                            <input type="hidden" name="reserva_id" id="restId"/>
+                            <input type="hidden" name="dia" id="dia"/>
                             <div class="rowCenter">
                                 <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
                                     <input type="number" class="form-120" name="qtdPessoas" id="qtdePessoa" placeholder="QTDE. Pessoas" data-msg="Digitar quantidade de pessoas">
@@ -345,6 +350,10 @@
                 e.preventDefault()
                 id = x
                 restId = z
+
+                var rest = document.getElementById('restId')
+
+                rest.value = x
 
                 var qtd = document.getElementById('qtdePessoa')
                 var data = document.getElementById('dataInput')

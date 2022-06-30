@@ -5,7 +5,7 @@
 
         <!---------------- end insights ---------------->
         <div class="recent-orders">
-            <h1>Nossos Clientes</h1>
+            <h1>HORÁRIOS</h1>
             <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
             <script type="text/javascript" charset="utf8" src="/DataTables/datatables.min.js"></script>
             <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
@@ -154,7 +154,7 @@
 
             <div class="containerform">
                 <div class="register">
-                    <strong>Esse dado será reativado, tem certeza ?</strong>
+                    <strong>Esse dado será excluído permanentemente, tem certeza ?</strong>
     
                     <div class="button-center">
                 <a href="" class="button button__link">Não</a>

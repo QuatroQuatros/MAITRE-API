@@ -89,28 +89,48 @@ class RestauranteController extends Controller
 
     public function show($id){
 
-        $c = Cliente::where('user_id', auth()->user()->id)->first();
 
-        $cliente = Reserva::where('status_reserva_id', 6)->where('restaurante_id', $id)->where('cliente_id', $c->id)->exists();
+        if(auth()->user()){
+            $c = Cliente::where('user_id', auth()->user()->id)->first();
 
-        $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
+            $cliente = Reserva::where('status_reserva_id', 6)->where('restaurante_id', $id)->where('cliente_id', $c->id)->exists();
+
+            $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
+        
+            $categorias = Prato::select('categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->distinct()->get();
+            $pratos = Prato::select('pratos.id','pratos.categoria_id', 'pratos.nome', 'pratos.valor', 'pratos.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos.categoria_id', 'categorias.id')->where('restaurante_id', $id)->distinct()->get();
+            $especiais = PratoEspecial::select('pratos_especiais.categoria_id', 'dia_semanas.diaSemana', 'pratos_especiais.nome',  'pratos_especiais.valor', 'pratos_especiais.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos_especiais.categoria_id', 'categorias.id')->join('dia_semanas', 'dia_semanas.id', 'pratos_especiais.dia_semana_id')
+            ->orderBy('pratos_especiais.dia_semana_id')
+            ->where('restaurante_id', $id)->get();
+    
+            $slides = FotoRestaurante::where('foto_restaurantes.restaurante_id', $id)->get();
+    
+            //sdd($cliente);
+    
+            return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides, 'cliente' => $cliente]);
+        
+        }else{
+            $avalicoes = $this->restaurante->select('avaliacoes.estrelas', 'avaliacoes.descAvaliacao', 'clientes.nome', 'clientes.foto')->join('avaliacoes', 'avaliacoes.restaurante_id', 'restaurantes.id')->join('clientes', 'clientes.user_id', 'avaliacoes.user_id')->where('avaliacoes.restaurante_id', $id)->get();
+            $categorias = Prato::select('categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->distinct()->get();
+            $pratos = Prato::select('pratos.id','pratos.categoria_id', 'pratos.nome', 'pratos.valor', 'pratos.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos.categoria_id', 'categorias.id')->where('restaurante_id', $id)->distinct()->get();
+            $especiais = PratoEspecial::select('pratos_especiais.categoria_id', 'dia_semanas.diaSemana', 'pratos_especiais.nome',  'pratos_especiais.valor', 'pratos_especiais.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos_especiais.categoria_id', 'categorias.id')->join('dia_semanas', 'dia_semanas.id', 'pratos_especiais.dia_semana_id')
+            ->orderBy('pratos_especiais.dia_semana_id')
+            ->where('restaurante_id', $id)->get();
+
+            $slides = FotoRestaurante::where('foto_restaurantes.restaurante_id', $id)->get();
+
+            //sdd($cliente);
+
+            return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id),  'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides, 'avaliacoes' => $avalicoes]);
+    }
+        }
+
+        
 
         
 
 
 
-        $categorias = Prato::select('categorias.descCategoria')->join('categorias', 'categorias.id', 'pratos.categoria_id')->where('restaurante_id', $id)->distinct()->get();
-        $pratos = Prato::select('pratos.id','pratos.categoria_id', 'pratos.nome', 'pratos.valor', 'pratos.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos.categoria_id', 'categorias.id')->where('restaurante_id', $id)->distinct()->get();
-        $especiais = PratoEspecial::select('pratos_especiais.categoria_id', 'dia_semanas.diaSemana', 'pratos_especiais.nome',  'pratos_especiais.valor', 'pratos_especiais.descPrato',  'categorias.descCategoria')->join('categorias', 'pratos_especiais.categoria_id', 'categorias.id')->join('dia_semanas', 'dia_semanas.id', 'pratos_especiais.dia_semana_id')
-        ->orderBy('pratos_especiais.dia_semana_id')
-        ->where('restaurante_id', $id)->get();
-
-        $slides = FotoRestaurante::where('foto_restaurantes.restaurante_id', $id)->get();
-
-        //sdd($cliente);
-
-        return view('restaurantes.show', ['restaurante' => $this->restauranteRepository->show($id), 'avaliacoes' => $avalicoes, 'pratos' => $pratos, 'especiais' => $especiais, 'categorias' => $categorias, 'slides'  => $slides, 'cliente' => $cliente]);
-    }
 
     public function store(Request $request){
         $request->merge(['user_id' => auth()->user()->id]);
@@ -143,13 +163,15 @@ class RestauranteController extends Controller
         $filtros = $request->query();
         
         if($busca){
-            if( $this->restaurante->where('nome', 'like', '%'.$busca.'%')->exists()){
+            if( $this->restaurante->select('id', 'foto', 'nome')
+            ->where('nome', 'like', '%'.$busca.'%')->exists()){
                 $restaurante = $this->restaurante->where('nome', 'like', '%'.$busca.'%')->get();
                 return response()->json($restaurante, 200);
 
-            }else if($this->restaurante->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
+            }else if($this->restaurante->select('restaurantes.id','restaurantes.nome', 'restaurantes.foto', 'categoria_restaurantes.categoria')
+            ->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
             ->where('categoria_restaurantes.categoria','like', '%'.$busca.'%')->exists()){
-                $restaurante = $this->restaurante->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
+                $restaurante = $this->restaurante->select('restaurantes.id','restaurantes.nome', 'restaurantes.foto', 'categoria_restaurantes.categoria')->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id')
                 ->where('categoria_restaurantes.categoria','like', '%'.$busca.'%')->get();
                 return response()->json($restaurante, 200);
             }else{
@@ -158,7 +180,7 @@ class RestauranteController extends Controller
             }
             
         }else if($filtros['categoria']){
-            return Restaurante::join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id') ->
+            return Restaurante::select('restaurantes.id','restaurantes.nome', 'restaurantes.foto', 'categoria_restaurantes.categoria')->join('categoria_restaurantes', 'categoria_restaurantes.id', 'restaurantes.categoria_restaurante_id') ->
             whereIn('categoria_restaurantes.categoria', $filtros['categoria'])->get();
 
             //return view('restaurantes.list', ['restaurantes' => $restaurantes, 'categorias' => CategoriaRestaurante::all()]);
